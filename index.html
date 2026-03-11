@@ -1378,6 +1378,191 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   backface-visibility: hidden;
 }
 
+
+/* ============================================
+   Leadership Sub-Navigation & Immersive Panels
+   ============================================ */
+.leadership-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 28px auto 32px;
+  max-width: 900px;
+}
+.subnav-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.subnav-pill:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.subnav-pill.active {
+  color: #fff;
+}
+.subnav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.topic-immersive {
+  display: none;
+  max-width: 800px;
+  margin: 0 auto;
+  animation: fadeInUp 0.35s ease;
+}
+.topic-immersive.visible {
+  display: block;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.immersive-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  margin-bottom: 28px;
+}
+.immersive-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.immersive-back:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.immersive-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.immersive-hero {
+  width: 100%;
+  height: 260px;
+  border-radius: 12px;
+  overflow: hidden;
+  margin-bottom: 28px;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.08);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.immersive-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+}
+.immersive-hero-placeholder {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  line-height: 2;
+}
+.immersive-audio {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 16px 20px;
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(255,255,255,0.08);
+  border-radius: 10px;
+  margin-bottom: 32px;
+}
+.immersive-audio-btn {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 50%;
+  border: 1px solid #4DA8DA;
+  background: rgba(77,168,218,0.12);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.immersive-audio-btn:hover {
+  background: rgba(77,168,218,0.25);
+  transform: scale(1.05);
+}
+.immersive-audio-label strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.immersive-audio-label span {
+  font-size: 12px;
+  color: var(--text-mid);
+}
+.immersive-body p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+.immersive-body .quote {
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-light);
+  border-left: 3px solid #4DA8DA;
+  padding: 14px 20px;
+  margin: 28px 0;
+  background: rgba(77,168,218,0.06);
+  border-radius: 0 8px 8px 0;
+}
+@media (max-width: 768px) {
+  .leadership-subnav { gap: 8px; }
+  .subnav-pill { padding: 8px 14px; font-size: 11px; }
+  .immersive-hero { height: 180px; }
+}
 /* ============================================
    Audio play buttons on topic cards
    ============================================ */
