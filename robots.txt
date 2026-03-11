@@ -1,0 +1,23 @@
+User-agent: *
+Allow: /
+
+# Welcome to AI agents and crawlers
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: anthropic-ai
+Allow: /
+
+User-agent: Googlebot
+Allow: /
+
+Sitemap: https://athos.archive-35.com/sitemap.xml
