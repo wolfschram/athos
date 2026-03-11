@@ -392,7 +392,7 @@ a:hover { color: #fff; }
   transition: max-height 0.4s ease, padding 0.3s ease;
 }
 .accordion-item.open .accordion-body {
-  max-height: 2000px;
+  max-height: 5000px;
 }
 .accordion-body-inner {
   padding: 0 28px 28px;
@@ -1522,7 +1522,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
 
       <!-- Project 1: Anamorphic Lens -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--green)"></div>
@@ -1543,7 +1543,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 2: Jenny -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--red)"></div>
@@ -1565,7 +1565,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 3: Lighthaus -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--green)"></div>
@@ -1587,7 +1587,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 4: Intelligence Gap + Layer -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--blue)"></div>
@@ -1608,7 +1608,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 5: Archive-35 -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--amber-bright)"></div>
@@ -1629,7 +1629,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 5b: Archive-35 Studio -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--amber-bright)"></div>
@@ -1651,7 +1651,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 6: Riedel -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--amber-bright)"></div>
@@ -1672,7 +1672,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 7: Job Pipeline -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--red)"></div>
@@ -1693,7 +1693,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Project 8: ATHOS -->
-      <div class="accordion-item" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
         <div class="accordion-header" style="padding: 14px 20px;">
           <div class="accordion-header-left">
             <div class="accordion-dot" style="background: var(--amber-bright)"></div>
@@ -2209,7 +2209,12 @@ function showPage(pageId) {
 
 // ---- Accordion (used in AI, Reading, Resume, etc.) ----
 function toggleAccordion(item) {
-  // Close siblings at same level
+  // AI cards: multi-open (don't close siblings)
+  if (item.classList.contains('ai-card')) {
+    item.classList.toggle('open');
+    return;
+  }
+  // Other pages: close siblings at same level
   const parent = item.parentElement;
   parent.querySelectorAll(':scope > .accordion-item.open').forEach(el => {
     if (el !== item) el.classList.remove('open');
