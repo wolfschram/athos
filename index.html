@@ -1401,6 +1401,47 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
         <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-top: 16px;">Revenue follows ownership. When your team genuinely owns their work, nobody needs to be told what matters. They already know. Because they built it.</p>
       </div>
 
+      <!-- Leadership Sub-Navigation -->
+      <nav class="leadership-subnav" id="leadershipSubnav">
+        <div class="subnav-pill" data-topic="purpose" style="--pill-color:#C8943A" onclick="openTopic('purpose')">
+          <span class="subnav-dot" style="background:#C8943A"></span>Purpose
+        </div>
+        <div class="subnav-pill" data-topic="ownership" style="--pill-color:#C8943A" onclick="openTopic('ownership')">
+          <span class="subnav-dot" style="background:#C8943A"></span>Ownership
+        </div>
+        <div class="subnav-pill" data-topic="symbiotic" style="--pill-color:#4AAD9E" onclick="openTopic('symbiotic')">
+          <span class="subnav-dot" style="background:#4AAD9E"></span>Symbiotic Teams
+        </div>
+        <div class="subnav-pill" data-topic="honest" style="--pill-color:#4DA8DA" onclick="openTopic('honest')">
+          <span class="subnav-dot" style="background:#4DA8DA"></span>Honest Conversation
+        </div>
+        <div class="subnav-pill" data-topic="cognitive" style="--pill-color:#4DA8DA" onclick="openTopic('cognitive')">
+          <span class="subnav-dot" style="background:#4DA8DA"></span>Cognitive Diversity
+        </div>
+        <div class="subnav-pill" data-topic="door" style="--pill-color:#7AAD5A" onclick="openTopic('door')">
+          <span class="subnav-dot" style="background:#7AAD5A"></span>The Door
+        </div>
+      </nav>
+
+      <!-- Immersive Topic Views -->
+      <div id="topicImmersive" class="topic-immersive">
+        <div class="immersive-header">
+          <button class="immersive-back" onclick="closeTopic()">&#8592; Back</button>
+          <div class="immersive-title" id="immersiveTitle"></div>
+        </div>
+        <div class="immersive-hero" id="immersiveHero">
+          <div class="immersive-hero-placeholder">HERO IMAGE COMING SOON</div>
+        </div>
+        <div class="immersive-audio" id="immersiveAudio">
+          <button class="immersive-audio-btn" id="immersivePlayBtn" onclick="toggleImmersiveAudio()">&#9654;</button>
+          <div class="immersive-audio-label">
+            <strong id="immersiveAudioTitle"></strong>
+            <span>Listen to Wolf on this topic</span>
+          </div>
+        </div>
+        <div class="immersive-body" id="immersiveBody"></div>
+      </div>
+
       <!-- Topic cards — grid, each card+panel in a column, panels drop below their card -->
       <div class="topic-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="topic-col">
@@ -2229,6 +2270,8 @@ function toggleAccordion(item) {
 }
 
 // ---- Topic Cards (Leadership readable) — multi-open toggle ----
+
+// ---- Leadership Sub-Navigation ----
 function toggleTopicCard(card) {
   card.classList.toggle('active');
   // Panel is the next sibling inside the same .topic-col
@@ -2236,6 +2279,181 @@ function toggleTopicCard(card) {
   const panel = col.querySelector('.topic-panel');
   if (panel) panel.classList.toggle('visible');
 }
+
+// ---- Leadership Sub-Navigation ----
+const TOPICS = {
+  purpose: {
+    label: 'Purpose',
+    color: '#C8943A',
+    audio: 'audio/purpose.mp3',
+    image: null,
+    body: `
+      <p>Every high-performing team I&rsquo;ve ever been part of shares one thing: every person in the room can answer the question &mdash; why am I here? Not the job description. Not the title. The real reason they show up and do what they do.</p>
+      <p>When you work on a touring production, your crew rolls into a new city, a new arena or stadium, and even if you&rsquo;ve been to that venue three times before with different shows, it&rsquo;s a fresh challenge every single time. Different rigging points, different power, different local crew, different problems to solve. But nobody needs to be told what to do. By end of day, the entire structure has to be built, functioning, tested, and running. That&rsquo;s the mandate. There are no extensions and there are no excuses, because tomorrow the artist walks in for soundcheck and after that you&rsquo;re live in front of thousands. That clarity &mdash; that shared understanding of why we&rsquo;re all here and what has to happen &mdash; is what makes those teams extraordinary. Not management. Not process. Purpose.</p>
+      <p>The same principle scales far beyond a touring crew. When roughly 250 engineers across three continents share a clear understanding of why the work matters, they don&rsquo;t need to be managed and they don&rsquo;t need to be motivated. They move. But that only works when leadership at the top genuinely believes in empowering their teams and their team leaders to make good, logical decisions &mdash; and trusts them enough to let go.</p>
+      <p>How do you avoid people longing for the weekend the moment they walk in on Monday morning? How do you stop people feeling they&rsquo;re in the wrong place &mdash; trapped, doing work someone else defined, following rules they didn&rsquo;t write? The answer isn&rsquo;t perks or pizza. It&rsquo;s purpose. When people know why they&rsquo;re here and genuinely own their outcomes, Monday stops being something to survive and becomes the day they get to do the thing they care about.</p>
+    `
+  },
+  ownership: {
+    label: 'Ownership',
+    color: '#C8943A',
+    audio: 'audio/ownership.mp3',
+    image: null,
+    body: `
+      <p>Real ownership is permission. Permission to decide. Permission to fail. Permission to say &ldquo;I don&rsquo;t know&rdquo; without consequence. Most people think they own their work &mdash; but they&rsquo;re handicapped to execute. They can&rsquo;t get things done because the system won&rsquo;t let them. That&rsquo;s not ownership. That&rsquo;s a prison with your name on the door.</p>
+      <p>When someone owns their work and fails &mdash; the healthy response is to speak up. Put your hands up. Say it didn&rsquo;t work. Be proud of failing. That is what makes us better. The moment fear enters the equation, people stop taking risks. They stop innovating. They stop owning. And the failures that follow are far worse &mdash; because nobody saw them coming.</p>
+      <p>Ownership culture means the team owns equally. If you see a team member struggling &mdash; trouble at home, health, anything &mdash; you look after each other. You are a team. Only you as that team can succeed. Leadership can support from the outside, but they can&rsquo;t do the work for you.</p>
+      <p>It&rsquo;s not team size where culture breaks &mdash; it&rsquo;s project complexity. This is something I&rsquo;ve observed over and over across 25 years of leading teams. Short, frequent projects need clear guardrails and rapid communication. Long, complex projects need deep social competence and genuine interpersonal bonds. The more complex the work, the longer the project timelines. The longer the timelines, the more social competence is required.</p>
+      <p>The leadership approach must match the complexity of the work, not the headcount on the spreadsheet. Get this wrong and you either strangle execution with unnecessary rules, or watch expensive failures cascade because nobody knew each other well enough to catch them.</p>
+      <p>Guardrails are necessary at scale. But guardrails installed in reaction to failure &mdash; without education, without communication about the rights and wrongs &mdash; strangle everyone. The question: when do guardrails protect, and when do they paralyse? Sometimes the right call takes real courage &mdash; to say the guardrails cost more than the risk. That requires leaders who see the bigger picture and have the nerve to act on it.</p>
+    `
+  },
+  symbiotic: {
+    label: 'Symbiotic Teams',
+    color: '#4AAD9E',
+    audio: 'audio/symbiotic-teams.mp3',
+    image: null,
+    body: `
+      <p>The bee needs the flower to get the nectar and make the honey. As a byproduct, the bee transports the pollen to the next flower. That&rsquo;s how they replicate. Neither survives without the other. That&rsquo;s a symbiotic relationship &mdash; and it&rsquo;s exactly what a healthy team looks like.</p>
+      <p>The lighting crew can&rsquo;t work without the power team. Video can&rsquo;t work without lighting. Audio can&rsquo;t work without power. In any team &mdash; project manager, lead engineer, installer &mdash; they&rsquo;re all symbiotically related because the action of one has a direct impact on the other. This extends beyond the team. Company and customer. Product and market. You can&rsquo;t produce output without input. The question for any organisation: are your relationships genuinely symbiotic &mdash; or is one side taking more than it gives?</p>
+      <p>Symbiotic relationships only work when each side understands what they bring and what they need. What&rsquo;s your strength? What&rsquo;s your weakness? Where do you need help? Most professionals never ask these questions &mdash; and never answer them honestly. But when they do, something shifts. People stop trying to be everything and start leaning into what they&rsquo;re actually built for. The bee doesn&rsquo;t try to be the flower. The flower doesn&rsquo;t try to be the bee. They each do their thing, and the other benefits.</p>
+      <p>That kind of honesty requires vulnerability &mdash; and vulnerability requires an environment where it&rsquo;s safe to say &ldquo;I&rsquo;m not good at this&rdquo; without it becoming a weapon. Build that environment and the symbiotic relationships form naturally. People find each other&rsquo;s gaps and fill them &mdash; not because someone told them to, but because they can see the whole picture and they want the team to work.</p>
+    `
+  },
+  honest: {
+    label: 'Honest Conversation',
+    color: '#4DA8DA',
+    audio: 'audio/honest-conversation.mp3',
+    image: null,
+    body: `
+      <div class="quote">A fool with a tool is still a fool.</div>
+      <p>Millions get spent on tools and systems that never get used. Not because the technology was wrong &mdash; because somebody bought the answer before they understood the question. The people on the floor knew what was broken. They tried to say something. Nobody was listening. And so the money gets spent, the system gets installed, and six months later it&rsquo;s collecting dust while everyone quietly works around it. That story plays out in every industry, in every company, over and over again.</p>
+      <p>But here&rsquo;s the thing nobody wants to talk about: the honest conversation doesn&rsquo;t start between the C-suite and the warehouse. It starts with you. With the leader staring back at you in the mirror. How much dialogue are you actually having with the people three, four, five layers below your role? When was the last time you sat with someone who does the work every day and genuinely asked them what&rsquo;s not working? Not in a town hall. Not in a survey. Face to face, with enough time and enough trust for them to tell you the truth.</p>
+      <p>Every leader &mdash; myself included &mdash; builds a circle of trust. The people you rely on, the ones who get access, the ones whose opinions shape your decisions. That&rsquo;s natural. You need those people. But over time that circle becomes a bubble, and inside that bubble you start to believe you have the full picture when you don&rsquo;t.</p>
+      <p>I&rsquo;ve been there. I&rsquo;ve been the leader who wasn&rsquo;t listening to the right person because something about them didn&rsquo;t sit right with me. It took time and honesty to recognise that pattern, and recognising it didn&rsquo;t make it go away &mdash; it just made me aware enough to fight it. That awareness is a learning curve that never ends.</p>
+      <p>If the conversation between leadership and the people doing the work can&rsquo;t be honest about the good, the bad, and the ugly &mdash; that is where every transformation dies. Not in the strategy. Not in the technology. In the silence between the people who know and the people who decide.</p>
+      <p>And none of that becomes possible without rapport. Building that trust is slow and it&rsquo;s fragile and it requires showing up consistently as someone who listens before they speak, who earns the right to be honest by being honest first about their own shortcomings. Once you&rsquo;ve earned that space where someone can look you in the eye and tell you you&rsquo;re wrong &mdash; that&rsquo;s when everything changes.</p>
+    `
+  },
+  cognitive: {
+    label: 'Cognitive Diversity',
+    color: '#4DA8DA',
+    audio: 'audio/cognitive-diversity.mp3',
+    image: null,
+    body: `
+      <p>Some people can&rsquo;t think inside the box &mdash; because they never had one. Their brains don&rsquo;t move in straight lines. They see twenty possibilities where others see one, and they can&rsquo;t stop pulling at threads until something unravels into an idea nobody expected. They failed at school because school wasn&rsquo;t built for the way they think, but put them in front of a real problem with real stakes and they will outperform everyone in the room.</p>
+      <p>These are the people who feel everything five or ten times more intensely than the people around them &mdash; the joy when something clicks, the frustration when they&rsquo;re forced into a process that doesn&rsquo;t fit, the sadness when they&rsquo;re not understood. Everything is amplified. That amplification is both their superpower and their vulnerability.</p>
+      <p>As a leader, if you have people like this on your team &mdash; and you almost certainly do, whether they&rsquo;ve told you or not &mdash; the work isn&rsquo;t to fix them. The work is to understand how they function. What shuts them down? Being micromanaged. Being forced into rigid workflows that exist because someone else couldn&rsquo;t handle the freedom. Being measured by how they work instead of what they produce. If you recognise these patterns and create the conditions where they can breathe, what comes back will astonish you.</p>
+      <p>Give curious people twenty to thirty percent of their time to explore within the domain. The breakthroughs never come from structured roadmaps. They come from someone who was given permission to follow a thread, and a leader who had the seventh sense to see where that thread was going before anyone else did.</p>
+      <p>But you also need minds that thrive in structure. The skill isn&rsquo;t choosing one type over the other &mdash; it&rsquo;s understanding who works best with whom, and creating an environment where all of it can coexist. When neurodivergent and neurotypical minds genuinely complement each other &mdash; when the person who sees twenty possibilities is paired with the person who can organise them into a plan &mdash; that&rsquo;s when teams do things nobody thought were possible.</p>
+    `
+  },
+  door: {
+    label: 'The Door',
+    color: '#7AAD5A',
+    audio: 'audio/the-door.mp3',
+    image: null,
+    body: `
+      <p>In my entire career, I have never gotten a role through a r&eacute;sum&eacute;. Not once. Every single opportunity that shaped who I am today came because another human being saw something in me that I couldn&rsquo;t see in myself, and they chose to do something about it. They opened a door and said &ldquo;walk through it.&rdquo; And because my neurodivergent brain has never been able to follow the regular path from A to B, those doors were everything.</p>
+      <p>Sometimes the door opens and you know exactly what it is. Someone believes in you and gives you a chance you didn&rsquo;t know you were ready for. They throw you into the deep end and trust you to figure out how to swim, and that terrifying moment of sinking before you find your stroke &mdash; that&rsquo;s where all the real growth lives. But sometimes the door is already open and you don&rsquo;t even see it. Someone is standing there holding it, patiently, waiting for you to notice. And sometimes you&rsquo;re the one standing in front of a door you can&rsquo;t open alone, and you have to find the courage to say &ldquo;I need your help with this one.&rdquo;</p>
+      <p>When you open a door for someone else, something happens that&rsquo;s hard to explain until you&rsquo;ve felt it. It&rsquo;s not charity. It&rsquo;s not a good deed you put on a list. Like pulling up to the drive-through window and paying for the car behind you &mdash; if you were having the worst day of your week before you did that, suddenly it&rsquo;s not the worst day anymore. Opening a door for another person goes deeper, because you&rsquo;re not paying for a coffee &mdash; you&rsquo;re seeing potential in someone that the rest of the world walked right past, and you&rsquo;re choosing to act on what you see.</p>
+      <p>Don&rsquo;t need them to come back. Don&rsquo;t need the credit. Don&rsquo;t need the favour returned. If they take that chance and build something meaningful with it, that&rsquo;s the return. That feeling of watching someone you believed in become who they were always capable of becoming &mdash; there is nothing in a career that compares to that. What keeps moving long after you&rsquo;re no longer in the picture &mdash; that&rsquo;s what success actually looks like.</p>
+    `
+  }
+};
+
+let immersiveAudio = null;
+let currentTopic = null;
+
+function openTopic(key) {
+  const topic = TOPICS[key];
+  if (!topic) return;
+  currentTopic = key;
+
+  // Update pills
+  document.querySelectorAll('.subnav-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.topic === key);
+    if (p.dataset.topic === key) {
+      p.style.background = topic.color + '22';
+      p.style.borderColor = topic.color;
+      p.style.boxShadow = '0 0 18px ' + topic.color + '33';
+      p.style.color = '#fff';
+    } else {
+      p.style.background = '';
+      p.style.borderColor = '';
+      p.style.boxShadow = '';
+      p.style.color = '';
+    }
+  });
+
+  // Populate immersive panel
+  document.getElementById('immersiveTitle').textContent = topic.label.toUpperCase();
+  document.getElementById('immersiveTitle').style.color = topic.color;
+  document.getElementById('immersiveAudioTitle').textContent = topic.label;
+  document.getElementById('immersiveAudioTitle').style.color = topic.color;
+  document.getElementById('immersivePlayBtn').style.borderColor = topic.color;
+  document.getElementById('immersivePlayBtn').style.background = topic.color + '20';
+  document.getElementById('immersiveBody').innerHTML = topic.body;
+
+  // Hero image
+  const hero = document.getElementById('immersiveHero');
+  if (topic.image) {
+    hero.innerHTML = '<img src="' + topic.image + '" alt="' + topic.label + '">';
+  } else {
+    hero.innerHTML = '<div class="immersive-hero-placeholder" style="color:' + topic.color + '33">&#9670; ' + topic.label.toUpperCase() + ' &#9670;<br><span style="font-size:10px;opacity:0.5">Hero image coming soon</span></div>';
+    hero.style.borderColor = topic.color + '33';
+  }
+
+  // Stop any playing audio
+  if (immersiveAudio) { immersiveAudio.pause(); immersiveAudio = null; }
+  document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
+
+  // Show immersive, hide grid
+  document.getElementById('topicImmersive').classList.add('visible');
+  document.querySelector('.topic-grid').style.display = 'none';
+
+  // Scroll to immersive top
+  document.getElementById('topicImmersive').scrollIntoView({behavior:'smooth', block:'start'});
+}
+
+function closeTopic() {
+  // Stop audio
+  if (immersiveAudio) { immersiveAudio.pause(); immersiveAudio = null; }
+  document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
+  currentTopic = null;
+
+  // Clear active pill styles
+  document.querySelectorAll('.subnav-pill').forEach(p => {
+    p.classList.remove('active');
+    p.style.background = '';
+    p.style.borderColor = '';
+    p.style.boxShadow = '';
+    p.style.color = '';
+  });
+
+  // Hide immersive, show grid
+  document.getElementById('topicImmersive').classList.remove('visible');
+  document.querySelector('.topic-grid').style.display = '';
+}
+
+function toggleImmersiveAudio() {
+  if (!currentTopic) return;
+  const topic = TOPICS[currentTopic];
+  const btn = document.getElementById('immersivePlayBtn');
+
+  if (!immersiveAudio) {
+    immersiveAudio = new Audio(topic.audio);
+    immersiveAudio.onended = () => { btn.innerHTML = '&#9654;'; immersiveAudio = null; };
+  }
+  if (immersiveAudio.paused) {
+    immersiveAudio.play();
+    btn.innerHTML = '&#9646;&#9646;';
+  } else {
+    immersiveAudio.pause();
+    btn.innerHTML = '&#9654;';
+  }
+}
+
 
 // ---- Rotating Questions ----
 const questions = [
