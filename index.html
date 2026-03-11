@@ -1428,8 +1428,10 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
 }
 .topic-immersive {
   display: none;
-  max-width: 800px;
-  margin: 0 auto;
+  margin-left: -48px;
+  margin-right: -48px;
+  width: 100vw;
+  max-width: 100vw;
   animation: fadeInUp 0.35s ease;
 }
 .topic-immersive.visible {
@@ -1491,6 +1493,7 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   width: 100vw;
   margin-left: calc(-48px);
   min-height: 80vh;
+  overflow: visible;
 }
 .immersive-left {
   display: flex;
