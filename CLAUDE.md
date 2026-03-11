@@ -96,3 +96,36 @@ Wolf Schram | wolfbroadcast@gmail.com | ADHD/dyslexia — keep answers short and
 ## Voice-to-Text Corrections
 - "get up" = **GitHub** — autocorrect won't let Wolf say GitHub. Always silently correct.
 - All voice-to-text errors should be silently corrected without commenting on them.
+
+## ChatGPT Image Generation — Context Bleed Prevention
+CRITICAL LEARNING: When generating multiple images in one ChatGPT session, previous image content BLEEDS into new generations. The context window accumulates instructions and they layer on top of each other — it's multiplication, not replacement.
+
+### The Problem
+- Each new image prompt in the same chat inherits context from ALL previous images
+- ChatGPT doesn't replace previous instructions — it layers them
+- By image 3-4, you get hybrid outputs mixing elements from earlier images
+- This gets WORSE with each generation in the same session
+
+### The Solution — "Fresh Session + Reference Image" Method
+1. Generate the FIRST image in a chat with the full style description
+2. SAVE that image
+3. For EVERY subsequent image: START A NEW CHAT
+4. In the new chat, UPLOAD the first image as a style reference
+5. Say: "Match the exact visual style, colour palette, and aesthetic of this reference image. But generate COMPLETELY NEW content as described below. Do NOT include any elements, labels, text, or components from the reference — use it ONLY for style matching."
+6. Then provide the specific prompt for that image
+7. Repeat for each image
+
+### Prompt Prefix for Every Generation (after first)
+Add this to the TOP of every prompt when generating in the same session:
+"IMPORTANT: This is a BRAND NEW image. Ignore ALL content from previous images in this conversation. Use ONLY the style and colour palette from previous images. The layout, text, labels, nodes, and components described below are the ONLY elements that should appear. Do not carry over ANY text, labels, or structural elements from previously generated images."
+
+### For Series of Consistent Images
+- Generate image 1 with full style description
+- Save it as the "style anchor"
+- New chat for each subsequent image
+- Upload the style anchor + specific new prompt
+- This prevents context bleed while maintaining visual consistency
+
+## Voice-to-Text Corrections (Global)
+- "get up" = **GitHub** — autocorrect won't let Wolf say GitHub
+- All voice-to-text errors silently corrected, never flagged
