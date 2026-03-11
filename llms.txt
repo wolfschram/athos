@@ -43,9 +43,9 @@ Mantra: **Own It. Build It. Stand Behind It.**
 
 ## Site Sections
 
-- [Leadership](https://athos.archive-35.com/#leadership) — The six principles with full essays and audio
-- [AI Evolution](https://athos.archive-35.com/#ai-evolution) — Wolf's proven AI-augmented workflow projects
-- [Engineering](https://athos.archive-35.com/#engineering) — 25 years of broadcast and enterprise engineering
-- [Engage](https://athos.archive-35.com/#engage) — How to work with Wolf
-- [Résumé](https://athos.archive-35.com/#resume) — Full career history
-- [Wolf](https://athos.archive-35.com/#wolf) — Contact and background
+- [Leadership](https://athos-obs.com/#leadership) — The six principles with full essays and audio
+- [AI Evolution](https://athos-obs.com/#ai-evolution) — Wolf's proven AI-augmented workflow projects
+- [Engineering](https://athos-obs.com/#engineering) — 25 years of broadcast and enterprise engineering
+- [Engage](https://athos-obs.com/#engage) — How to work with Wolf
+- [Résumé](https://athos-obs.com/#resume) — Full career history
+- [Wolf](https://athos-obs.com/#wolf) — Contact and background
