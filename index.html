@@ -1474,6 +1474,19 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   text-transform: uppercase;
   flex: 1;
 }
+.immersive-layout {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 32px;
+  align-items: start;
+}
+.immersive-left {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  position: sticky;
+  top: 80px;
+}
 .immersive-hero {
   width: 100%;
   height: 260px;
@@ -1561,7 +1574,9 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
 @media (max-width: 768px) {
   .leadership-subnav { gap: 8px; }
   .subnav-pill { padding: 8px 14px; font-size: 11px; }
-  .immersive-hero { height: 180px; }
+  .immersive-layout { grid-template-columns: 1fr; }
+  .immersive-left { position: static; }
+  .immersive-hero { height: 220px; }
 }
 /* ============================================
    Audio play buttons on topic cards
@@ -1714,17 +1729,21 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
           <button class="immersive-back" onclick="closeTopic()">&#8592; Back</button>
           <div class="immersive-title" id="immersiveTitle"></div>
         </div>
-        <div class="immersive-hero" id="immersiveHero">
-          <div class="immersive-hero-placeholder">HERO IMAGE COMING SOON</div>
-        </div>
-        <div class="immersive-audio" id="immersiveAudio">
-          <button class="immersive-audio-btn" id="immersivePlayBtn" onclick="toggleImmersiveAudio()">&#9654;</button>
-          <div class="immersive-audio-label">
-            <strong id="immersiveAudioTitle"></strong>
-            <span>Listen to Wolf on this topic</span>
+        <div class="immersive-layout">
+          <div class="immersive-left">
+            <div class="immersive-hero" id="immersiveHero">
+              <div class="immersive-hero-placeholder">HERO IMAGE COMING SOON</div>
+            </div>
+            <div class="immersive-audio" id="immersiveAudio">
+              <button class="immersive-audio-btn" id="immersivePlayBtn" onclick="toggleImmersiveAudio()">&#9654;</button>
+              <div class="immersive-audio-label">
+                <strong id="immersiveAudioTitle"></strong>
+                <span>Listen to Wolf on this topic</span>
+              </div>
+            </div>
           </div>
+          <div class="immersive-body" id="immersiveBody"></div>
         </div>
-        <div class="immersive-body" id="immersiveBody"></div>
       </div>
 
       <!-- Topic cards — grid, each card+panel in a column, panels drop below their card -->
