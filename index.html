@@ -1271,7 +1271,7 @@ a:hover { color: #FFFFFF; text-shadow: 0 0 8px rgba(77,168,218,0.3); }
 }
 
 /* Image sharpness */
-img[src^="hero-"], img[src="images/landing-logo.png"] {
+img[src^="hero-"], img[src="images/athos-logo.png"] {
   image-rendering: -webkit-optimize-contrast;
   image-rendering: crisp-edges;
   -webkit-backface-visibility: hidden;
@@ -1354,7 +1354,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
     <div style="position: relative; z-index: 10; width: 100%; height: 100%; padding: 0 48px;">
       <!-- Logo top-left, 2 inches below nav -->
       <div style="padding-top: 100px;">
-        <img src="images/landing-logo.png" alt="ATHOS" style="max-width: 420px; width: 50vw; height: auto; filter: brightness(1.3) contrast(1.1); animation: logoEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0;">
+        <img src="images/athos-logo.png" alt="ATHOS" style="max-width: 420px; width: 50vw; height: auto; filter: brightness(1.3) contrast(1.1); animation: logoEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0;">
       </div>
       <!-- Tagline centred, right below logo area -->
       <div style="text-align: center; margin-top: 40px;">
@@ -2286,7 +2286,7 @@ const TOPICS = {
     label: 'Purpose',
     color: '#C8943A',
     audio: 'audio/purpose.mp3',
-    image: null,
+    image: 'images/purpose.png',
     body: `
       <p>Every high-performing team I&rsquo;ve ever been part of shares one thing: every person in the room can answer the question &mdash; why am I here? Not the job description. Not the title. The real reason they show up and do what they do.</p>
       <p>When you work on a touring production, your crew rolls into a new city, a new arena or stadium, and even if you&rsquo;ve been to that venue three times before with different shows, it&rsquo;s a fresh challenge every single time. Different rigging points, different power, different local crew, different problems to solve. But nobody needs to be told what to do. By end of day, the entire structure has to be built, functioning, tested, and running. That&rsquo;s the mandate. There are no extensions and there are no excuses, because tomorrow the artist walks in for soundcheck and after that you&rsquo;re live in front of thousands. That clarity &mdash; that shared understanding of why we&rsquo;re all here and what has to happen &mdash; is what makes those teams extraordinary. Not management. Not process. Purpose.</p>
@@ -2298,7 +2298,7 @@ const TOPICS = {
     label: 'Ownership',
     color: '#C8943A',
     audio: 'audio/ownership.mp3',
-    image: null,
+    image: 'images/ownership.png',
     body: `
       <p>Real ownership is permission. Permission to decide. Permission to fail. Permission to say &ldquo;I don&rsquo;t know&rdquo; without consequence. Most people think they own their work &mdash; but they&rsquo;re handicapped to execute. They can&rsquo;t get things done because the system won&rsquo;t let them. That&rsquo;s not ownership. That&rsquo;s a prison with your name on the door.</p>
       <p>When someone owns their work and fails &mdash; the healthy response is to speak up. Put your hands up. Say it didn&rsquo;t work. Be proud of failing. That is what makes us better. The moment fear enters the equation, people stop taking risks. They stop innovating. They stop owning. And the failures that follow are far worse &mdash; because nobody saw them coming.</p>
@@ -2312,7 +2312,7 @@ const TOPICS = {
     label: 'Symbiotic Teams',
     color: '#4AAD9E',
     audio: 'audio/symbiotic-teams.mp3',
-    image: null,
+    image: 'images/symbiotic-teams.png',
     body: `
       <p>The bee needs the flower to get the nectar and make the honey. As a byproduct, the bee transports the pollen to the next flower. That&rsquo;s how they replicate. Neither survives without the other. That&rsquo;s a symbiotic relationship &mdash; and it&rsquo;s exactly what a healthy team looks like.</p>
       <p>The lighting crew can&rsquo;t work without the power team. Video can&rsquo;t work without lighting. Audio can&rsquo;t work without power. In any team &mdash; project manager, lead engineer, installer &mdash; they&rsquo;re all symbiotically related because the action of one has a direct impact on the other. This extends beyond the team. Company and customer. Product and market. You can&rsquo;t produce output without input. The question for any organisation: are your relationships genuinely symbiotic &mdash; or is one side taking more than it gives?</p>
@@ -2324,7 +2324,7 @@ const TOPICS = {
     label: 'Honest Conversation',
     color: '#4DA8DA',
     audio: 'audio/honest-conversation.mp3',
-    image: null,
+    image: 'images/honest-conversation.png',
     body: `
       <div class="quote">A fool with a tool is still a fool.</div>
       <p>Millions get spent on tools and systems that never get used. Not because the technology was wrong &mdash; because somebody bought the answer before they understood the question. The people on the floor knew what was broken. They tried to say something. Nobody was listening. And so the money gets spent, the system gets installed, and six months later it&rsquo;s collecting dust while everyone quietly works around it. That story plays out in every industry, in every company, over and over again.</p>
@@ -2339,7 +2339,7 @@ const TOPICS = {
     label: 'Cognitive Diversity',
     color: '#4DA8DA',
     audio: 'audio/cognitive-diversity.mp3',
-    image: null,
+    image: 'images/cognitive-diversity.png',
     body: `
       <p>Some people can&rsquo;t think inside the box &mdash; because they never had one. Their brains don&rsquo;t move in straight lines. They see twenty possibilities where others see one, and they can&rsquo;t stop pulling at threads until something unravels into an idea nobody expected. They failed at school because school wasn&rsquo;t built for the way they think, but put them in front of a real problem with real stakes and they will outperform everyone in the room.</p>
       <p>These are the people who feel everything five or ten times more intensely than the people around them &mdash; the joy when something clicks, the frustration when they&rsquo;re forced into a process that doesn&rsquo;t fit, the sadness when they&rsquo;re not understood. Everything is amplified. That amplification is both their superpower and their vulnerability.</p>
@@ -2352,7 +2352,7 @@ const TOPICS = {
     label: 'The Door',
     color: '#7AAD5A',
     audio: 'audio/the-door.mp3',
-    image: null,
+    image: 'images/door.png',
     body: `
       <p>In my entire career, I have never gotten a role through a r&eacute;sum&eacute;. Not once. Every single opportunity that shaped who I am today came because another human being saw something in me that I couldn&rsquo;t see in myself, and they chose to do something about it. They opened a door and said &ldquo;walk through it.&rdquo; And because my neurodivergent brain has never been able to follow the regular path from A to B, those doors were everything.</p>
       <p>Sometimes the door opens and you know exactly what it is. Someone believes in you and gives you a chance you didn&rsquo;t know you were ready for. They throw you into the deep end and trust you to figure out how to swim, and that terrifying moment of sinking before you find your stroke &mdash; that&rsquo;s where all the real growth lives. But sometimes the door is already open and you don&rsquo;t even see it. Someone is standing there holding it, patiently, waiting for you to notice. And sometimes you&rsquo;re the one standing in front of a door you can&rsquo;t open alone, and you have to find the courage to say &ldquo;I need your help with this one.&rdquo;</p>
