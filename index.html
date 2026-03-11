@@ -1859,62 +1859,82 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
 
 
 <div class="page" id="page-engage">
-  <div class="page-content" style="max-width: 800px; margin: 0 auto;">
-    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 260px; overflow: hidden; margin-bottom: 20px;">
-      <img src="images/hero-bridge.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.70;">
-      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.2) 0%, rgba(12,11,15,0.8) 70%, rgba(12,11,15,1) 100%);"></div>
-      <div style="position: absolute; bottom: 32px; left: 48px; right: 48px;">
+  <div class="page-content">
+
+    <!-- Hero banner -->
+    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 280px; overflow: hidden; margin-bottom: 24px;">
+      <img src="images/engage-blueprint.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.70;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.2) 0%, rgba(12,11,15,0.75) 65%, rgba(12,11,15,1) 100%);"></div>
+      <div style="position: absolute; bottom: 28px; left: 48px; right: 48px;">
         <div class="page-label" style="color: var(--green); text-align: left;">WORKING WITH ATHOS</div>
-        <div class="page-title" style="text-align: left;">First Engagements</div>
+        <div class="page-title" style="text-align: left; font-size: clamp(24px, 4vw, 38px);">First Engagements</div>
         <div class="page-subtitle" style="text-align: left; margin-left: 0;">How this starts &mdash; and what it looks like.</div>
       </div>
     </div>
 
-    <span class="parked-badge">DEVELOPING</span>
-
-    <div style="padding: 28px; background: var(--bg-warm); border: 1px solid var(--green-border); border-radius: 12px; margin-bottom: 28px;">
-      <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--green); margin-bottom: 12px;">THE KEY QUESTION</div>
-      <div class="quote" style="border-color: var(--green);">If someone reads this site and thinks "this sounds great" &mdash; what's the first step? A 1-hour call? A half-day workshop? A paid assessment? There needs to be a clear entry point that isn't "commit to 3 months with a stranger."</div>
-    </div>
-
-    <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--amber-bright); margin-bottom: 16px;">THE ATHOS MODEL</div>
-    <p style="color: var(--text-mid); font-size: 16px; line-height: 1.8; margin-bottom: 20px;">
-      Not a slide deck and a handshake. ATHOS embeds. Hands-on. In the room. Witnessing first &mdash; then acting on the witnessing.
-    </p>
-    <p style="color: var(--text-mid); font-size: 16px; line-height: 1.8; margin-bottom: 28px;">
-      Day one: sit down with key people and ask them if they're happy. Ask what their biggest challenge is today. Read them. Then start building.
-    </p>
-
-    <div style="font-family: var(--font-mono); font-size: 12px; font-weight: 700; letter-spacing: 0.1em; color: var(--amber-bright); margin-bottom: 16px;">POSSIBLE TRACKS</div>
-
-    <div class="eng-grid">
-      <div class="eng-card" style="border-left: 3px solid var(--amber);">
-        <div class="eng-card-title">CULTURE ARCHITECTURE</div>
-        <p class="eng-card-body">Team culture challenges that may have nothing to do with AI. Ownership, communication, team dynamics, leadership development. The human system.</p>
+    <!-- Two-column: Key Question + ATHOS Model -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+      <div style="padding: 24px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
+        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE KEY QUESTION</div>
+        <p style="font-size: 15px; color: #FFFFFF; line-height: 1.7; margin-bottom: 10px;">If someone reads this site and thinks &ldquo;this sounds great&rdquo; &mdash; what’s the first step?</p>
+        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7;">A 1-hour call? A half-day workshop? A paid assessment? There needs to be a clear entry point that isn’t &ldquo;commit to 3 months with a stranger.&rdquo; Different organisations have different needs.</p>
       </div>
-      <div class="eng-card" style="border-left: 3px solid var(--blue);">
-        <div class="eng-card-title">AI ADOPTION</div>
-        <p class="eng-card-body">Helping leadership teams guide AI transition without losing the humans in the process. Not replacing people with technology &mdash; building people who know how to work with it.</p>
-      </div>
-      <div class="eng-card" style="border-left: 3px solid var(--green);">
-        <div class="eng-card-title">EMBEDDED ADVISORY</div>
-        <p class="eng-card-body">1 week. 1 month. 3 months. Fractional senior leadership for organisations that need the experience without the full-time cost. In the room, not on a call.</p>
+      <div style="position: relative; padding: 24px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08); overflow: hidden;">
+        <img src="images/engage-hands.png" alt="" style="position: absolute; top: 0; right: 0; width: 50%; height: 100%; object-fit: cover; opacity: 0.2; mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent); -webkit-mask-image: linear-gradient(to left, rgba(0,0,0,0.5), transparent);">
+        <div style="position: relative; z-index: 2;">
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE ATHOS MODEL</div>
+          <p style="font-size: 15px; color: #FFFFFF; line-height: 1.7; margin-bottom: 10px;">Not a slide deck and a handshake. ATHOS embeds. Hands-on. In the room. Witnessing first &mdash; then acting on the witnessing.</p>
+          <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7;">Day one: sit down with key people and ask if they’re happy. Ask what their biggest challenge is. Read them. Then start building.</p>
+        </div>
       </div>
     </div>
 
-    <p style="color: var(--text-light); font-size: 14px; margin-top: 32px; text-align: center; font-style: italic;">
-      Different organisations have different needs. The engagement model adapts to what you actually need &mdash; not a one-size-fits-all package.
-    </p>
-
-    <div style="text-align: center; margin-top: 32px;">
-      <div class="wolf-btn" onclick="showPage('wolf')">START A CONVERSATION</div>
+    <!-- Three Track Cards with images -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+      <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(122,173,90,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
+        <div style="height: 130px; overflow: hidden; position: relative;">
+          <img src="images/engage-blueprint.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, rgba(12,11,15,1) 100%);"></div>
+        </div>
+        <div style="padding: 18px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--green); margin-bottom: 8px;">CULTURE ARCHITECTURE</div>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Team culture challenges that may have nothing to do with AI. Ownership, communication, team dynamics, leadership development.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">The human system. Where people own outcomes because the environment makes it natural.</p>
+        </div>
+      </div>
+      <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(77,168,218,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
+        <div style="height: 130px; overflow: hidden; position: relative;">
+          <img src="images/engage-embedded.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, rgba(12,11,15,1) 100%);"></div>
+        </div>
+        <div style="padding: 18px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #4DA8DA; margin-bottom: 8px;">EMBEDDED ADVISORY</div>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">1 week. 1 month. 3 months. Fractional senior leadership without the full-time cost.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">In the room, not on a call. Witnessing how the team works. Weekly reflections. Building ownership from the inside.</p>
+        </div>
+      </div>
+      <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(100,181,246,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
+        <div style="height: 130px; overflow: hidden; position: relative;">
+          <img src="images/engage-ai.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
+          <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, transparent 20%, rgba(12,11,15,1) 100%);"></div>
+        </div>
+        <div style="padding: 18px;">
+          <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 8px;">AI ADOPTION</div>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Helping leadership teams guide AI transition without losing the humans in the process.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">Not replacing people with technology &mdash; building people who know how to work with it.</p>
+        </div>
+      </div>
     </div>
+
+    <!-- CTA -->
+    <div style="text-align: center; padding: 24px; background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);">
+      <p style="font-size: 16px; color: var(--text); margin-bottom: 16px;">Every engagement starts with a conversation. No commitment. No pitch deck. Just two people talking about what’s real.</p>
+      <div class="wolf-btn" onclick="showPage('wolf')" style="display: inline-block;">START A CONVERSATION</div>
+    </div>
+
   </div>
 </div>
 
-<!-- ============================================
-     Page: Résumé — full readable layout, no accordions
-     ============================================ -->
 <div class="page" id="page-resume">
   <div class="page-content" style="max-width: 900px; margin: 0 auto;">
 
