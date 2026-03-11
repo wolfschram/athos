@@ -1511,8 +1511,8 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
 .immersive-hero {
   width: 100%;
   flex: 1;
-  height: calc(100vh - 180px);
-  min-height: 520px;
+  min-height: 0;
+  height: auto;
   border-radius: 0;
   overflow: hidden;
   margin-bottom: 0;
@@ -1541,12 +1541,14 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   align-items: center;
   gap: 18px;
   padding: 20px 24px;
-  background: rgba(0,0,0,0.7);
+  background: rgba(0,0,0,0.85);
   border: none;
-  border-bottom: 1px solid rgba(255,255,255,0.1);
+  border-bottom: 2px solid rgba(77,168,218,0.25);
   border-radius: 0;
   flex-shrink: 0;
   cursor: pointer;
+  order: -1;
+  z-index: 2;
 }
 .immersive-audio:hover {
   background: rgba(77,168,218,0.12);
