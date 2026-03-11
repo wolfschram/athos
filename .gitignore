@@ -3,3 +3,5 @@
 *.pxd
 *.jsx
 *.docx
+images/*.mp3
+generate_audio.py

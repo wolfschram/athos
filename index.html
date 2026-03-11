@@ -1277,6 +1277,48 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
+
+/* ============================================
+   Audio play buttons on topic cards
+   ============================================ */
+.topic-card-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+.topic-audio-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--divider);
+  background: var(--bg-warm);
+  color: var(--text-light);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.topic-audio-btn:hover {
+  border-color: var(--amber-border);
+  color: var(--amber-bright);
+  background: var(--bg-accent);
+}
+.topic-audio-btn.playing {
+  border-color: var(--amber-bright);
+  color: var(--amber-bright);
+  background: var(--amber-dim);
+  animation: audioPulse 1.5s ease infinite;
+}
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240,178,64,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(240,178,64,0); }
+}
 </style>
 </head>
 <body>
@@ -1362,7 +1404,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       <!-- Topic cards — grid, each card+panel in a column, panels drop below their card -->
       <div class="topic-grid" style="grid-template-columns: repeat(3, 1fr);">
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Purpose</div>
+          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Purpose<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/purpose.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #C8943A40">
             <p>Every high-performing team I&rsquo;ve ever been part of shares one thing: every person in the room can answer the question &mdash; why am I here? Not the job description. Not the title. The real reason they show up and do what they do.</p>
             <p>When you work on a touring production, your crew rolls into a new city, a new arena or stadium, and even if you&rsquo;ve been to that venue three times before with different shows, it&rsquo;s a fresh challenge every single time. Different rigging points, different power, different local crew, different problems to solve. But nobody needs to be told what to do. By end of day, the entire structure has to be built, functioning, tested, and running. That&rsquo;s the mandate. There are no extensions and there are no excuses, because tomorrow the artist walks in for soundcheck and after that you&rsquo;re live in front of thousands. That clarity &mdash; that shared understanding of why we&rsquo;re all here and what has to happen &mdash; is what makes those teams extraordinary. Not management. Not process. Purpose.</p>
@@ -1371,7 +1413,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Ownership</div>
+          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Ownership<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/ownership.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #C8943A40">
             <p>Real ownership is permission. Permission to decide. Permission to fail. Permission to say &ldquo;I don&rsquo;t know&rdquo; without consequence. Most people think they own their work &mdash; but they&rsquo;re handicapped to execute. They can&rsquo;t get things done because the system won&rsquo;t let them. That&rsquo;s not ownership. That&rsquo;s a prison with your name on the door.</p>
             <p>When someone owns their work and fails &mdash; the healthy response is to speak up. Put your hands up. Say it didn&rsquo;t work. Be proud of failing. That is what makes us better. The moment fear enters the equation, people stop taking risks. They stop innovating. They stop owning. And the failures that follow are far worse &mdash; because nobody saw them coming.</p>
@@ -1382,7 +1424,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--teal)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4AAD9E"></span>Symbiotic Teams</div>
+          <div class="topic-card" data-color="var(--teal)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4AAD9E"></span>Symbiotic Teams<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/symbiotic-teams.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #4AAD9E40">
             <p>The bee needs the flower to get the nectar and make the honey. As a byproduct, the bee transports the pollen to the next flower. That&rsquo;s how they replicate. Neither survives without the other. That&rsquo;s a symbiotic relationship &mdash; and it&rsquo;s exactly what a healthy team looks like.</p>
             <p>The lighting crew can&rsquo;t work without the power team. Video can&rsquo;t work without lighting. Audio can&rsquo;t work without power. In any team &mdash; project manager, lead engineer, installer &mdash; they&rsquo;re all symbiotically related because the action of one has a direct impact on the other. This extends beyond the team. Company and customer. Product and market. You can&rsquo;t produce output without input. The question for any organisation: are your relationships genuinely symbiotic &mdash; or is one side taking more than it gives?</p>
@@ -1391,7 +1433,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Honest Conversation</div>
+          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Honest Conversation<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/honest-conversation.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #4DA8DA40">
             <div class="quote">A fool with a tool is still a fool.</div>
             <p>Millions get spent on tools and systems that never get used. Not because the technology was wrong &mdash; because somebody bought the answer before they understood the question. The people on the floor knew what was broken. They tried to say something. Nobody was listening. And so the money gets spent, the system gets installed, and six months later it&rsquo;s collecting dust while everyone quietly works around it. That story plays out in every industry, in every company, over and over again.</p>
@@ -1403,7 +1445,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Cognitive Diversity</div>
+          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Cognitive Diversity<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/cognitive-diversity.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #4DA8DA40">
             <p>Some people can&rsquo;t think inside the box &mdash; because they never had one. Their brains don&rsquo;t move in straight lines. They see twenty possibilities where others see one, and they can&rsquo;t stop pulling at threads until something unravels into an idea nobody expected. They failed at school because school wasn&rsquo;t built for the way they think, but put them in front of a real problem with real stakes and they will outperform everyone in the room. These are the people who feel everything five or ten times more intensely than the people around them &mdash; the joy when something clicks, the frustration when they&rsquo;re forced into a process that doesn&rsquo;t fit, the sadness when they&rsquo;re not understood. Everything is amplified. That amplification is both their superpower and their vulnerability.</p>
             <p>As a leader, if you have people like this on your team &mdash; and you almost certainly do, whether they&rsquo;ve told you or not &mdash; the work isn&rsquo;t to fix them or accommodate them as if something is broken. The work is to understand how they function. What shuts them down? Being micromanaged. Being forced into rigid workflows that exist because someone else couldn&rsquo;t handle the freedom. Being pushed when they need space. Being measured by how they work instead of what they produce. If you recognise these patterns and create the conditions where they can breathe, what comes back will astonish you.</p>
@@ -1412,7 +1454,7 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--green)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#7AAD5A"></span>The Door</div>
+          <div class="topic-card" data-color="var(--green)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#7AAD5A"></span>The Door<button class="topic-audio-btn" onclick="event.stopPropagation(); toggleAudio(this, 'audio/the-door.mp3')" title="Listen">&#9654;</button></div>
           <div class="topic-panel" style="border-color: #7AAD5A40">
             <p>In my entire career, I have never gotten a role through a r&eacute;sum&eacute;. Not once. Every single opportunity that shaped who I am today came because another human being saw something in me that I couldn&rsquo;t see in myself, and they chose to do something about it. They didn&rsquo;t wait for me to apply. They didn&rsquo;t ask for my CV. They opened a door and said &ldquo;walk through it.&rdquo; And because my neurodivergent brain has never been able to follow the regular path from A to B &mdash; the applications, the interviews, the ticking of boxes that everyone else seems to navigate without thinking &mdash; those doors were everything. Without the people who opened them, I wouldn&rsquo;t be here. It&rsquo;s that simple and it&rsquo;s that profound.</p>
             <p>Sometimes the door opens and you know exactly what it is. Someone believes in you and gives you a chance you didn&rsquo;t know you were ready for. They throw you into the deep end and trust you to figure out how to swim, and that terrifying moment of sinking before you find your stroke &mdash; that&rsquo;s where all the real growth lives. But sometimes the door is already open and you don&rsquo;t even see it. Someone is standing there holding it, patiently, waiting for you to notice, and eventually they have to tap you on the shoulder and say &ldquo;hey &mdash; are you coming through or what? I can&rsquo;t hold this forever.&rdquo; And sometimes it&rsquo;s the other way around entirely &mdash; you&rsquo;re the one standing in front of a door you can&rsquo;t open alone, and you have to find the courage to reach out to someone and say &ldquo;I need your help with this one.&rdquo; That vulnerability &mdash; admitting you need someone else &mdash; is part of the whole thing.</p>
@@ -2602,6 +2644,52 @@ function unhlNode() {
 window.addEventListener('resize', () => {
   if(document.getElementById('mindmapView').style.display!=='none') renderMindmap();
 });
+
+// ---- Audio Playback for Topic Cards ----
+let currentAudio = null;
+let currentBtn = null;
+
+function toggleAudio(btn, src) {
+  // If clicking the same button that's playing, stop it
+  if (currentBtn === btn && currentAudio && !currentAudio.paused) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    btn.classList.remove('playing');
+    btn.innerHTML = '&#9654;';
+    currentAudio = null;
+    currentBtn = null;
+    return;
+  }
+  
+  // Stop any currently playing audio
+  if (currentAudio) {
+    currentAudio.pause();
+    currentAudio.currentTime = 0;
+    if (currentBtn) {
+      currentBtn.classList.remove('playing');
+      currentBtn.innerHTML = '&#9654;';
+    }
+  }
+  
+  // Play new audio
+  currentAudio = new Audio(src);
+  currentBtn = btn;
+  btn.classList.add('playing');
+  btn.innerHTML = '&#9646;&#9646;';
+  
+  currentAudio.play().catch(e => {
+    console.error('Audio play failed:', e);
+    btn.classList.remove('playing');
+    btn.innerHTML = '&#9654;';
+  });
+  
+  currentAudio.addEventListener('ended', function() {
+    btn.classList.remove('playing');
+    btn.innerHTML = '&#9654;';
+    currentAudio = null;
+    currentBtn = null;
+  });
+}
 </script>
 </body>
 </html>
