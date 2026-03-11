@@ -1360,60 +1360,100 @@ img[src^="hero-"], img[src="images/landing-logo.png"] {
       </div>
 
       <!-- Topic cards — grid, each card+panel in a column, panels drop below their card -->
-      <div class="topic-grid" style="grid-template-columns: repeat(3, 1fr);">
+      <div class="topic-grid">
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Purpose</div>
-          <div class="topic-panel" style="border-color: #C8943A40">
-            <p>Every high-performing team shares one trait: every person can answer &ldquo;why am I here?&rdquo; Not the job description. The real reason.</p>
-            <p>When a crew loads into a venue at dawn in a country they&rsquo;ve never been to, they don&rsquo;t need motivation. They have a mandate. By end of day, the entire structure has to be built, functioning, tested, running. No extensions. No excuses. That clarity changes everything. You don&rsquo;t need to manage people who know why they&rsquo;re here. You don&rsquo;t need to motivate them. They move.</p>
-            <p>Purpose isn&rsquo;t a poster on the wall. It&rsquo;s the answer to one question every person should be able to answer at any moment: why am I in this role? When that answer is clear, everything else follows. And it scales. The same principle that makes a 15-person touring crew exceptional makes a 200-person engineering organisation transformative. But only if leadership at the top fundamentally believes in empowering their teams to make good, logical decisions.</p>
-            <p>How do you avoid people longing for the weekend the moment they arrive at work on Monday morning? How do you avoid people feeling they&rsquo;re in the wrong place &mdash; trapped, doing work someone else defined, following rules they didn&rsquo;t write? The answer isn&rsquo;t perks or pizza. It&rsquo;s ownership. When people genuinely own their outcomes, Monday becomes the day they get to do the thing they care about.</p>
+          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#3A7BD5"></span>Purpose</div>
+          <div class="topic-panel" style="border-color: #3A7BD540">
+            <p>Every high-performing team shares one trait: every person can answer "why am I here?" Not the job description. The real reason. When a crew loads into a venue at dawn in a country they've never been to, they don't need motivation. They have a mandate. By end of day, the entire structure has to be built, functioning, tested, running. No extensions. No excuses.</p>
+            <p>That clarity changes everything. You don't need to manage people who know why they're here. You don't need to motivate them. They move. Purpose isn't a poster on the wall. It's the answer to one question every person should be able to answer at any moment: why am I in this role? When that answer is clear, everything else follows.</p>
+            <p>And it scales. The same principle that makes a 15-person touring crew exceptional makes a 200-person engineering organisation transformative. But only if leadership at the top fundamentally believes in empowering their teams to make good, logical decisions.</p>
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#C8943A"></span>Ownership</div>
-          <div class="topic-panel" style="border-color: #C8943A40">
-            <p>Real ownership is permission. Permission to decide. Permission to fail. Permission to say &ldquo;I don&rsquo;t know&rdquo; without consequence. Most people think they own their work &mdash; but they&rsquo;re handicapped to execute. They can&rsquo;t get things done because the system won&rsquo;t let them. That&rsquo;s not ownership. That&rsquo;s a prison with your name on the door.</p>
-            <p>When someone owns their work and fails &mdash; the healthy response is to speak up. Put your hands up. Say it didn&rsquo;t work. Be proud of failing. That is what makes us better. The moment fear enters the equation, people stop taking risks. They stop innovating. They stop owning. And the failures that follow are far worse &mdash; because nobody saw them coming.</p>
-            <p>Ownership culture means the team owns equally. If you see a team member struggling &mdash; trouble at home, health, anything &mdash; you look after each other. You are a team. Only you as that team can succeed. Leadership can support from the outside, but they can&rsquo;t do the work for you.</p>
-            <p>It&rsquo;s not team size where culture breaks &mdash; it&rsquo;s project complexity. This is an original ATHOS principle. Short, frequent projects need clear guardrails and rapid communication. Long, complex projects need deep social competence and genuine interpersonal bonds. The more complex the work, the longer the project timelines. The longer the timelines, the more social competence is required. Less complexity means shorter projects and more frequent team rotations &mdash; and that&rsquo;s where guardrails matter most.</p>
-            <p>The leadership approach must match the complexity of the work, not the headcount on the spreadsheet. Get this wrong and you either strangle execution with unnecessary rules, or watch expensive failures cascade because nobody knew each other well enough to catch them.</p>
-            <p>Guardrails are necessary at scale. When hundreds of engineers are working across multiple projects, uncontrolled environments create real financial risk. That&rsquo;s reality. But guardrails installed in reaction to failure &mdash; without education, without communication about the rights and wrongs &mdash; strangle everyone. They limit everybody&rsquo;s capability of manoeuvring. Before you know it, the entire organisation is standing still because nobody can execute anymore. The question: when do guardrails protect, and when do they paralyse? Sometimes the right call takes real courage &mdash; to say the guardrails cost more than the risk. That requires leaders who see the bigger picture and have the nerve to act on it.</p>
+          <div class="topic-card" data-color="var(--amber)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#3A7BD5"></span>Ownership</div>
+          <div class="topic-panel" style="border-color: #3A7BD540">
+            <p>Real ownership is permission. Permission to decide. Permission to fail. Permission to say "I don't know" without consequence. Most people think they own their work — but they're handicapped to execute. They can't get things done because the system won't let them. That's not ownership. That's a prison with your name on the door.</p>
+            <p>When someone owns their work and fails — the healthy response is to speak up. Put your hands up. Say it didn't work. Be proud of failing. That is what makes us better. The moment fear enters the equation, people stop taking risks. They stop innovating. They stop owning. And the failures that follow are far worse — because nobody saw them coming.</p>
+            <p>Ownership culture means the team owns equally. If you see a team member struggling — trouble at home, health, anything — you look after each other. You are a team. Only you as that team can succeed. Leadership can support from the outside, but they can't do the work for you.</p>
           </div>
         </div>
         <div class="topic-col">
           <div class="topic-card" data-color="var(--teal)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4AAD9E"></span>Symbiotic Teams</div>
           <div class="topic-panel" style="border-color: #4AAD9E40">
-            <p>The bee needs the flower to get the nectar and make the honey. As a byproduct, the bee transports the pollen to the next flower. That&rsquo;s how they replicate. Neither survives without the other. That&rsquo;s a symbiotic relationship &mdash; and it&rsquo;s exactly what a healthy team looks like.</p>
-            <p>The lighting crew can&rsquo;t work without the power team. Video can&rsquo;t work without lighting. Audio can&rsquo;t work without power. In any team &mdash; project manager, lead engineer, installer &mdash; they&rsquo;re all symbiotically related because the action of one has a direct impact on the other. This extends beyond the team. Company and customer. Product and market. You can&rsquo;t produce output without input. The question for any organisation: are your relationships genuinely symbiotic &mdash; or is one side taking more than it gives?</p>
-            <p>What&rsquo;s your strength? What&rsquo;s your weakness? Where do you need help? These questions sound simple. Most professionals never ask them &mdash; and never answer them honestly. Creating space for vulnerability isn&rsquo;t about being open all the time. It&rsquo;s about building an environment where it&rsquo;s possible when it matters. That&rsquo;s where real teams are built.</p>
+            <p>The bee needs the flower to get the nectar and make the honey. As a byproduct, the bee transports the pollen to the next flower. That's how they replicate. Neither survives without the other. That's a symbiotic relationship — and it's exactly what a healthy team looks like.</p>
+            <p>The lighting crew can't work without the power team. Video can't work without lighting. Audio can't work without power. In any team — project manager, lead engineer, installer — they're all symbiotically related because the action of one has a direct impact on the other.</p>
+            <p>This extends beyond the team. Company and customer. Product and market. You can't produce output without input. The question for any organisation: are your relationships genuinely symbiotic — or is one side taking more than it gives?</p>
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Honest Conversation</div>
-          <div class="topic-panel" style="border-color: #4DA8DA40">
-            <p>If the conversation between senior leadership and the people doing the work can&rsquo;t be honest about the good, the bad, and the ugly &mdash; that is the first sign of a broken organisation. And it&rsquo;s where every transformation dies.</p>
-            <p>Millions get spent on tools and systems that fail. Not because the technology was wrong &mdash; because nobody asked the right people the right questions. Senior leadership doesn&rsquo;t listen to the people who actually know the answers. They don&rsquo;t ask the right questions, so they don&rsquo;t get the right answers. That&rsquo;s how companies spend fortunes on systems that never get integrated.</p>
+          <div class="topic-card" data-color="var(--red)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#D06A5A"></span>Honest Conversation</div>
+          <div class="topic-panel" style="border-color: #D06A5A40">
+            <p>If the conversation between senior leadership and the people doing the work can't be honest about the good, the bad, and the ugly — that is the first sign of a broken organisation. And it's where every transformation dies.</p>
+            <p>Millions get spent on tools and systems that fail. Not because the technology was wrong — because nobody asked the right people the right questions. Senior leadership doesn't listen to the people who actually know the answers. They don't ask the right questions, so they don't get the right answers. That's how companies spend fortunes on systems that never get integrated.</p>
             <div class="quote">A fool with a tool is still a fool.</div>
-            <p>The real investment is never the technology. It&rsquo;s the conversation. Bridge the gap between C-suite and warehouse. If that conversation can&rsquo;t be honest, nothing else matters.</p>
-            <p>You can&rsquo;t tell a CEO they&rsquo;re wrong until you&rsquo;ve earned the relationship. If that rapport doesn&rsquo;t exist, your insights go in one ear and out the other. It doesn&rsquo;t matter how right you are. Truth only lands after trust is established. Build rapport first. Earn the right to be heard. Then the honest conversation becomes possible &mdash; and it becomes powerful. Without rapport, you&rsquo;re just another voice with an opinion.</p>
+            <p>The real investment is never the technology. It's the conversation. Bridge the gap between C-suite and warehouse. If that conversation can't be honest, nothing else matters.</p>
           </div>
         </div>
         <div class="topic-col">
-          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#4DA8DA"></span>Cognitive Diversity</div>
-          <div class="topic-panel" style="border-color: #4DA8DA40">
-            <p>Some people can&rsquo;t think inside the box &mdash; because they never had one. They find 20 solutions where others see one. Their brains don&rsquo;t sit still. They failed at formal education but outperform everyone in practice. The ones not afraid to fail. The ones who can&rsquo;t stop pushing. You need these people.</p>
-            <p>But you also need minds that thrive in structure. They can be equally brilliant. The trick is identifying who can work with whom and why. What&rsquo;s your strength? What&rsquo;s your weakness? Where can you go? Where should you stay?</p>
-            <p>Give curious people 20-30% of their time to explore within the domain. The breakthroughs don&rsquo;t come from structured roadmaps. They come from people with permission to follow a thread &mdash; and a leader with a seventh sense for spotting potential that others miss.</p>
+          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#5A9ABE"></span>Cognitive Diversity</div>
+          <div class="topic-panel" style="border-color: #5A9ABE40">
+            <p>Some people can't think inside the box — because they never had one. They find 20 solutions where others see one. Their brains don't sit still. They failed at formal education but outperform everyone in practice. The ones not afraid to fail. The ones who can't stop pushing. You need these people.</p>
+            <p>But you also need minds that thrive in structure. They can be equally brilliant. The trick is identifying who can work with whom and why. What's your strength? What's your weakness? Where can you go? Where should you stay?</p>
+            <p>Give curious people 20-30% of their time to explore within the domain. The breakthroughs don't come from structured roadmaps. They come from people with permission to follow a thread — and a leader with a seventh sense for spotting potential that others miss.</p>
             <p>Be open. Be vulnerable. Be human. That is the key in all of this.</p>
+          </div>
+        </div>
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--purple)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#9A7ABF"></span>Complexity</div>
+          <div class="topic-panel" style="border-color: #9A7ABF40">
+            <p>It's not team size where culture breaks — it's project complexity. This is an original ATHOS principle. Short, frequent projects need clear guardrails and rapid communication. Long, complex projects need deep social competence and genuine interpersonal bonds.</p>
+            <p>The more complex the work, the longer the project timelines. The longer the timelines, the more social competence is required. Less complexity means shorter projects and more frequent team rotations — and that's where guardrails matter most.</p>
+            <p>The leadership approach must match the complexity of the work, not the headcount on the spreadsheet. Get this wrong and you either strangle execution with unnecessary rules, or watch expensive failures cascade because nobody knew each other well enough to catch them.</p>
+          </div>
+        </div>
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--purple)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#9A7ABF"></span>Guardrails</div>
+          <div class="topic-panel" style="border-color: #9A7ABF40">
+            <p>Guardrails are necessary at scale. When hundreds of engineers are working across multiple projects, uncontrolled environments create real financial risk. That's reality.</p>
+            <p>But guardrails installed in reaction to failure — without education, without communication about the rights and wrongs — strangle everyone. They limit everybody's capability of manoeuvring. Before you know it, the entire organisation is standing still because nobody can execute anymore.</p>
+            <p>The question: when do guardrails protect, and when do they paralyse? Sometimes the right call takes real courage — to say the guardrails cost more than the risk. That requires leaders who see the bigger picture and have the nerve to act on it.</p>
           </div>
         </div>
         <div class="topic-col">
           <div class="topic-card" data-color="var(--green)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#7AAD5A"></span>The Door</div>
           <div class="topic-panel" style="border-color: #7AAD5A40">
-            <p>Open doors for people. Help them walk through. Don&rsquo;t need them to come back. That&rsquo;s not strategy. That&rsquo;s purpose.</p>
-            <p>Throughout a career, certain people see something in you that you can&rsquo;t see yourself. They give you opportunities you didn&rsquo;t know you were ready for. They put you in the deep end and trust you to swim. And when you look back, those moments defined everything that followed.</p>
-            <p>Pay it forward. Open doors for others the same way. If they never come back &mdash; that&rsquo;s fine. If they open a door for someone else one day, that&rsquo;s the real return. Success isn&rsquo;t measured by what comes back to you. It&rsquo;s measured by what ripples outward.</p>
+            <p>Open doors for people. Help them walk through. Don't need them to come back. That's not strategy. That's purpose.</p>
+            <p>Throughout a career, certain people see something in you that you can't see yourself. They give you opportunities you didn't know you were ready for. They put you in the deep end and trust you to swim. And when you look back, those moments defined everything that followed.</p>
+            <p>Pay it forward. Open doors for others the same way. If they never come back — that's fine. If they open a door for someone else one day, that's the real return. Success isn't measured by what comes back to you. It's measured by what ripples outward.</p>
+          </div>
+        </div>
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--red)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#D06A5A"></span>Rapport</div>
+          <div class="topic-panel" style="border-color: #D06A5A40">
+            <p>You can't tell a CEO they're wrong until you've earned the relationship. If that rapport doesn't exist, your insights go in one ear and out the other. It doesn't matter how right you are.</p>
+            <p>Truth only lands after trust is established. Build rapport first. Earn the right to be heard. Then the honest conversation becomes possible — and it becomes powerful. Without rapport, you're just another voice with an opinion.</p>
+          </div>
+        </div>
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--purple)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#9A7ABF"></span>Monday Q</div>
+          <div class="topic-panel" style="border-color: #9A7ABF40">
+            <p>How do you avoid people longing for the weekend the moment they arrive at work on Monday morning? How do you avoid people feeling they're in the wrong place — trapped, doing work someone else defined, following rules they didn't write?</p>
+            <p>The answer isn't perks or pizza. It's ownership. When people genuinely own their outcomes, Monday becomes the day they get to do the thing they care about. Most people hate Mondays not because they're lazy — because the system never gave them anything worth owning.</p>
+          </div>
+        </div>
+
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--blue)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#5A9ABE"></span>Be Human</div>
+          <div class="topic-panel" style="border-color: #5A9ABE40">
+            <p>What's your strength? What's your weakness? Where do you need help? These questions sound simple. Most professionals never ask them &mdash; and never answer them honestly.</p>
+            <p>Creating space for vulnerability isn't about being open all the time. It's about building an environment where it's possible when it matters. That's where real teams are built.</p>
+          </div>
+        </div>
+        <div class="topic-col">
+          <div class="topic-card" data-color="var(--green)" onclick="toggleTopicCard(this)"><span class="topic-dot" style="background:#7AAD5A"></span>Pay It Forward</div>
+          <div class="topic-panel" style="border-color: #7AAD5A40">
+            <p>Open a door for someone. Don't need them to come back. If they open a door for someone else one day &mdash; that's the real return.</p>
+            <p>Success isn't measured by what comes back to you. It's measured by what ripples outward. That's not business strategy. That's purpose.</p>
           </div>
         </div>
       </div>
