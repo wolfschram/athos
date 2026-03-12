@@ -2755,38 +2755,42 @@ body.immersive-open {
 </div>
 
 <div class="page" id="page-resume" style="padding: 0;">
-  <!-- Hero Image — full bleed, outside max-width wrapper -->
-  <div style="position: relative; width: 100%; height: 420px; overflow: hidden; margin-bottom: 0;">
-    <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 20% center; opacity: 0.9;">
-    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0.5) 60%, rgba(12,11,15,1) 100%);"></div>
+  <!-- Hero: man on ridge, full bleed, head near menu bar -->
+  <div style="position: relative; width: 100%; height: 460px; overflow: hidden; margin-bottom: 0;">
+    <img src="images/resume-portrait.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center 15%; opacity: 0.95;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0.4) 55%, rgba(12,11,15,1) 100%);"></div>
     <div style="position: absolute; bottom: 36px; left: 48px; right: 48px;">
       <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin-bottom: 10px;">R&Eacute;SUM&Eacute;</div>
       <div style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.1;">Wolfgang Schram</div>
       <div style="font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 8px; letter-spacing: 0.06em;">Los Angeles &middot; VP Engineering &middot; Culture Architect &middot; 25+ Years</div>
     </div>
   </div>
-  <div class="page-content" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
 
-    <!-- Header -->
-    <div style="margin-bottom: 32px;">
-      <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-light); letter-spacing: 0.06em; padding-top: 8px;">
-        Los Angeles, California &middot; +1 310 997 8359 &middot;
-        <a href="mailto:wolfbroadcast@gmail.com">wolfbroadcast@gmail.com</a> &middot;
-        <a href="https://www.linkedin.com/in/wolfschram" target="_blank">linkedin.com/in/wolfschram</a>
+  <!-- Two-column body: CV left, road right -->
+  <div style="display: flex; align-items: flex-start; position: relative; background: #0C0B0F;">
+
+    <!-- RIGHT: road image sticky panel, left edge dissolves into black -->
+    <div style="position: sticky; top: 0; width: 300px; min-width: 300px; height: 100vh; overflow: hidden; flex-shrink: 0; order: 2;">
+      <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center center; opacity: 0.85; display: block;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to right, #0C0B0F 0%, rgba(12,11,15,0.7) 30%, rgba(12,11,15,0) 60%);"></div>
+    </div>
+
+    <!-- LEFT: CV content -->
+    <div style="flex: 1; min-width: 0; padding: 40px 48px 80px 48px; order: 1;">
+
+      <!-- Header -->
+      <div style="margin-bottom: 32px;">
+        <div style="font-family: var(--font-mono); font-size: 12px; color: var(--text-light); letter-spacing: 0.06em; padding-top: 8px;">
+          Los Angeles, California &middot; +1 310 997 8359 &middot;
+          <a href="mailto:wolfbroadcast@gmail.com">wolfbroadcast@gmail.com</a> &middot;
+          <a href="https://www.linkedin.com/in/wolfschram" target="_blank">linkedin.com/in/wolfschram</a>
+        </div>
       </div>
-    </div>
 
-    <!-- Positioning Statement -->
-    <div style="padding: 24px 28px; background: var(--bg-warm); border-left: 3px solid var(--amber-bright); border-radius: 0 10px 10px 0; margin-bottom: 40px;">
-      <p style="font-size: 16px; color: var(--text); line-height: 1.8; font-style: italic;">"I thrive on building teams of diverse and complex minds that flourish under the core concept of an ownership culture. Twenty-five years leading engineering teams across three continents—from broadcast engineering in Germany to concert touring to transforming a 250-person engineering organization at Diversified."</p>
-    </div>
-
-    <!-- Portrait Image â floated right alongside content -->
-    <div style="float: right; width: 340px; margin: 0 0 32px 40px; shape-outside: border-box;">
-      <img src="images/resume-portrait.png" alt="Wolfgang Schram" style="width: 100%; border-radius: 6px; opacity: 0.92; object-fit: cover; object-position: center top; display: block;">
-    </div>
-
-    <div style="clear: both;"></div>
+      <!-- Positioning Statement -->
+      <div style="padding: 24px 28px; background: var(--bg-warm); border-left: 3px solid var(--amber-bright); border-radius: 0 10px 10px 0; margin-bottom: 40px;">
+        <p style="font-size: 16px; color: var(--text); line-height: 1.8; font-style: italic;">“I thrive on building teams of diverse and complex minds that flourish under the core concept of an ownership culture. Twenty-five years leading engineering teams across three continents—from broadcast engineering in Germany to concert touring to transforming a 250-person engineering organization at Diversified.”</p>
+      </div>
 
     <!-- ---- EXPERIENCE ---- -->
     <div class="cv-section-heading">Experience</div>
@@ -2948,6 +2952,8 @@ body.immersive-open {
       </div>
     </div>
   </div>
+    </div><!-- end CV column -->
+  </div><!-- end flex container -->
 </div>
 
 <!-- ============================================
