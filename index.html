@@ -502,6 +502,14 @@ a:hover { color: #fff; }
 .accordion-body-inner {
   padding: 0 28px 28px;
 }
+/* AI cards — fast collapse, no animation lag */
+.ai-card .accordion-body {
+  transition: max-height 0.25s ease;
+}
+.ai-card.open .accordion-body {
+  max-height: 2000px;
+  transition: max-height 0.4s ease;
+}
 .accordion-body p {
   font-size: 16px;
   color: var(--text);
@@ -1939,20 +1947,13 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
       </div>
     </div>
 
-    <!-- THE HONEST TRUTH — RIGHT AT THE TOP, BIG AND BRIGHT -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 28px;">
-      <div style="padding: 28px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
-        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE HONEST TRUTH</div>
-        <p style="font-size: 15px; color: #FFFFFF; line-height: 1.7; margin-bottom: 10px;">On a scale of 1 to 10 as an AI professional, I’d place myself at a <strong style="color: #4DA8DA; font-size: 20px;">1.5</strong>. There’s so much to know, so much to learn, so much complexity I haven’t even touched the surface of.</p>
-        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 8px;">These projects might look like “wow” to those who haven’t tried it — but that’s the one-eyed among the blind.</p>
-          <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7;">I’m not the AI expert. I’m the person who uses it to manoeuvre through the world in a better way. The difference matters. Only by doing it do you understand what doing it means — and to earn respect from the people who do this professionally, you have to show that you’ve done it yourself.</p>
-      </div>
-      <div style="padding: 28px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
-        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">IF YOU WANT TO DO WHAT I DID</div>
-        <p style="font-size: 18px; color: #FFFFFF; line-height: 1.6; font-weight: 700; margin-bottom: 12px;">Don’t do what I did. Do what you want to do. Think about an outcome. Then plan backwards from there.</p>
-        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 8px;">Every project below was born from a real need. Not an exercise. Not a tutorial. A genuine problem that needed solving — and nothing existed to solve it.</p>
-          <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7;">Some worked. Some failed spectacularly. Each one taught something the next one needed. That’s The Restless Mind in action — a brain that doesn’t sit still, doesn’t accept failure as final, and constantly searches for a better way.</p>
-      </div>
+    <!-- THE RESTLESS MIND INTRO -->
+    <div style="padding: 32px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08); margin-bottom: 28px;">
+      <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 16px;">THE HONEST TRUTH</div>
+      <p style="font-size: 16px; color: #FFFFFF; line-height: 1.8; margin-bottom: 14px;">My brain does not sit still. It never has. When I was a kid, that was a problem &mdash; school is not built for a mind that needs to understand why before it can learn how, that gets bored the moment something stops being new, that sees twenty connections where most people see one. It took me decades to stop seeing that as a flaw and start seeing it as an engine.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px;">AI changed something for me. Not because it made me smarter &mdash; but because for the first time, I had a tool that could keep up with the pace of how I think. I could have an idea at midnight, describe it out loud, and have something real to look at by morning. The gap between concept and reality &mdash; the gap that had always exhausted me &mdash; collapsed. And what came out of that collapse was everything you see below.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px;">On a scale of 1 to 10 as an AI professional, I would put myself at a <strong style="color: #4DA8DA; font-size: 18px;">1.5</strong>. There is so much I have not touched the surface of. These projects might look impressive to someone who has not tried &mdash; but that is the one-eyed among the blind. What they represent is not technical mastery. They represent what happens when a restless mind finally finds a way to build the things it has always been able to see.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8;">Every project below was born from a real need. Not an exercise. Not a tutorial. A genuine problem that needed solving and nothing that existed could solve it. Some worked. Some failed spectacularly. Each one taught something the next one needed. That is the ADHD brain in its natural habitat &mdash; not distracted, but driven. Not scattered, but searching. Always searching.</p>
     </div>
 
     <!-- PROJECTS — COMPACT 2-COLUMN GRID -->
@@ -1972,9 +1973,2035 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
         </div>
         <div class="accordion-body"><div class="accordion-body-inner" style="padding: 0 20px 16px;">
           <img src="images/workflow-anamorphic.png" alt="Anamorphic Lens Workflow" style="width: 100%; border-radius: 8px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">The need:</strong> Photography shot with a fully manual anamorphic lens produces squeezed images. Every frame needs de-morphing before editing. After research — nothing existed to batch-process this.</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">What I built:</strong> macOS desktop app. Electron + React + TypeScript. Uses dnglab for RAW conversion, ffmpeg for de-squeeze, exiftool for metadata. Five modules. Drop files in, get corrected images out.</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">Why it matters:</strong> First time I said “Hello Claude, build me something” — and it worked. A real tool solving a real problem. The spark that lit everything that followed.</p>
+          <p style="font-size: 13px; margin-bottom: 10px;"><strong style="color: var(--text);">The need:</strong> Photography shot with a fully manual anamorphic lens produces squeezed images. Every frame needs de-morphing before editing. After research — nothing existed to batch-process this.</p>
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent); letter-spacing: 0.08em; margin-bottom: 6px;">STACK</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Electron</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">React</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">TypeScript</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">dnglab</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">ffmpeg</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">exiftool</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 8px;"><strong style="color: var(--text);">Why it matters:</strong> First time I said “Hello Claude, build me something” — and it worked. A real tool solving a real problem. The spark that lit everything that followed.</p>
+          <p style="margin-top: 8px;"><a href="https://github.com/wolfschram/anamorphic-lens" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">→ GitHub: wolfschram/anamorphic-lens</a></p>
+        </div></div>
+      </div>
+
+      <!-- Project 2: Jenny -->
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+        <div class="accordion-header" style="padding: 14px 20px;">
+          <div class="accordion-header-left">
+            <div class="accordion-dot" style="background: var(--red)"></div>
+            <div>
+              <div class="stage-num">02 — THE CURRICULUM</div>
+              <div class="accordion-title" style="font-size: 13px;">Jenny — AI Assistant (v1–v3)</div>
+            </div>
+          </div>
+          <div class="accordion-arrow">&#9662;</div>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner" style="padding: 0 20px 16px;">
+          <img src="images/workflow-jenny.png" alt="Jenny Evolution Workflow" style="width: 100%; border-radius: 8px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+                    <p style="font-size: 13px; margin-bottom: 10px;"><strong style="color: var(--text);">The need:</strong> An AI second brain designed for a neurodivergent mind — something that captures what I say, understands what matters, and surfaces it back when I need it. Nothing on the market was built for this.</p>
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--red); letter-spacing: 0.08em; margin-bottom: 6px;">THREE ATTEMPTS</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(208,106,90,0.1); border: 1px solid rgba(208,106,90,0.2); border-radius: 4px; color: var(--text-mid);">v1: MCP server spec</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(208,106,90,0.1); border: 1px solid rgba(208,106,90,0.2); border-radius: 4px; color: var(--text-mid);">v2: Swift / Xcode iOS</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(208,106,90,0.1); border: 1px solid rgba(208,106,90,0.2); border-radius: 4px; color: var(--text-mid);">v3: Electron + SQLite</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 8px;"><strong style="color: var(--red);">What failed:</strong> All three. None became a usable product. The vision was right — the execution kept hitting walls I didn’t know existed yet. Which turned out to be exactly the education I needed.</p>
+          <p style="font-size: 13px; margin-bottom: 8px;"><strong style="color: var(--text);">What I learned:</strong> Failure is the fastest teacher if you are honest about it. The breakthrough comes after you stop blaming the tools and start understanding the problem.</p>
+          <p style="margin-top: 8px;"><a href="https://github.com/wolfschram/jenny-app" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">→ jenny-app</a> &middot; <a href="https://github.com/wolfschram/jenny-capture" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">capture</a> &middot; <a href="https://github.com/wolfschram/jenny-assistant" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">assistant</a></p>lang="en">
+<head>
+<meta charset="UTF-8">
+  <script>
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+      location.replace('https://' + location.hostname + location.pathname + location.search);
+    }
+  </script>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ATHOS — Architecting Teams for High-performance Outcomes & Scale</title>
+<meta name="description" content="Culture architecture. Own It. Build It. Stand Behind It. Wolf Schram builds environments where teams own their work and organisations transform.">
+<!-- ============================================
+     SEO & AI AGENT DISCOVERABILITY
+     ============================================ -->
+<!-- Primary Meta -->
+<meta name="keywords" content="culture architecture, leadership, team ownership, Wolfgang Schram, Wolf Schram, ATHOS, servant leadership, neurodivergent leadership, cognitive diversity, VP Engineering, organisational culture, people development, symbiotic teams">
+<meta name="author" content="Wolf Schram">
+<meta name="robots" content="index, follow">
+<link rel="canonical" href="https://athos-obs.com/">
+
+<!-- Open Graph -->
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://athos-obs.com/">
+<meta property="og:title" content="ATHOS — Architecting Teams for High-performance Outcomes & Scale">
+<meta property="og:description" content="Wolf Schram is a Culture Architect. He embeds with organisations, witnesses, then acts. 25 years building teams that own their work. Own It. Build It. Stand Behind It.">
+<meta property="og:image" content="https://athos-obs.com/images/purpose.png">
+<meta property="og:image:width" content="1536">
+<meta property="og:image:height" content="1024">
+<meta property="og:site_name" content="ATHOS">
+<meta property="og:locale" content="en_US">
+
+<!-- Twitter / X Cards -->
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="ATHOS — Architecting Teams for High-performance Outcomes & Scale">
+<meta name="twitter:description" content="Wolf Schram is a Culture Architect. He embeds with organisations, witnesses, then acts. Own It. Build It. Stand Behind It.">
+<meta name="twitter:image" content="https://athos-obs.com/images/purpose.png">
+
+<!-- JSON-LD Structured Data -->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Person",
+      "@id": "https://athos-obs.com/#wolf",
+      "name": "Wolfgang Schram",
+      "alternateName": "Wolf Schram",
+      "url": "https://athos.archive-35.com",
+      "image": "https://athos-obs.com/images/athos-logo.png",
+      "jobTitle": "Culture Architect",
+      "description": "Former VP Engineering with ~250 engineers globally across broadcast, media and workplace technology. 25+ years building high-performance teams. Founder of ATHOS. ADHD and dyslexia — views both as superpowers.",
+      "knowsAbout": [
+        "Ownership culture",
+        "Servant leadership",
+        "Cognitive diversity",
+        "Neurodivergent leadership",
+        "Broadcast technology",
+        "SMPTE 2110",
+        "Enterprise engineering",
+        "AI-augmented workflows",
+        "Team architecture"
+      ],
+      "sameAs": [
+        "https://www.linkedin.com/in/wolfgang-schram-a4837420/"
+      ],
+      "email": "wolfbroadcast@gmail.com"
+    },
+    {
+      "@type": "Organization",
+      "@id": "https://athos-obs.com/#athos",
+      "name": "ATHOS",
+      "alternateName": "Architecting Teams for High-performance Outcomes & Scale",
+      "url": "https://athos.archive-35.com",
+      "logo": "https://athos-obs.com/images/athos-logo.png",
+      "description": "Culture architecture practice. Wolf Schram embeds with organisations, witnesses how they work, then acts. Not consulting. Not coaching. Architecture.",
+      "slogan": "Own It. Build It. Stand Behind It.",
+      "founder": { "@id": "https://athos-obs.com/#wolf" },
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "email": "wolfbroadcast@gmail.com",
+        "contactType": "Business Enquiries"
+      }
+    },
+    {
+      "@type": "Service",
+      "@id": "https://athos-obs.com/#service",
+      "name": "Culture Architecture",
+      "provider": { "@id": "https://athos-obs.com/#athos" },
+      "description": "Wolf embeds with your organisation. Witnesses how your culture actually operates. Then architects the conditions for genuine ownership, honest conversation, and high-performance teams.",
+      "offers": [
+        {
+          "@type": "Offer",
+          "name": "Embedded Culture Engagement",
+          "description": "Wolf works inside your organisation — not from a conference room. He observes, listens, builds trust, then architects change from within."
+        },
+        {
+          "@type": "Offer",
+          "name": "Leadership Development",
+          "description": "Building leadership capability across Purpose, Ownership, Symbiotic Teams, Honest Conversation, Cognitive Diversity, and The Door."
+        },
+        {
+          "@type": "Offer",
+          "name": "AI + Human Integration",
+          "description": "Practical AI augmentation for leadership teams. Not automation theatre. Genuine human-AI symbiosis that elevates people, not replaces them."
+        }
+      ]
+    }
+  ]
+}
+</script>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/* ============================================
+   ATHOS v2 — Tab-based SPA
+   Full-width. Mono headings. Bright nav.
+   ============================================ */
+:root {
+  --bg: #0C0B0F;
+  --bg-warm: #111114;
+  --bg-accent: #19191e;
+  --bg-card: #1e1e24;
+  --bg-hover: #242430;
+  --navy: #1B2A4A;
+  --amber: #3A7BD5;
+  --amber-bright: #4DA8DA;
+  --amber-light: #5BB8F0;
+  --amber-dim: rgba(58,123,213,0.10);
+  --amber-border: rgba(58,123,213,0.30);
+  --blue: #64B5F6;
+  --blue-dim: rgba(100,181,246,0.10);
+  --blue-border: rgba(100,181,246,0.30);
+  --teal: #4AAD9E;
+  --teal-dim: rgba(74,173,158,0.10);
+  --teal-border: rgba(74,173,158,0.30);
+  --red: #D06A5A;
+  --red-dim: rgba(208,106,90,0.10);
+  --red-border: rgba(208,106,90,0.30);
+  --green: #7AAD5A;
+  --green-dim: rgba(122,173,90,0.10);
+  --green-border: rgba(122,173,90,0.30);
+  --purple: #9A7ABF;
+  --purple-dim: rgba(154,122,191,0.10);
+  --purple-border: rgba(154,122,191,0.30);
+  --text: #F0EDE8;
+  --text-mid: #B0AAA4;
+  --text-light: #7A7470;
+  --divider: rgba(255,255,255,0.08);
+  --font-body: 'Atkinson Hyperlegible', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', monospace;
+}
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 17px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+  min-height: 100vh;
+}
+
+::selection { background: var(--amber); color: var(--bg); }
+a { color: var(--amber-bright); text-decoration: none; transition: color 0.2s; }
+a:hover { color: #fff; }
+
+/* ============================================
+   Navigation — BRIGHT, popping
+   ============================================ */
+.nav {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  z-index: 1000;
+  background: rgba(12,11,15,0.85);
+  backdrop-filter: blur(24px);
+  border-bottom: 1px solid rgba(77,168,218,0.4);
+}
+.nav-inner {
+  display: flex;
+  align-items: center;
+  height: 52px;
+  padding: 0 24px;
+  gap: 0;
+}
+.nav-brand {
+  font-family: var(--font-mono);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: var(--amber-bright);
+  cursor: pointer;
+  margin-right: 32px;
+  flex-shrink: 0;
+  text-shadow: 0 0 20px rgba(77,168,218,0.3);
+}
+.nav-tabs {
+  display: flex;
+  gap: 2px;
+  list-style: none;
+  flex: 1;
+  overflow-x: auto;
+}
+.nav-tab {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.10em;
+  text-transform: uppercase;
+  color: var(--text-mid);
+  padding: 8px 18px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  border: 1px solid transparent;
+  user-select: none;
+}
+.nav-tab:hover {
+  color: #fff;
+  background: var(--bg-hover);
+  border-color: var(--divider);
+}
+.nav-tab.active {
+  color: var(--amber-bright);
+  background: rgba(200,148,58,0.12);
+  border-color: var(--amber-border);
+  text-shadow: 0 0 12px rgba(77,168,218,0.25);
+}
+.nav-contact {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--bg);
+  background: var(--amber-bright);
+  padding: 8px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 1px solid var(--amber-bright);
+  margin-left: 16px;
+  flex-shrink: 0;
+  text-shadow: none;
+}
+.nav-contact:hover {
+  background: transparent;
+  color: var(--amber-bright);
+}
+
+/* Mobile hamburger */
+.nav-toggle {
+  display: none;
+  background: none;
+  border: none;
+  color: var(--amber-bright);
+  font-size: 28px;
+  cursor: pointer;
+  margin-left: auto;
+}
+@media (max-width: 900px) {
+  .nav-toggle { display: block; }
+  .nav-tabs {
+    display: none;
+    position: absolute;
+    top: 52px; left: 0; right: 0;
+    background: rgba(12,11,15,0.97);
+    flex-direction: column;
+    padding: 12px;
+    border-bottom: 1px solid rgba(77,168,218,0.4);
+  }
+  .nav-tabs.open { display: flex; }
+  .nav-contact { display: none; }
+}
+
+/* ============================================
+   Page Container — full width, tab-based
+   ============================================ */
+.page {
+  display: none;
+  width: 100%;
+  min-height: calc(100vh - 52px);
+  margin-top: 52px;
+  padding: 0;
+}
+.page.active { display: block; }
+
+/* Full-width section padding */
+.page-content {
+  width: 100%;
+  padding: 32px 48px 48px;
+}
+@media (max-width: 700px) {
+  .page-content { padding: 32px 20px 60px; }
+  [style*="margin-left: calc(-48px)"] { margin-left: calc(-20px) !important; }
+  [style*="left: 48px"] { left: 20px !important; right: 20px !important; }
+}
+
+/* ============================================
+   Page 1 — Landing
+   ============================================ */
+#landing {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  text-align: left;
+  min-height: calc(100vh - 52px);
+  position: relative;
+  overflow: hidden;
+}
+/* Ambient glow */
+#landing::before {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  background: url('images/hero-landing.png') center center / cover no-repeat;
+  opacity: 0.80;
+  pointer-events: none;
+  z-index: 0;
+}
+#landing::after {
+  content: '';
+  position: absolute;
+  width: 100%; height: 100%;
+  top: 0; left: 0;
+  background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0) 40%, rgba(12,11,15,0.3) 70%, rgba(12,11,15,0.85) 100%);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Logo animation — starts tiny, scales + fades in */
+.hero-logo-img {
+  max-width: 720px;
+  width: 95%;
+  height: auto;
+  filter: brightness(1.3) contrast(1.1) drop-shadow(0 0 40px rgba(255,255,255,0.15));
+  animation: logoEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  opacity: 0;
+}
+@keyframes logoEntrance {
+  0% {
+    opacity: 0;
+    transform: scale(0.15) translateY(40px);
+    filter: drop-shadow(0 0 0px rgba(200,148,58,0)) blur(8px);
+  }
+  40% {
+    opacity: 0.8;
+    filter: drop-shadow(0 0 80px rgba(58,123,213,0.4)) blur(0px);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    filter: drop-shadow(0 0 60px rgba(58,123,213,0.2)) blur(0px);
+  }
+}
+
+.hero-tagline {
+  font-family: var(--font-mono);
+  font-size: clamp(19px, 3vw, 30px);
+  font-weight: 700;
+  color: #FFFFFF !important;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  -webkit-text-fill-color: #FFFFFF;
+  text-shadow: 0 0 50px rgba(255,255,255,0.8), 0 0 100px rgba(255,255,255,0.4), 0 0 150px rgba(77,168,218,0.3), 0 2px 4px rgba(0,0,0,1);
+  margin-top: 16px;
+  opacity: 0;
+  animation: fadeUp 1s 1.4s ease forwards;
+}
+.hero-humanfocus {
+  font-family: var(--font-mono);
+  font-size: clamp(16px, 2.4vw, 24px);
+  color: #FFFFFF;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-shadow: 0 0 24px rgba(77,168,218,0.5), 0 2px 4px rgba(0,0,0,0.8);
+  margin-top: 8px;
+  opacity: 0;
+  animation: fadeUp 1s 2s ease forwards;
+}
+.hero-core {
+  font-family: var(--font-mono);
+  font-size: 17px;
+  font-weight: 700;
+  letter-spacing: 0.25em;
+  color: #FFFFFF;
+  margin-top: 48px;
+  text-shadow: 0 0 30px rgba(77,168,218,0.5), 0 0 60px rgba(77,168,218,0.2);
+  opacity: 0;
+  animation: fadeUp 1s 2.4s ease forwards;
+}
+.hero-question-wrapper {
+  min-height: 52px;
+  margin-top: 100px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  animation: fadeUp 1s 2.4s ease forwards;
+}
+.hero-question {
+  font-family: var(--font-body);
+  font-size: clamp(18px, 2.5vw, 24px);
+  font-style: italic;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF;
+  text-shadow: 0 0 40px rgba(255,255,255,0.6), 0 0 80px rgba(255,255,255,0.3), 0 2px 4px rgba(0,0,0,1);
+  max-width: 560px;
+  line-height: 1.6;
+  transition: opacity 0.8s ease;
+}
+.hero-scroll {
+  position: absolute;
+  bottom: 28px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.2em;
+  color: #FFFFFF !important;
+  -webkit-text-fill-color: #FFFFFF;
+  text-shadow: 0 0 20px rgba(255,255,255,0.5), 0 2px 4px rgba(0,0,0,1);
+  z-index: 10;
+  animation: float 3s ease-in-out infinite;
+  opacity: 0;
+  animation: float 3s 3.5s ease-in-out infinite, fadeUp 1s 3.2s ease forwards;
+  cursor: pointer;
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@keyframes float {
+  0%, 100% { transform: translateX(-50%) translateY(0); }
+  50% { transform: translateX(-50%) translateY(-6px); }
+}
+
+/* ============================================
+   Accordion component — used everywhere
+   ============================================ */
+.accordion-item {
+  border: 1px solid var(--divider);
+  border-radius: 10px;
+  margin-bottom: 8px;
+  overflow: hidden;
+  transition: border-color 0.3s;
+  background: var(--bg-warm);
+}
+.accordion-item:hover { border-color: rgba(77,168,218,0.5); box-shadow: 0 0 20px rgba(77,168,218,0.08); }
+.accordion-item.open { border-color: rgba(77,168,218,0.5); box-shadow: 0 0 20px rgba(77,168,218,0.08), inset 0 0 30px rgba(77,168,218,0.03); }
+.accordion-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 28px;
+  cursor: pointer;
+  user-select: none;
+  transition: background 0.2s;
+}
+.accordion-header:hover { background: var(--bg-accent); }
+.accordion-header-left {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+.accordion-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.accordion-title {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.accordion-arrow {
+  font-size: 18px;
+  color: var(--text-light);
+  transition: transform 0.3s;
+  flex-shrink: 0;
+}
+.accordion-item.open .accordion-arrow { transform: rotate(180deg); }
+.accordion-body {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.4s ease, padding 0.3s ease;
+}
+.accordion-item.open .accordion-body {
+  max-height: 5000px;
+}
+.accordion-body-inner {
+  padding: 0 28px 28px;
+}
+/* AI cards — fast collapse, no animation lag */
+.ai-card .accordion-body {
+  transition: max-height 0.25s ease;
+}
+.ai-card.open .accordion-body {
+  max-height: 2000px;
+  transition: max-height 0.4s ease;
+}
+.accordion-body p {
+  font-size: 16px;
+  color: var(--text);
+  line-height: 1.8;
+  margin-bottom: 12px;
+}
+.accordion-body .quote {
+  border-left: 3px solid var(--amber-bright);
+  padding: 14px 22px;
+  margin: 16px 0;
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-style: italic;
+  color: #FFFFFF;
+  line-height: 1.6;
+  background: rgba(77,168,218,0.12);
+  border-radius: 0 8px 8px 0;
+  box-shadow: 0 0 15px rgba(77,168,218,0.05);
+}
+.provocation {
+  font-family: var(--font-mono);
+  font-size: 15px;
+  font-weight: 700;
+  color: #FFFFFF;
+  text-align: center;
+  padding: 16px 28px;
+  margin: 16px auto;
+  max-width: 380px;
+  border: 1px solid rgba(255,255,255,0.15);
+  border-radius: 12px;
+  background: rgba(77,168,218,0.12);
+  letter-spacing: 0.03em;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 8px 32px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.1);
+  text-shadow: 0 0 10px rgba(77,168,218,0.4);
+}
+
+/* Section headers inside pages — centered */
+.page-header {
+  margin-bottom: 32px;
+  text-align: center;
+}
+.page-label {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+.page-title {
+  font-family: var(--font-mono);
+  font-size: clamp(28px, 4vw, 44px);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: var(--text);
+  line-height: 1.2;
+}
+.page-subtitle {
+  font-family: var(--font-body);
+  font-size: 17px;
+  color: var(--text-mid);
+  font-style: italic;
+  margin-top: 8px;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+/* ============================================
+   Mind Map — FULL PAGE, visible circles
+   ============================================ */
+.mindmap-wrapper {
+  margin-top: 32px;
+  position: relative;
+}
+.mindmap-toggle {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  justify-content: center;
+}
+.mm-toggle-btn {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  padding: 10px 22px;
+  border-radius: 8px;
+  border: 1px solid var(--divider);
+  background: var(--bg-warm);
+  color: var(--text-light);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.mm-toggle-btn.active {
+  background: var(--amber);
+  color: var(--bg);
+  border-color: var(--amber);
+}
+/* Mind map — borderless, full page, interactive canvas */
+.mindmap-container {
+  position: relative;
+  width: 100vw;
+  margin-left: calc(-48px); /* break out of page-content padding */
+  height: calc(100vh - 180px);
+  min-height: 600px;
+  background: var(--bg);
+  overflow: hidden;
+  cursor: grab;
+  touch-action: none; /* prevent browser zoom/scroll on map */
+}
+.mindmap-container.grabbing { cursor: grabbing; }
+.mindmap-world {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  transform-origin: 0 0;
+  /* transform set by JS: translate + scale */
+}
+.mindmap-svg {
+  position: absolute;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  pointer-events: none;
+  overflow: visible;
+}
+.mm-node {
+  position: absolute;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  cursor: grab;
+  user-select: none;
+  background: var(--bg-accent);
+  transition: filter 0.2s, opacity 0.3s;
+}
+.mm-node.dragging {
+  cursor: grabbing;
+  z-index: 200 !important;
+  filter: brightness(1.3) !important;
+  transition: none;
+}
+.mm-node:hover {
+  z-index: 50;
+  filter: brightness(1.2);
+}
+.mm-node span {
+  font-family: var(--font-mono);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+  line-height: 1.2;
+  white-space: pre-line;
+  pointer-events: none;
+}
+
+/* Info panel — tethered to clicked node */
+.mm-panel {
+  position: absolute;
+  width: 280px;
+  background: rgba(30,30,36,0.95);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--amber-border);
+  border-radius: 10px;
+  padding: 16px 18px;
+  z-index: 300;
+  display: none;
+  pointer-events: auto;
+}
+.mm-panel.visible { display: block; animation: tetheredIn 0.2s ease; }
+.mm-panel-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  margin-bottom: 6px;
+}
+.mm-panel-desc {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+.mm-panel-close {
+  position: absolute;
+  top: 8px; right: 12px;
+  color: var(--text-light);
+  cursor: pointer;
+  font-size: 16px;
+  background: none;
+  border: none;
+  font-family: var(--font-mono);
+}
+/* Tether line from panel to node */
+.mm-panel::before {
+  content: '';
+  position: absolute;
+  width: 2px;
+  height: 20px;
+  top: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: var(--amber-border);
+}
+@keyframes tetheredIn {
+  from { opacity: 0; transform: translateY(-6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+/* Zoom controls */
+.mm-zoom-controls {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  z-index: 250;
+}
+.mm-zoom-btn {
+  width: 36px; height: 36px;
+  background: rgba(30,30,36,0.9);
+  border: 1px solid var(--divider);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-mono);
+  font-size: 18px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+.mm-zoom-btn:hover { background: var(--bg-hover); border-color: var(--amber-border); color: var(--amber-bright); }
+.mm-zoom-level {
+  font-family: var(--font-mono);
+  font-size: 9px;
+  color: var(--text-light);
+  text-align: center;
+  letter-spacing: 0.05em;
+  padding: 2px 0;
+}
+@keyframes panelSlide {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 700px) {
+  .mindmap-container { margin-left: calc(-20px); width: 100vw; }
+}
+
+/* ============================================
+   AI Timeline — accordion style
+   ============================================ */
+.stage-num {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  color: var(--blue);
+  margin-bottom: 2px;
+}
+.stage-body {
+  font-size: 14px;
+  color: var(--text-light);
+  margin-top: 4px;
+}
+
+/* ============================================
+   Engineering cards
+   ============================================ */
+.eng-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 24px;
+}
+.eng-card {
+  padding: 32px;
+  background: var(--bg-warm);
+  border: 1px solid rgba(77,168,218,0.2);
+  border-radius: 12px;
+  transition: all 0.3s;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.3);
+}
+.eng-card:hover {
+  border-color: rgba(77,168,218,0.5);
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(77,168,218,0.12), 0 2px 15px rgba(0,0,0,0.4);
+}
+.eng-card-title {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+  color: var(--amber-bright);
+  margin-bottom: 12px;
+}
+.eng-card-body {
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+
+/* ============================================
+   Photography
+   ============================================ */
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+  margin-top: 32px;
+}
+.photo-grid div {
+  aspect-ratio: 3/2;
+  background: linear-gradient(135deg, var(--bg-warm), var(--bg-accent));
+  border-radius: 8px;
+  border: 1px solid var(--divider);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.1em;
+}
+@media (max-width: 600px) {
+  .photo-grid { grid-template-columns: 1fr; }
+}
+
+/* ============================================
+   Reading Room
+   ============================================ */
+.reading-item .accordion-dot { background: var(--purple); }
+
+/* ============================================
+   Voices
+   ============================================ */
+.voice-card {
+  padding: 28px;
+  background: rgba(17,17,20,0.9);
+  border: 1px solid rgba(74,173,158,0.25);
+  border-radius: 12px;
+  border-left: 3px solid var(--teal);
+  margin-bottom: 16px;
+  box-shadow: 0 2px 15px rgba(0,0,0,0.3), 0 0 10px rgba(74,173,158,0.05);
+}
+.voice-card-quote {
+  font-family: var(--font-body);
+  font-size: 16px;
+  font-style: italic;
+  color: var(--text);
+  line-height: 1.6;
+  margin-bottom: 12px;
+}
+.voice-card-name {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--teal);
+}
+
+/* ============================================
+   Wolf / About
+   ============================================ */
+.wolf-section { text-align: center; }
+.wolf-name {
+  font-family: var(--font-mono);
+  font-size: clamp(32px, 5vw, 52px);
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  color: var(--text);
+}
+.wolf-tagline {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  color: var(--amber-bright);
+  margin-top: 4px;
+}
+.wolf-bio {
+  max-width: 620px;
+  margin: 28px auto;
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.8;
+}
+.wolf-quote-big {
+  font-family: var(--font-mono);
+  font-size: 18px;
+  font-style: italic;
+  color: var(--text);
+  max-width: 500px;
+  margin: 0 auto 40px;
+  line-height: 1.5;
+}
+.wolf-contact a {
+  display: block;
+  font-family: var(--font-mono);
+  font-size: 14px;
+  color: var(--amber-bright);
+  margin-bottom: 8px;
+}
+.wolf-btn {
+  display: inline-block;
+  margin-top: 24px;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  padding: 14px 32px;
+  border: 1px solid var(--amber-bright);
+  border-radius: 8px;
+  color: var(--amber-bright);
+  cursor: pointer;
+  transition: all 0.25s;
+}
+.wolf-btn:hover {
+  background: var(--amber-bright);
+  color: var(--bg);
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.site-footer {
+  padding: 32px 48px;
+  border-top: 1px solid var(--divider);
+  text-align: center;
+}
+.footer-core {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  color: #FFFFFF;
+  letter-spacing: 0.2em;
+  text-shadow: 0 0 16px rgba(77,168,218,0.2);
+}
+.footer-meta {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  color: var(--text-light);
+  letter-spacing: 0.08em;
+  margin-top: 4px;
+}
+
+/* ============================================
+   Topic cards — grid, cards spread full width
+   ============================================ */
+.topic-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 12px;
+  margin-bottom: 0;
+}
+.topic-col {
+  display: flex;
+  flex-direction: column;
+}
+.topic-card {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  padding: 16px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(77,168,218,0.2);
+  background: rgba(17,17,20,0.9);
+  color: var(--text);
+  cursor: pointer;
+  transition: all 0.25s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  user-select: none;
+  text-align: center;
+  width: 100%;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+}
+.topic-card:hover {
+  border-color: rgba(77,168,218,0.5);
+  color: #FFFFFF;
+  background: rgba(25,25,30,1);
+  box-shadow: 0 4px 20px rgba(77,168,218,0.1);
+  transform: translateY(-2px);
+}
+.topic-card.active {
+  color: #FFFFFF;
+  background: rgba(77,168,218,0.1);
+  border-color: var(--amber-bright);
+  box-shadow: 0 0 20px rgba(77,168,218,0.15), inset 0 0 20px rgba(77,168,218,0.05);
+}
+.topic-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+.topic-panel {
+  display: none;
+  padding: 20px 18px;
+  margin-top: 8px;
+  background: rgba(20,20,26,0.95);
+  border: 1px solid rgba(77,168,218,0.25);
+  border-radius: 10px;
+  animation: topicDrop 0.2s ease;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(77,168,218,0.05);
+  backdrop-filter: blur(8px);
+}
+.topic-panel.visible { display: block; }
+.topic-panel p {
+  font-size: 14px;
+  color: var(--text);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+.topic-panel p:last-child { margin-bottom: 0; }
+@keyframes topicDrop {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+@media (max-width: 900px) {
+  .topic-grid { grid-template-columns: repeat(3, 1fr); }
+}
+@media (max-width: 600px) {
+  .topic-grid { grid-template-columns: repeat(2, 1fr); }
+  .topic-card { font-size: 11px; padding: 10px 12px; }
+}
+
+/* ============================================
+   Résumé — clean, full readable layout
+   ============================================ */
+.cv-section-heading {
+  font-family: var(--font-mono);
+  font-size: 13px;
+  font-weight: 700;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+  padding-bottom: 10px;
+  margin-bottom: 20px;
+  border-bottom: 1px solid rgba(77,168,218,0.4);
+}
+.cv-role {
+  padding-bottom: 24px;
+  margin-bottom: 24px;
+  border-bottom: 1px solid var(--divider);
+}
+.cv-role-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+.cv-company {
+  font-family: var(--font-mono);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text);
+}
+.cv-dates {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  color: var(--text-light);
+  letter-spacing: 0.04em;
+  flex-shrink: 0;
+}
+.cv-title {
+  font-family: var(--font-body);
+  font-size: 16px;
+  color: var(--text-mid);
+  font-style: italic;
+  margin-bottom: 10px;
+}
+.cv-location {
+  font-style: normal;
+  font-size: 13px;
+  color: var(--text-light);
+}
+.cv-bullets {
+  list-style: none;
+  padding: 0;
+}
+.cv-bullets li {
+  position: relative;
+  padding-left: 16px;
+  font-size: 15px;
+  color: var(--text-mid);
+  line-height: 1.7;
+  margin-bottom: 6px;
+}
+.cv-bullets li::before {
+  content: '–';
+  position: absolute;
+  left: 0;
+  color: var(--text-light);
+}
+.cv-competencies {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 20px;
+}
+.cv-comp-label {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  color: var(--text);
+  margin-bottom: 6px;
+}
+.cv-comp-body {
+  font-size: 14px;
+  color: var(--text-mid);
+  line-height: 1.6;
+}
+
+/* Parked badge */
+.parked-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+  padding: 4px 12px;
+  border-radius: 4px;
+  background: var(--amber-dim);
+  border: 1px solid var(--amber-border);
+  color: var(--amber-bright);
+  margin-bottom: 20px;
+}
+
+
+
+/* Gradient mesh for glass reflection */
+body {
+  background: 
+    radial-gradient(ellipse at 20% 50%, rgba(58,123,213,0.06) 0%, transparent 50%),
+    radial-gradient(ellipse at 80% 20%, rgba(77,168,218,0.04) 0%, transparent 50%),
+    radial-gradient(ellipse at 50% 80%, rgba(100,181,246,0.03) 0%, transparent 50%),
+    var(--bg) !important;
+}
+
+/* Global ambient glow */
+body::before {
+  content: '';
+  position: fixed;
+  top: 0; left: 0;
+  width: 100%; height: 100%;
+  background: radial-gradient(ellipse at 50% 0%, rgba(77,168,218,0.04) 0%, transparent 60%);
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Sharper selection */
+::selection { background: rgba(77,168,218,0.4); color: #fff; }
+
+/* Brighter links */
+a:hover { color: #FFFFFF; text-shadow: 0 0 8px rgba(77,168,218,0.3); }
+
+/* Parked badge — glow */
+.parked-badge {
+  box-shadow: 0 0 10px rgba(77,168,218,0.1);
+}
+
+
+/* ============================================
+   GLASSMORPHISM — Crystal Clear Widgets
+   ============================================ */
+
+/* Glass card base — Apple-style frosted glass */
+.accordion-item,
+.eng-card,
+.voice-card {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.08),
+    inset 0 -1px 0 rgba(255,255,255,0.02) !important;
+}
+
+.accordion-item:hover,
+.eng-card:hover,
+.voice-card:hover {
+  background: rgba(255,255,255,0.07) !important;
+  border-color: rgba(77,168,218,0.35) !important;
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.3),
+    0 0 20px rgba(77,168,218,0.08),
+    inset 0 1px 0 rgba(255,255,255,0.12),
+    inset 0 -1px 0 rgba(255,255,255,0.03) !important;
+}
+
+.accordion-item.open {
+  background: rgba(77,168,218,0.06) !important;
+  border-color: rgba(77,168,218,0.3) !important;
+}
+
+/* Topic cards — glass */
+.topic-card {
+  background: rgba(255,255,255,0.05) !important;
+  backdrop-filter: blur(12px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(12px) saturate(1.1) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 
+    0 4px 16px rgba(0,0,0,0.2),
+    inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+.topic-card:hover {
+  background: rgba(255,255,255,0.08) !important;
+  border-color: rgba(77,168,218,0.4) !important;
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.25),
+    0 0 15px rgba(77,168,218,0.1),
+    inset 0 1px 0 rgba(255,255,255,0.12) !important;
+}
+
+.topic-card.active {
+  background: rgba(77,168,218,0.1) !important;
+  border-color: rgba(77,168,218,0.5) !important;
+  box-shadow: 
+    0 8px 24px rgba(0,0,0,0.3),
+    0 0 20px rgba(77,168,218,0.12),
+    inset 0 1px 0 rgba(255,255,255,0.15) !important;
+}
+
+/* Topic panels — glass */
+.topic-panel {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(20px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.2) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  box-shadow: 
+    0 12px 40px rgba(0,0,0,0.35),
+    inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+/* Reading room cards — glass */
+[style*="border-top: 3px solid var(--purple)"] {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(14px) saturate(1.1) !important;
+  -webkit-backdrop-filter: blur(14px) saturate(1.1) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+  border-top: 3px solid var(--purple) !important;
+  box-shadow: 
+    0 8px 28px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.06) !important;
+}
+
+/* Nav — glass */
+.nav {
+  background: rgba(12,11,15,0.7) !important;
+  backdrop-filter: blur(24px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(24px) saturate(1.3) !important;
+  border-bottom: 1px solid rgba(255,255,255,0.08) !important;
+}
+
+/* Nav contact button — glass */
+.nav-contact {
+  background: rgba(77,168,218,0.2) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border: 1px solid rgba(77,168,218,0.4) !important;
+  color: #FFFFFF !important;
+  text-shadow: none !important;
+  box-shadow: 0 0 15px rgba(77,168,218,0.1);
+}
+
+.nav-contact:hover {
+  background: rgba(77,168,218,0.35) !important;
+  border-color: rgba(77,168,218,0.6) !important;
+  box-shadow: 0 0 20px rgba(77,168,218,0.2);
+}
+
+/* Business Reality card — glass */
+[style*="max-width: 720px"][style*="border-radius: 12px"] {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(16px) saturate(1.2) !important;
+  -webkit-backdrop-filter: blur(16px) saturate(1.2) !important;
+  box-shadow: 
+    0 8px 32px rgba(0,0,0,0.25),
+    inset 0 1px 0 rgba(255,255,255,0.08) !important;
+}
+
+/* Mind map info panel — glass */
+.mm-panel {
+  background: rgba(20,20,28,0.75) !important;
+  backdrop-filter: blur(20px) saturate(1.3) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(1.3) !important;
+  border: 1px solid rgba(255,255,255,0.12) !important;
+  box-shadow: 
+    0 16px 48px rgba(0,0,0,0.5),
+    inset 0 1px 0 rgba(255,255,255,0.1) !important;
+}
+
+/* Quote blocks — glass tint */
+.accordion-body .quote,
+.quote {
+  background: rgba(77,168,218,0.08) !important;
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  border-left: 3px solid rgba(77,168,218,0.6) !important;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05);
+}
+
+/* Engage cards — glass */
+.eng-card[style*="border-left: 3px"] {
+  background: rgba(255,255,255,0.04) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+}
+
+/* Wolf button — glass */
+.wolf-btn {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  background: rgba(77,168,218,0.1) !important;
+  border: 1px solid rgba(77,168,218,0.4) !important;
+  color: #FFFFFF !important;
+}
+
+.wolf-btn:hover {
+  background: rgba(77,168,218,0.25) !important;
+  box-shadow: 0 0 20px rgba(77,168,218,0.15);
+}
+
+/* Parked badge — glass */
+.parked-badge {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  background: rgba(77,168,218,0.1) !important;
+  border: 1px solid rgba(77,168,218,0.3) !important;
+}
+
+/* Zoom controls — glass */
+.mm-zoom-btn {
+  background: rgba(20,20,28,0.6) !important;
+  backdrop-filter: blur(12px) !important;
+  -webkit-backdrop-filter: blur(12px) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.mm-zoom-btn:hover {
+  background: rgba(77,168,218,0.15) !important;
+  border-color: rgba(77,168,218,0.4) !important;
+}
+
+/* Toggle buttons — glass */
+.mm-toggle-btn {
+  backdrop-filter: blur(8px) !important;
+  -webkit-backdrop-filter: blur(8px) !important;
+  background: rgba(255,255,255,0.04) !important;
+  border: 1px solid rgba(255,255,255,0.1) !important;
+}
+
+.mm-toggle-btn.active {
+  background: rgba(77,168,218,0.2) !important;
+  border-color: rgba(77,168,218,0.5) !important;
+  color: #FFFFFF !important;
+}
+
+
+/* AI Evolution responsive */
+@media (max-width: 768px) {
+  [style*="grid-template-columns: 1fr 1fr"] {
+    grid-template-columns: 1fr !important;
+  }
+}
+
+/* Image sharpness */
+img[src^="hero-"], img[src="images/athos-logo.png"] {
+  image-rendering: -webkit-optimize-contrast;
+  image-rendering: crisp-edges;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+
+/* ============================================
+   Leadership Sub-Navigation & Immersive Panels
+   ============================================ */
+.leadership-subnav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 28px auto 32px;
+  max-width: 900px;
+}
+.subnav-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  user-select: none;
+}
+.subnav-pill:hover {
+  background: rgba(255,255,255,0.08);
+  border-color: rgba(255,255,255,0.25);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.subnav-pill.active {
+  color: #fff;
+}
+.subnav-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  display: inline-block;
+}
+.topic-immersive {
+  display: none;
+  position: fixed;
+  top: 60px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 500;
+  background: var(--bg);
+  overflow: hidden;
+  animation: fadeInUp 0.25s ease;
+}
+.topic-immersive.visible {
+  display: flex;
+  flex-direction: column;
+}
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+.immersive-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 32px;
+  background: rgba(12,11,15,0.9);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  flex-shrink: 0;
+  z-index: 10;
+}
+.immersive-back {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.12);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.immersive-back:hover {
+  background: rgba(255,255,255,0.08);
+  color: #fff;
+  transform: translateY(-1px);
+}
+.immersive-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  flex: 1;
+}
+.immersive-layout {
+  display: grid;
+  grid-template-columns: 42vw 1fr;
+  gap: 0;
+  align-items: stretch;
+  flex: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.immersive-left {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  height: 100%;
+  overflow: hidden;
+}
+.immersive-hero {
+  width: 100%;
+  flex: 1;
+  min-height: 0;
+  overflow: hidden;
+  border-radius: 0;
+  overflow: hidden;
+  margin-bottom: 0;
+  background: rgba(255,255,255,0.03);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.immersive-hero img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 0;
+}
+.immersive-hero-placeholder {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  color: rgba(255,255,255,0.2);
+  text-align: center;
+  line-height: 2;
+}
+.immersive-audio {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  padding: 20px 24px;
+  background: rgba(0,0,0,0.85);
+  border: none;
+  border-bottom: 2px solid rgba(77,168,218,0.25);
+  border-radius: 0;
+  flex-shrink: 0;
+  cursor: pointer;
+  order: -1;
+  z-index: 2;
+}
+.immersive-audio:hover {
+  background: rgba(77,168,218,0.12);
+}
+.immersive-audio-btn {
+  width: 54px;
+  height: 54px;
+  min-width: 54px;
+  border-radius: 50%;
+  border: 2px solid #4DA8DA;
+  background: rgba(77,168,218,0.2);
+  color: #fff;
+  font-size: 15px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.immersive-audio-btn:hover {
+  background: rgba(77,168,218,0.25);
+  transform: scale(1.05);
+}
+.immersive-audio-label strong {
+  display: block;
+  color: #fff;
+  font-family: var(--font-mono);
+  font-size: 12px;
+  letter-spacing: 0.08em;
+  margin-bottom: 3px;
+}
+.immersive-audio-label span {
+  font-size: 12px;
+  color: var(--text-mid);
+}
+.immersive-body {
+  padding: 40px 56px 60px;
+  overflow-y: auto;
+  height: 100%;
+}
+.immersive-body p {
+  font-size: 16px;
+  color: var(--text-mid);
+  line-height: 1.9;
+  margin-bottom: 22px;
+}
+.immersive-body .quote {
+  font-style: italic;
+  font-size: 18px;
+  color: var(--text-light);
+  border-left: 3px solid #4DA8DA;
+  padding: 14px 20px;
+  margin: 28px 0;
+  background: rgba(77,168,218,0.06);
+  border-radius: 0 8px 8px 0;
+}
+@media (max-width: 768px) {
+  .leadership-subnav { gap: 8px; }
+  .subnav-pill { padding: 8px 14px; font-size: 11px; }
+  .immersive-layout { grid-template-columns: 1fr; }
+  .immersive-left { height: auto; flex-shrink: 0; }
+  .immersive-hero { height: 260px; min-height: 260px; flex: none; }
+  .immersive-body { padding: 24px 20px 60px; height: auto; overflow-y: visible; }
+  .topic-immersive { overflow-y: auto; }
+}
+/* ============================================
+   Audio play buttons on topic cards
+   ============================================ */
+.topic-card-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0;
+  width: 100%;
+}
+.topic-audio-btn {
+  width: 32px;
+  height: 32px;
+  min-width: 32px;
+  border-radius: 50%;
+  border: 1px solid var(--divider);
+  background: var(--bg-warm);
+  color: var(--text-light);
+  font-size: 13px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  margin-left: 8px;
+  flex-shrink: 0;
+}
+.topic-audio-btn:hover {
+  border-color: var(--amber-border);
+  color: var(--amber-bright);
+  background: var(--bg-accent);
+}
+.topic-audio-btn.playing {
+  border-color: var(--amber-bright);
+  color: var(--amber-bright);
+  background: var(--amber-dim);
+  animation: audioPulse 1.5s ease infinite;
+}
+@keyframes audioPulse {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(240,178,64,0.2); }
+  50% { box-shadow: 0 0 0 6px rgba(240,178,64,0); }
+}
+
+/* ============================================
+   Global Playlist Bar
+   ============================================ */
+#globalPlayer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  background: rgba(12,11,15,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(77,168,218,0.3);
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  transform: translateY(100%);
+  transition: transform 0.35s cubic-bezier(0.16,1,0.3,1);
+}
+#globalPlayer.visible {
+  transform: translateY(0);
+}
+#gp-play {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 50%;
+  border: 2px solid #4DA8DA;
+  background: rgba(77,168,218,0.15);
+  color: #fff;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+  flex-shrink: 0;
+}
+#gp-play:hover { background: rgba(77,168,218,0.3); transform: scale(1.05); }
+#gp-info {
+  flex: 1;
+  min-width: 0;
+}
+#gp-title {
+  font-family: var(--font-mono);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4DA8DA;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+#gp-sub {
+  font-size: 11px;
+  color: var(--text-light);
+  margin-top: 2px;
+}
+#gp-progress-wrap {
+  flex: 2;
+  height: 3px;
+  background: rgba(255,255,255,0.1);
+  border-radius: 2px;
+  cursor: pointer;
+  position: relative;
+}
+#gp-progress {
+  height: 100%;
+  background: #4DA8DA;
+  border-radius: 2px;
+  width: 0;
+  transition: width 0.3s linear;
+  pointer-events: none;
+}
+#gp-tracks {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+}
+.gp-track-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.gp-track-dot.active { background: #4DA8DA; }
+.gp-track-dot:hover { background: rgba(77,168,218,0.6); }
+#gp-close {
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  border: 1px solid rgba(255,255,255,0.15);
+  background: none;
+  color: var(--text-light);
+  font-size: 14px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.2s;
+}
+#gp-close:hover { border-color: rgba(255,255,255,0.4); color: #fff; }
+.nav-play-all {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  color: #4DA8DA;
+  cursor: pointer;
+  padding: 6px 12px;
+  border: 1px solid rgba(77,168,218,0.3);
+  border-radius: 100px;
+  transition: all 0.2s;
+  white-space: nowrap;
+  background: rgba(77,168,218,0.06);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.nav-play-all:hover {
+  background: rgba(77,168,218,0.15);
+  border-color: #4DA8DA;
+}
+@media (max-width: 700px) {
+  #gp-progress-wrap { display: none; }
+  #gp-tracks { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ============================================
+     Navigation
+     ============================================ -->
+<nav class="nav">
+  <div class="nav-inner">
+    <div class="nav-brand" onclick="showPage('landing')">ATHOS</div>
+    <button class="nav-toggle" onclick="document.querySelector('.nav-tabs').classList.toggle('open')" aria-label="Menu">&#9776;</button>
+    <div class="nav-tabs" id="navTabs">
+      <div class="nav-tab active" data-page="landing" onclick="showPage('landing')">Approach</div>
+      <div class="nav-tab" data-page="leadership" onclick="showPage('leadership')">Leadership</div>
+      <div class="nav-tab" data-page="ai" onclick="showPage('ai')">My AI Evolution</div>
+      <div class="nav-tab" data-page="engineering" onclick="showPage('engineering')">Engineering</div>
+      <div class="nav-tab" data-page="photography" onclick="showPage('photography')">Photography</div>
+      <div class="nav-tab" data-page="engage" onclick="showPage('engage')">Engage</div>
+      <div class="nav-tab" data-page="voices" onclick="showPage('voices')">Voices</div>
+      <div class="nav-tab" data-page="resume" onclick="showPage('resume')">Résumé</div>
+      <div class="nav-tab" data-page="reading" onclick="showPage('reading')">Reading</div>
+      <div class="nav-tab" data-page="wolf" onclick="showPage('wolf')">About</div>
+    </div>
+    <div class="nav-play-all" onclick="gpPlayAll()" title="Play all leadership audio">&#9654; LISTEN ALL</div>
+    <div class="nav-contact" onclick="showPage('wolf')">CONTACT</div>
+  </div>
+</nav>
+
+<!-- ============================================
+     Page: Landing
+     ============================================ -->
+<div class="page active" id="page-landing">
+  <section id="landing">
+    <div style="position: relative; z-index: 10; width: 100%; height: 100%; padding: 0 48px;">
+      <!-- Logo top-left, 2 inches below nav -->
+      <div style="padding-top: 100px;">
+        <img src="images/athos-logo.png" alt="ATHOS" style="max-width: 420px; width: 50vw; height: auto; filter: brightness(1.3) contrast(1.1); animation: logoEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0;">
+      </div>
+      <!-- Tagline centred, right below logo area -->
+      <div style="text-align: center; margin-top: 40px;">
+        <div class="hero-tagline">Architecting Teams for High-performance Outcomes & Scale</div>
+      </div>
+      <!-- Question lower, above the human figure -->
+      <div style="text-align: center; margin-top: 40px;">
+        <div class="hero-question-wrapper" style="margin-top: 0;">
+          <div class="hero-question" id="rotatingQuestion"></div>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll" onclick="showPage('leadership')">EXPLORE &#8595;</div>
+  </section>
+</div>
+
+<!-- ============================================
+     Page: Leadership
+     ============================================ -->
+<div class="page" id="page-leadership">
+  <div class="page-content">
+    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 260px; overflow: hidden; margin-bottom: 20px;">
+      <img src="images/hero-bridge.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.70;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.2) 0%, rgba(12,11,15,0.8) 70%, rgba(12,11,15,1) 100%);"></div>
+      <div style="position: absolute; bottom: 32px; left: 48px; right: 48px;">
+        <div class="page-label" style="color: var(--amber-bright); text-align: left;">THE HUMAN IN FOCUS</div>
+        <div class="page-title" style="text-align: left;">Leadership Culture Architecture</div>
+        <div class="page-subtitle" style="text-align: left; margin-left: 0;">Ownership culture. Not management. Architecture.</div>
+      </div>
+    </div>
+
+    <div class="mindmap-toggle">
+      <button class="mm-toggle-btn" id="btnReadable" onclick="toggleLeadershipView('readable')">READABLE</button>
+      <button class="mm-toggle-btn" id="btnMindmap" onclick="toggleLeadershipView('mindmap')">MIND MAP</button>
+    </div>
+
+    <!-- Readable View (default) — horizontal cards, multi-open -->
+    <div id="readableView">
+      <!-- Business Reality — always visible at top -->
+      <div style="margin-bottom: 28px; padding: 32px; background: var(--bg-warm); border: 1px solid rgba(77,168,218,0.3); border-radius: 12px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;">
+        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE BUSINESS REALITY</div>
+        <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px;">Every organisation runs on revenue. That's not cynical — it's the system. The question isn't whether money matters. It's: who makes it? People do. People who own their work make more. Your culture IS your business strategy.</p>
+        <div class="provocation">Let's talk about the money.</div>
+        <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-top: 16px;">Revenue follows ownership. When your team genuinely owns their work, nobody needs to be told what matters. They already know. Because they built it.</p>
+      </div>
+
+      <!-- Leadership Sub-Navigation -->
+      <nav class="leadership-subnav" id="leadershipSubnav">
+        <div class="subnav-pill" data-topic="purpose" style="--pill-color:#C8943A" onclick="openTopic('purpose')">
+          <span class="subnav-dot" style="background:#C8943A"></span>Purpose
+        </div>
+        <div class="subnav-pill" data-topic="ownership" style="--pill-color:#C8943A" onclick="openTopic('ownership')">
+          <span class="subnav-dot" style="background:#C8943A"></span>Ownership
+        </div>
+        <div class="subnav-pill" data-topic="symbiotic" style="--pill-color:#4AAD9E" onclick="openTopic('symbiotic')">
+          <span class="subnav-dot" style="background:#4AAD9E"></span>Symbiotic Teams
+        </div>
+        <div class="subnav-pill" data-topic="honest" style="--pill-color:#4DA8DA" onclick="openTopic('honest')">
+          <span class="subnav-dot" style="background:#4DA8DA"></span>Honest Conversation
+        </div>
+        <div class="subnav-pill" data-topic="cognitive" style="--pill-color:#4DA8DA" onclick="openTopic('cognitive')">
+          <span class="subnav-dot" style="background:#4DA8DA"></span>Cognitive Diversity
+        </div>
+        <div class="subnav-pill" data-topic="door" style="--pill-color:#7AAD5A" onclick="openTopic('door')">
+          <span class="subnav-dot" style="background:#7AAD5A"></span>The Door
+        </div>
+      </nav>
+
+      <!-- Immersive Topic Views -->
+      <div id="topicImmersive" class="topic-immersive">
+        <div class="immersive-header">
+          <button class="immersive-back" onclick="closeTopic()">&#8592; Back</button>
+          <div class="immersive-title" id="immersiveTitle"></div>
+        </div>
+        <div class="immersive-layout">
+          <div class="immersive-left">
+            <div class="immersive-audio" id="immersiveAudio">
+              <button class="immersive-audio-btn" id="immersivePlayBtn" onclick="toggleImmersiveAudio()">
+                <span id="immersivePlayIcon">&#9654;</span>
+              </button>
+              <div class="immersive-audio-label">
+                <strong id="immersiveAudioTitle"></strong>
+                <span id="immersiveAudioSub">Listen to Wolf on this topic</span>
+              </div>
+            </div>
+            <div class="immersive-hero" id="immersiveHero">
+              <div class="immersive-hero-placeholder">HERO IMAGE COMING SOON</div>
+            </div>
+          </div>
+          <div class="immersive-body" id="immersiveBody"></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+<!-- ============================================
+     Page: AI Evolution
+     ============================================ -->
+<div class="page" id="page-ai">
+  <div class="page-content">
+
+    <!-- Hero banner -->
+    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 260px; overflow: hidden; margin-bottom: 20px;">
+      <img src="images/hero-ai.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.70;">
+      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.2) 0%, rgba(12,11,15,0.8) 70%, rgba(12,11,15,1) 100%);"></div>
+      <div style="position: absolute; bottom: 32px; left: 48px; right: 48px;">
+        <div class="page-label" style="color: var(--blue); text-align: left;">THE RESTLESS MIND</div>
+        <div class="page-title" style="text-align: left;">My AI Evolution</div>
+        <div class="page-subtitle" style="text-align: left; margin-left: 0;">Need &rarr; Build &rarr; Learn &rarr; Pivot &rarr; Build Again.</div>
+      </div>
+    </div>
+
+    <!-- THE RESTLESS MIND INTRO -->
+    <div style="padding: 32px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08); margin-bottom: 28px;">
+      <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 16px;">THE HONEST TRUTH</div>
+      <p style="font-size: 16px; color: #FFFFFF; line-height: 1.8; margin-bottom: 14px;">My brain does not sit still. It never has. When I was a kid, that was a problem &mdash; school is not built for a mind that needs to understand why before it can learn how, that gets bored the moment something stops being new, that sees twenty connections where most people see one. It took me decades to stop seeing that as a flaw and start seeing it as an engine.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px;">AI changed something for me. Not because it made me smarter &mdash; but because for the first time, I had a tool that could keep up with the pace of how I think. I could have an idea at midnight, describe it out loud, and have something real to look at by morning. The gap between concept and reality &mdash; the gap that had always exhausted me &mdash; collapsed. And what came out of that collapse was everything you see below.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px;">On a scale of 1 to 10 as an AI professional, I would put myself at a <strong style="color: #4DA8DA; font-size: 18px;">1.5</strong>. There is so much I have not touched the surface of. These projects might look impressive to someone who has not tried &mdash; but that is the one-eyed among the blind. What they represent is not technical mastery. They represent what happens when a restless mind finally finds a way to build the things it has always been able to see.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8;">Every project below was born from a real need. Not an exercise. Not a tutorial. A genuine problem that needed solving and nothing that existed could solve it. Some worked. Some failed spectacularly. Each one taught something the next one needed. That is the ADHD brain in its natural habitat &mdash; not distracted, but driven. Not scattered, but searching. Always searching.</p>
+    </div>
+
+    <!-- PROJECTS — COMPACT 2-COLUMN GRID -->
+    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 20px;">
+
+      <!-- Project 1: Anamorphic Lens -->
+      <div class="accordion-item ai-card open" onclick="toggleAccordion(this)" style="margin-bottom: 0;">
+        <div class="accordion-header" style="padding: 14px 20px;">
+          <div class="accordion-header-left">
+            <div class="accordion-dot" style="background: var(--green)"></div>
+            <div>
+              <div class="stage-num">01 — THE SPARK</div>
+              <div class="accordion-title" style="font-size: 13px;">Anamorphic Lens Converter</div>
+            </div>
+          </div>
+          <div class="accordion-arrow">&#9662;</div>
+        </div>
+        <div class="accordion-body"><div class="accordion-body-inner" style="padding: 0 20px 16px;">
+          <img src="images/workflow-anamorphic.png" alt="Anamorphic Lens Workflow" style="width: 100%; border-radius: 8px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
+          <p style="font-size: 13px; margin-bottom: 10px;"><strong style="color: var(--text);">The need:</strong> Photography shot with a fully manual anamorphic lens produces squeezed images. Every frame needs de-morphing before editing. After research — nothing existed to batch-process this.</p>
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent); letter-spacing: 0.08em; margin-bottom: 6px;">STACK</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Electron</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">React</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">TypeScript</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">dnglab</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">ffmpeg</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">exiftool</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 8px;"><strong style="color: var(--text);">Why it matters:</strong> First time I said “Hello Claude, build me something” — and it worked. A real tool solving a real problem. The spark that lit everything that followed.</p>
           <p style="margin-top: 8px;"><a href="https://github.com/wolfschram/anamorphic-lens" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">→ GitHub: wolfschram/anamorphic-lens</a></p>
         </div></div>
       </div>
@@ -2015,10 +4042,20 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
         </div>
         <div class="accordion-body"><div class="accordion-body-inner" style="padding: 0 20px 16px;">
           <img src="images/workflow-lighthaus.png" alt="Lighthaus Architecture" style="width: 100%; border-radius: 8px; margin-bottom: 14px; border: 1px solid rgba(255,255,255,0.08); box-shadow: 0 4px 20px rgba(0,0,0,0.3);">
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">The need:</strong> Same as Jenny — but this time I understood the problem well enough to solve it properly.</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">What I built:</strong> Full desktop app. Swift audio capture as separate process. Real-time transcription. Claude API for intelligent extraction of tasks, promises, memories. Supabase cloud backend. Post-it style overlay — max 15 words — surfacing context exactly when you need it.</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">Why it works:</strong> ADHD-first design as the core principle. Every feature asks: does this reduce cognitive load or add to it? If it adds, it doesn’t ship.</p>
-          <p style="font-size: 13px; margin-bottom: 6px;"><strong style="color: var(--text);">What it proved:</strong> 20 failures lead somewhere if you don’t quit. First tool built entirely with AI assistance that works in daily use.</p>
+                    <p style="font-size: 13px; margin-bottom: 10px;"><strong style="color: var(--text);">The need:</strong> Same as Jenny — but this time I understood the problem well enough to solve it. ADHD-first design as the core principle: every feature asks whether it reduces cognitive load or adds to it. If it adds, it doesn’t ship.</p>
+          <div style="margin-bottom: 10px;">
+            <div style="font-size: 11px; font-family: var(--font-mono); color: var(--accent); letter-spacing: 0.08em; margin-bottom: 6px;">STACK</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Electron</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">React</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">TypeScript</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Swift audio</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Claude API</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">Supabase</span>
+              <span style="font-size: 11px; font-family: var(--font-mono); padding: 3px 8px; background: rgba(77,168,218,0.1); border: 1px solid rgba(77,168,218,0.2); border-radius: 4px; color: var(--text-mid);">SQLite</span>
+            </div>
+          </div>
+          <p style="font-size: 13px; margin-bottom: 8px;"><strong style="color: var(--green);">What it proved:</strong> Twenty failures lead somewhere if you don’t quit. First tool built entirely with AI assistance that works in daily use. The post-it overlay — max 15 words — surfaces the right context at the right moment.</p>
           <p style="margin-top: 8px;"><a href="https://github.com/wolfschram/lighthaus-v1" target="_blank" style="font-family: var(--font-mono); font-size: 11px;">→ GitHub: wolfschram/lighthaus-v1</a></p>
         </div></div>
       </div>
@@ -2182,24 +4219,37 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
       </div>
     </div>
 
-    <!-- Two-column layout -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-bottom: 20px;">
-      <div class="eng-card">
-        <div class="eng-card-title">BROADCAST & MEDIA</div>
-        <p class="eng-card-body">SMPTE 2110, IP infrastructure, live production systems, studio builds. OB trucks for Champions League, Bundesliga. Olympic Stadium Berlin. G8 Summit Germany. The technical depth that grounds the leadership philosophy.</p>
+    <!-- Engineering narrative sections -->
+    <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px;">
+
+      <div class="eng-card" style="padding: 32px;">
+        <div class="eng-card-title" style="margin-bottom: 16px;">BROADCAST &amp; LIVE PRODUCTION</div>
+        <p class="eng-card-body" style="margin-bottom: 14px;">I started in a control room in Germany in the late nineties, and I sat in every seat. Audio desk. Live switching. Graphics. Camera shading. Teleprompter. VTR. Not because I was told to &mdash; because I wanted to understand how it all connected. When you have physically touched every part of a signal chain, you stop thinking about it as a collection of components and start thinking about it as a single organism. That understanding never leaves you.</p>
+        <p class="eng-card-body" style="margin-bottom: 14px;">I ran MCR operations &mdash; satellite transmissions, live conferences over bundled ISDN lines, the kind of work where the uplink window is fixed and there is no version two. I shaded cameras for Champions League matches and major sports broadcasts out of OB trucks. I built fly-pack systems from single components for exhibitions, gala dinners, and corporate broadcasts at a rental house in the early 2000s &mdash; the kind of work where you show up with a truck full of parts and leave with a functioning broadcast system.</p>
+        <p class="eng-card-body">I am not a 2110 specialist &mdash; and I want to be honest about that. I can sit in a room and have a real conversation about whether IP infrastructure is the right path for a given organisation: the need, the cost, the risk, the timing. I have led the people who build those networks and I understand the why and the why-not. But I am not the person you bring in to architect the solution. What I am is the person who knows enough to ask the right questions &mdash; and to know whether the person answering them actually has what it takes.</p>
       </div>
-      <div class="eng-card">
-        <div class="eng-card-title">LIVE PRODUCTION</div>
-        <p class="eng-card-body">Stadium tours across 55+ countries. U2, Rolling Stones, Paul McCartney, Beyoncé, Metallica, Queen. Where “close enough” kills the show and the only safety net is the team you built and the trust you earned.</p>
+
+      <div class="eng-card" style="padding: 32px;">
+        <div class="eng-card-title" style="margin-bottom: 16px;">CONCERT TOURING</div>
+        <p class="eng-card-body" style="margin-bottom: 14px;">At some point early in my career, I was running a show and cutting live &mdash; acting as the Technical Director while also being the systems guy. A Director pulled me off the switcher and brought in someone whose entire skill was cutting. It was a punch in the face. My ego took the hit.</p>
+        <p class="eng-card-body" style="margin-bottom: 14px;">Sitting with it afterward, I realised something that changed everything: being good at systems is not the same as being good at cutting. The TD reads the room before the camera does &mdash; thinking three shots ahead, dictating movement before it happens, feeling the rhythm of a broadcast the way a conductor feels an orchestra. That is a different brain. Not better or worse. Different. I was not that brain. I was the systems brain.</p>
+        <p class="eng-card-body" style="margin-bottom: 14px;">From that moment, I stopped trying to be both. When people asked me to cut, I said: <em>I&rsquo;m not good at that. You want someone else. I&rsquo;m good at the systems.</em> And something unexpected happened &mdash; they trusted me more. Saying what you are not turned out to be the most credible thing you could say in a room full of people pretending to be everything.</p>
+        <p class="eng-card-body">That honesty is how I ended up leading the touring video operations for PRG in the UK. First-generation 4K fly-pack systems. U2&rsquo;s Joshua Tree tour. Metallica. Beyonc&eacute;. Queen. Rolling Stones. Paul McCartney. 55+ countries. I ran the entire crewing pipeline &mdash; every video crew position came through me. I bridged US equipment and relationships into UK operations, built the trust on both sides, and specialised deliberately: <em>I do fly-pack systems. LED walls, projection &mdash; that&rsquo;s not my world.</em> That specificity was not a limitation. It was the thing that made people pick up the phone.</p>
       </div>
-      <div class="eng-card">
-        <div class="eng-card-title">SCALE</div>
-        <p class="eng-card-body">~250 engineers across North America, Europe, and Asia. Broadcast, media, and workplace technology. Scaling culture from 15-person touring crews to a global engineering organisation. The challenge isn’t the technology — it’s the humans.</p>
+
+      <div class="eng-card" style="padding: 32px;">
+        <div class="eng-card-title" style="margin-bottom: 16px;">THE PIVOT</div>
+        <p class="eng-card-body" style="margin-bottom: 14px;">The pandemic stopped everything. Tours cancelled. Furloughed. And somewhere in that silence, I made a decision: I was not going to try to be two things anymore. I had spent years being a great systems engineer who also led. I wanted to be a great leader who also understood systems. Those are not the same thing, and the difference matters.</p>
+        <p class="eng-card-body" style="margin-bottom: 14px;">PRG called. They needed someone to lead their corporate live streaming operation &mdash; the business that was still running while everything else was shut down. I said yes, but I was honest about the terms: <em>This is not my technical expertise. If we all agree that I don&rsquo;t need to be the clever guy in the room &mdash; if I can lead the team without touching the gear &mdash; I&rsquo;ll take the role.</em> They agreed. And it worked.</p>
+        <p class="eng-card-body">Diversified was the company I had been buying equipment through for years &mdash; a vendor relationship that had become a genuine one built on trust. They brought me in to lead. A large global engineering team across North America, Europe, and Asia: broadcast, media, and workplace technology. The challenge was never the technology. It was always the humans. It still is.</p>
       </div>
-      <div class="eng-card">
-        <div class="eng-card-title">SYSTEMS THINKING</div>
-        <p class="eng-card-body">In the macro world it works one way — in the micro world of code, the same principles apply. Complex systems, signal infrastructure, multi-vendor integration. Engineering is problem-solving. Leadership is people-solving. Both require the same brain.</p>
+
+      <div class="eng-card" style="padding: 32px; border-color: rgba(77,168,218,0.3);">
+        <div class="eng-card-title" style="margin-bottom: 16px; color: var(--accent);">THE THROUGH-LINE</div>
+        <p class="eng-card-body" style="margin-bottom: 14px;">I have no degree. Everything I know, I learned by doing &mdash; by sitting in the seat, making the mistake, and deciding what to take from it. The TD moment taught me that honesty about your limitations is more credible than pretending they do not exist. The PRG return taught me that you can walk into a room, say <em>I won&rsquo;t be the clever guy</em>, and still be exactly what the room needs.</p>
+        <p class="eng-card-body">That is not a weakness I have learned to manage. It is the entire ATHOS story in one sentence: knowing what you are not is more valuable &mdash; and far rarer &mdash; than pretending you are everything.</p>
       </div>
+
     </div>
 
     <div class="quote" style="text-align: center; max-width: 600px; margin: 0 auto;">
