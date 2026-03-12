@@ -7,6 +7,14 @@ Cloudflare Account: wolfbroadcast@gmail.com | b7491e0a2209add17e1f4307eb77c991
 
 ---
 
+## PRIORITY FOR THIS SESSION — READ BEFORE ANYTHING ELSE
+
+**RÉSUMÉ IMAGE:**  should be a SECOND centered image, NOT a replacement for the road hero. The original road hero is currently gone. First task: confirm with Wolf — regenerate the road image OR keep man-on-ridge as hero? Then place  centered mid-page. Wolf confirms exact placement.
+
+Everything else (audio, nav, engage rewrite, reading room) is **working**. Start with the image.
+
+---
+
 ## MCP ACCESS NOTE — READ FIRST
 Claude has FULL MCP access in this environment:
 - **archive35 MCP** — full read/write/run access to ~/Documents/ACTIVE/ATHOS and the Archive-35 repo
