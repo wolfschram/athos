@@ -129,3 +129,11 @@ Add this to the TOP of every prompt when generating in the same session:
 ## Voice-to-Text Corrections (Global)
 - "get up" = **GitHub** — autocorrect won't let Wolf say GitHub
 - All voice-to-text errors silently corrected, never flagged
+
+## Voices System — Credentials
+
+**Voices delete password:** `athos2026`
+- Used to delete endorsements on the Voices page
+- Each card has a small × button (top right)
+- Clicking × prompts for this password before deleting
+- To change it: search `VOICES_DELETE_PW` in index.html and update the value
