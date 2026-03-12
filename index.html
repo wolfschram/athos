@@ -2428,7 +2428,10 @@ body.immersive-open {
     <div style="display: flex; flex-direction: column; gap: 24px; margin-bottom: 32px;">
 
       <div class="eng-card" style="padding: 32px;">
-        <div class="eng-card-title" style="margin-bottom: 16px;">BROADCAST &amp; LIVE PRODUCTION</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="eng-card-title">BROADCAST &amp; LIVE PRODUCTION</div>
+          <button onclick="event.stopPropagation();gpPlaySingle('audio/broadcast-live-production.mp3','ENG: BROADCAST &amp; LIVE PRODUCTION')" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid #4AAD9E;background:#4AAD9E20;color:#4AAD9E;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s;white-space:nowrap;">&#9654; PLAY</button>
+        </div>
         <p class="eng-card-body" style="margin-bottom: 14px;">It started with running tapes. Literally. I was a runner at a TV station in Berlin in the late nineties &mdash; the elevators were unreliable, and when content arrived that needed to go on air three minutes later, you paid a young guy to sprint up the staircases between the master control room and the sports division on the fourth floor. That was me. I did not mind. I was inside the building, and I was watching everything.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">From there I taught myself into the MCR. Not running it &mdash; operating it. Jumping into things I had no idea how to do and figuring them out by doing them. Satellite transmissions. Live conferences over bundled ISDN lines. The kind of work where the uplink window is fixed and there is no version two. Then a different TV studio, where I sat in every seat I could find &mdash; audio desk, live switching, graphics, camera shading, teleprompter, VTR. Not because anyone told me to. Because I needed to understand how it all connected.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">The moment that changed how my brain works permanently was a signal flow diagram on the wall of the equipment room at a TV station in the Sony Center, Berlin &mdash; around 2001. Every signal. Every path. Every DA, every converter, every destination. Drawn out, clear, complete. For a visual thinker, it was like someone handed me the map I had always been building in my head. I stood there and overlaid everything I already knew onto that drawing. That is how I learned to think about systems &mdash; visually, end to end, no gaps. That instinct has never left me.</p>
@@ -2439,8 +2442,11 @@ body.immersive-open {
       </div>
 
       <div class="eng-card" style="padding: 32px;">
-        <div class="eng-card-title" style="margin-bottom: 16px;">CONCERT TOURING</div>
-        <p class="eng-card-body" style="margin-bottom: 14px;">I came into concert touring having already settled who I was: the systems person, not the TD. That understanding was the foundation, not something I found along the way. In the touring world the Director and TD are usually the same person &mdash; broadcast separates them, touring rarely does. Which meant my role was clear from the start: be the technical partner. When a director wanted to do something interesting on the switcher live, they came to me. We worked out how to technically achieve what they were imagining. Translating artistic vision into a signal flow solution in real time &mdash; that was the work I was built for, and I loved it.</p>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;">
+          <div class="eng-card-title">CONCERT TOURING</div>
+          <button onclick="event.stopPropagation();gpPlaySingle('audio/concert-touring.mp3','ENG: CONCERT TOURING')" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid #9A7ABF;background:#9A7ABF20;color:#9A7ABF;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s;white-space:nowrap;">&#9654; PLAY</button>
+        </div>
+        <p class="eng-card-body" style="margin-bottom: 14px;">I came into concert touring having already settled who I was: the systems person, not the TD. That understanding was the foundation, not something I found along the way. In the touring world the Director and TD are usually the same person &mdash; broadcast separates them, touring rarely does. Which meant my role was clear from the start: be the technical partner. When a director wanted to do something interesting on the switcher, they came to me. We worked out how to technically achieve what they were imagining. Translating artistic vision into a signal flow solution in real time &mdash; that was the work I was built for, and I loved it.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">I started working with PRG in the UK around 2011 as a subcontractor &mdash; still freelance, building the relationship show by show. I moved to the US in 2014, and it was 2016 before I joined full-time, eventually taking on the role of Director of Engineering leading the touring division. The shows included the Rolling Stones&rsquo; 50th Anniversary Tour &mdash; my first time with the Stones, which turned into two and a half years of working with them. There was Paul McCartney, which happened the way touring always does: I was in Australia with the Stones when Mick Jagger&rsquo;s wife passed away, the tour was cancelled, we flew back on the band plane to London, and three days later I was on a flight to Chicago to help prep McCartney. Within a week I was in South America for a leg of his tour. One thing leads to another, faster than the police allows.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">My role was never to be the touring engineer on the road every night. I was the person who planned the show &mdash; making sure every piece of equipment needed to execute that production existed, communicated, and worked. Every signal flow guaranteed before the crew left for the first city. That included the crew itself: understanding who knows what, who works well together, who you trust when the stakes are high. At peak we had over 1,600 freelancers working across PRG&rsquo;s touring operations &mdash; a pipeline I could never manage alone, but the inner circle of key people on the flagship shows, I knew every one of them.</p>
         <p class="eng-card-body">One project from that period I am particularly proud of: the INGEST system. A multi-channel capture system for 3G-SDI input that captured in real time, converted to ProRes 422, and pushed finished ISO recordings to an external NAS via 10GbE &mdash; all finished and exported within twenty seconds of show end. What normally took a full day of exporting camera by camera, file by file. We built versions of that system for U2 and for a Beyonc&eacute; show in South Africa in 2019 where we had 27 simultaneous 3G inputs ingesting and converting, feeding a Premier Pro edit suite on-site to re-cut the show for broadcast while it was still happening. Going into that day I genuinely did not know if it would work. It did. That was a good feeling.</p>
@@ -3613,7 +3619,9 @@ const GP_TRACKS = [
   { file: 'audio/symbiotic-teams.mp3',    label: 'SYMBIOTIC TEAMS',    sub: 'The bee and the flower' },
   { file: 'audio/honest-conversation.mp3',label: 'HONEST CONVERSATION',sub: 'A fool with a tool' },
   { file: 'audio/cognitive-diversity.mp3',label: 'COGNITIVE DIVERSITY', sub: 'Outside the box' },
-  { file: 'audio/the-door.mp3',           label: 'THE DOOR',           sub: 'Open it for others' }
+  { file: 'audio/the-door.mp3',           label: 'THE DOOR',           sub: 'Open it for others' },
+  { file: 'audio/broadcast-live-production.mp3', label: 'FOUNDATION',          sub: 'Where it all started' },
+  { file: 'audio/concert-touring.mp3',           label: 'CONCERT TOURING',     sub: 'Systems on the road' }
 ];
 
 let gpAudio = new Audio();
@@ -3666,6 +3674,27 @@ function gpGoTo(index) {
   }
 }
 
+function gpPlaySingle(file, label) {
+  // Open global player and play just this one track
+  const track = gpTracks.find(t => t.file === file);
+  if (track) {
+    gpCurrentIndex = gpTracks.indexOf(track);
+  } else {
+    // Not in playlist - play directly
+    gpOpen();
+    if (gpAudio) { gpAudio.pause(); gpAudio = null; }
+    gpAudio = new Audio(file);
+    gpAudio.play();
+    const lbl = document.getElementById('gpTrackLabel');
+    if (lbl) lbl.textContent = label;
+    const btn = document.getElementById('gpPlayBtn');
+    if (btn) btn.innerHTML = '&#9646;&#9646;';
+    gpAudio.onended = () => { if (btn) btn.innerHTML = '&#9654;'; };
+    return;
+  }
+  gpOpen();
+  gpPlayIndex(gpCurrentIndex);
+}
 function gpPlayAll() {
   gpIndex = 0;
   gpActive = true;
