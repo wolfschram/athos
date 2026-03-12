@@ -2994,7 +2994,9 @@ function toggleLeadershipView(view) {
   } else {
     readable.style.display = 'none'; mindmap.style.display = 'block';
     btnM.classList.add('active'); btnR.classList.remove('active');
-    setTimeout(renderMindmap, 50);
+    mmCurrentPositions = {};
+    document.getElementById('mmInfoPanel').style.display = 'none';
+    setTimeout(renderMindmap, 80);
   }
 }
 // Default: readable active
