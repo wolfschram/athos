@@ -1486,6 +1486,31 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   cursor: pointer;
   transition: all 0.2s ease;
 }
+.imm-pill {
+  padding: 6px 14px;
+  border-radius: 100px;
+  border: 1px solid rgba(255,255,255,0.1);
+  background: rgba(255,255,255,0.04);
+  color: var(--text-mid);
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  cursor: pointer;
+  transition: all 0.2s;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.imm-pill:hover {
+  border-color: var(--pc, var(--accent));
+  color: var(--pc, var(--accent));
+  background: color-mix(in srgb, var(--pc, var(--accent)) 15%, transparent);
+}
+.imm-pill.active {
+  border-color: var(--pc, var(--accent));
+  color: var(--pc, var(--accent));
+  background: color-mix(in srgb, var(--pc, var(--accent)) 20%, transparent);
+}
 .immersive-back:hover {
   background: rgba(255,255,255,0.08);
   color: #fff;
@@ -2094,7 +2119,15 @@ body.immersive-open {
       <div id="topicImmersive" class="topic-immersive">
         <div class="immersive-header">
           <button class="immersive-back" onclick="closeTopic()">&#8592; Back</button>
-          <div class="immersive-title" id="immersiveTitle"></div>
+          <div id="immersiveNavPills" style="display:flex;align-items:center;gap:8px;flex-wrap:nowrap;overflow-x:auto;scrollbar-width:none;flex:1;padding:0 8px;">
+            <button class="imm-pill" data-topic="purpose" onclick="openTopic('purpose')" style="--pc:#C8943A">Purpose</button>
+            <button class="imm-pill" data-topic="ownership" onclick="openTopic('ownership')" style="--pc:#C8943A">Ownership</button>
+            <button class="imm-pill" data-topic="symbiotic" onclick="openTopic('symbiotic')" style="--pc:#4AAD9E">Symbiotic Teams</button>
+            <button class="imm-pill" data-topic="honest" onclick="openTopic('honest')" style="--pc:#4DA8DA">Honest Conversation</button>
+            <button class="imm-pill" data-topic="cognitive" onclick="openTopic('cognitive')" style="--pc:#4DA8DA">Cognitive Diversity</button>
+            <button class="imm-pill" data-topic="door" onclick="openTopic('door')" style="--pc:#7AAD5A">The Door</button>
+          </div>
+          <div class="immersive-title" id="immersiveTitle" style="display:none"></div>
         </div>
         <div class="immersive-layout">
           <div class="immersive-left">
@@ -2453,14 +2486,14 @@ body.immersive-open {
       </div>
 
       <div class="eng-card" style="padding: 32px;">
-        <div class="eng-card-title" style="margin-bottom: 16px;">THE PIVOT</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;"><div class="eng-card-title">THE PIVOT</div><button onclick="event.stopPropagation();gpPlaySingle('audio/the-pivot.mp3','ENG: THE PIVOT')" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid #4DA8DA;background:#4DA8DA20;color:#4DA8DA;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s;white-space:nowrap;">&#9654; PLAY</button></div>
         <p class="eng-card-body" style="margin-bottom: 14px;">The pandemic stopped everything. Tours cancelled. Furloughed. And somewhere in that silence, I made a decision: I was not going to try to be two things anymore. I had spent years being a great systems engineer who also led. I wanted to be a great leader who also understood systems. Those are not the same thing, and the difference matters.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">PRG called. They needed someone to lead their corporate live streaming operation &mdash; the part of the business still running while everything else was shut down. I said yes, but I was honest about the terms: <em>This is not my technical expertise. If we all agree that I don&rsquo;t need to be the clever guy in the room &mdash; if I can lead the team without touching the gear &mdash; I&rsquo;ll take the role.</em> They agreed. And it worked.</p>
         <p class="eng-card-body">Diversified was the company I had been buying equipment through for years &mdash; a vendor relationship that had quietly become something built on real trust. They brought me in to lead: first media entertainment on the West Coast, then media entertainment across North America, then media and AV across North America, Canada, and India. A steady growth, maybe fast &mdash; I am not sure it felt fast at the time because the challenges were always there, and the challenges were always the people. Not as a problem. As the thing that made it interesting, and made it a genuinely wonderful place to work.</p>
       </div>
 
       <div class="eng-card" style="padding: 32px; border-color: rgba(77,168,218,0.3);">
-        <div class="eng-card-title" style="margin-bottom: 16px; color: var(--accent);">THE THROUGH-LINE</div>
+        <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:16px;color:var(--accent);"><div class="eng-card-title">THE THROUGH-LINE</div><button onclick="event.stopPropagation();gpPlaySingle('audio/the-through-line.mp3','ENG: THE THROUGH-LINE')" style="display:flex;align-items:center;gap:6px;padding:6px 14px;border-radius:100px;border:1px solid #4DA8DA;background:#4DA8DA20;color:#4DA8DA;font-family:var(--font-mono);font-size:10px;font-weight:700;letter-spacing:0.08em;cursor:pointer;transition:all 0.2s;white-space:nowrap;">&#9654; PLAY</button></div>
         <p class="eng-card-body" style="margin-bottom: 14px;">I have no degree. Everything I know, I learned by doing &mdash; by sitting in the seat, making the mistake, and deciding what to take from it. The runner carrying tapes up four flights of stairs taught me to stay close to the work. The signal flow diagram on the wall in Berlin taught me to think visually and completely. The TD moment taught me that honesty about your limitations is more valuable than pretending they do not exist. The PRG return taught me that you can walk into a room, say <em>I won&rsquo;t be the clever guy</em>, and still be exactly what the room needs.</p>
         <p class="eng-card-body" style="margin-bottom: 14px;">What I noticed moving from live production into the systems integration world was this: the egos that live comfortably in live production do not have the same home in integration. Engineers working in that world are too deeply aware of the complexity &mdash; the margins are smaller, the stakes are higher, the interdependencies are greater &mdash; to spend much energy pointing out other people&rsquo;s flaws. What you find instead are people working very hard to earn their place, and doing it with their heart in the right spot.</p>
         <p class="eng-card-body">That holds wherever you go. In any engineering environment, in any country, at any level &mdash; the people doing the work tend to be among the most kind-hearted and hard-working people you will ever meet. That has been true every time, without exception. It is the part of this career I am most grateful for.</p>
@@ -3051,6 +3084,10 @@ function openTopic(key) {
 
   // Populate immersive panel
   document.getElementById('immersiveTitle').textContent = topic.label.toUpperCase();
+  // Highlight active nav pill
+  document.querySelectorAll('.imm-pill').forEach(p => {
+    p.classList.toggle('active', p.dataset.topic === key);
+  });
   document.getElementById('immersiveTitle').style.color = topic.color;
   document.getElementById('immersiveAudioTitle').textContent = topic.label;
   document.getElementById('immersiveAudioTitle').style.color = topic.color;
@@ -3621,7 +3658,9 @@ const GP_TRACKS = [
   { file: 'audio/cognitive-diversity.mp3',label: 'COGNITIVE DIVERSITY', sub: 'Outside the box' },
   { file: 'audio/the-door.mp3',           label: 'THE DOOR',           sub: 'Open it for others' },
   { file: 'audio/broadcast-live-production.mp3', label: 'FOUNDATION',          sub: 'Where it all started' },
-  { file: 'audio/concert-touring.mp3',           label: 'CONCERT TOURING',     sub: 'Systems on the road' }
+  { file: 'audio/concert-touring.mp3',           label: 'CONCERT TOURING',     sub: 'Systems on the road' },
+  { file: 'audio/the-pivot.mp3',               label: 'THE PIVOT',           sub: 'Choosing to lead' },
+  { file: 'audio/the-through-line.mp3',         label: 'THE THROUGH-LINE',    sub: 'No degree. Just doing.' }
 ];
 
 let gpAudio = new Audio();
