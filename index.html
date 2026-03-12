@@ -1843,7 +1843,12 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
 }
 .mm-info-close:hover { color: #fff; }
 /* Mindmap container needs relative positioning for info panel */
-.mindmap-container { position: relative; }
+.mindmap-container {
+  position: relative;
+  height: calc(100vh - 140px);
+  min-height: 520px;
+  overflow: hidden;
+}
 </style>
 </head>
 <body>
@@ -1977,7 +1982,7 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
     </div>
 
     <!-- Mind Map View (hidden by default) -->
-    <div id="mindmapView" style="display:none;">
+    <div id="mindmapView" style="display:none; height: calc(100vh - 120px); min-height: 540px;">
       <div class="mindmap-container" id="mindmapCanvas">
         <div id="mindmapWorld" class="mindmap-world">
           <svg class="mindmap-svg" id="mindmapSvg"></svg>
@@ -3159,6 +3164,9 @@ function mmNodeColor(id) {
 function renderMindmap() {
   const canvas = document.getElementById('mindmapCanvas');
   if (!canvas || canvas.offsetWidth === 0) return;
+  // Reset zoom/pan so map fills the space
+  mapScale = 1; mapX = 0; mapY = 0;
+  applyTransform();
   mmTargetPositions = mmComputePixels(mmCenterId);
   if (Object.keys(mmCurrentPositions).length === 0) {
     mmCurrentPositions = JSON.parse(JSON.stringify(mmTargetPositions));
