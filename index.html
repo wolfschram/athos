@@ -1796,6 +1796,54 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   #gp-progress-wrap { display: none; }
   #gp-tracks { display: none; }
 }
+
+/* Hyperbolic mindmap node transitions */
+.mm-node {
+  transition: transform 0.15s ease, opacity 0.15s ease;
+}
+/* Info panel */
+.mm-info-panel {
+  position: absolute;
+  bottom: 80px;
+  right: 24px;
+  width: min(360px, 90vw);
+  background: rgba(12,11,15,0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(77,168,218,0.35);
+  border-radius: 12px;
+  padding: 20px 24px 20px 20px;
+  z-index: 20;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.5);
+}
+.mm-info-title {
+  font-family: var(--font-mono);
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  margin-bottom: 10px;
+  text-transform: uppercase;
+}
+.mm-info-body {
+  font-size: 13px;
+  color: var(--text-mid);
+  line-height: 1.7;
+}
+.mm-info-close {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  background: none;
+  border: none;
+  color: var(--text-light);
+  font-size: 16px;
+  cursor: pointer;
+  padding: 0;
+  line-height: 1;
+}
+.mm-info-close:hover { color: #fff; }
+/* Mindmap container needs relative positioning for info panel */
+.mindmap-container { position: relative; }
 </style>
 </head>
 <body>
@@ -1927,6 +1975,28 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
       </div>
 
     </div>
+
+    <!-- Mind Map View (hidden by default) -->
+    <div id="mindmapView" style="display:none;">
+      <div class="mindmap-container" id="mindmapCanvas">
+        <div id="mindmapWorld" class="mindmap-world">
+          <svg class="mindmap-svg" id="mindmapSvg"></svg>
+          <div id="mindmapNodes"></div>
+        </div>
+      </div>
+      <div class="mindmap-controls">
+        <button onclick="zoomMap(1.25)">+</button>
+        <span id="zoomLevel">100%</span>
+        <button onclick="zoomMap(0.8)">&minus;</button>
+        <button onclick="resetMapView()" style="margin-left:8px;">Reset</button>
+      </div>
+      <div id="mmInfoPanel" class="mm-info-panel" style="display:none;">
+        <div id="mmInfoTitle" class="mm-info-title"></div>
+        <div id="mmInfoBody" class="mm-info-body"></div>
+        <button class="mm-info-close" onclick="document.getElementById(&#39;mmInfoPanel&#39;).style.display=&#39;none&#39;">&#x2715;</button>
+      </div>
+    </div>
+
   </div>
 </div>
 
@@ -2925,374 +2995,381 @@ function toggleLeadershipView(view) {
 // Default: readable active
 document.getElementById('btnReadable').classList.add('active');
 
-// ---- Mind Map — Interactive Canvas ----
-// Color lookup
-const colorHex = {
-  'var(--amber-bright)':'#4DA8DA','var(--amber)':'#3A7BD5','var(--teal)':'#4AAD9E',
-  'var(--red)':'#D06A5A','var(--blue)':'#5A9ABE','var(--green)':'#7AAD5A','var(--purple)':'#9A7ABF'
-};
+// ============================================
+// HYPERBOLIC FOCUS+CONTEXT MIND MAP
+// Click any node → it animates to centre
+// Every connection redraws from that perspective
+// Concept: Lamping & Rao, Xerox PARC (1994)
+// ============================================
 
-// Node data — x,y are percentage positions in the "world" space
-const mmNodes = [
-  { id:"core", label:"Own It.\nBuild It.\nStand Behind It.", desc:"Own your work. Build something real. Stand behind it. People drive the results. People are the investment — everything else is just tools. When teams genuinely own their outcomes — when every person feels responsible, capable, and supported — the organisation doesn't just perform. It transforms.", x:50, y:50, color:"var(--amber-bright)", sz:80, ring:"core" },
-  { id:"purpose", label:"Purpose", desc:"Every high-performing team shares one trait: every person can answer — why am I here? Not the job description. The real reason. When a crew loads into a venue at 6am, they don't need motivation. They have a mandate. That clarity changes everything — and it scales.", x:50, y:10, color:"var(--amber)", sz:50, ring:"inner" },
-  { id:"ownership", label:"Ownership", desc:"Real ownership is permission. Permission to decide, to fail, to say I don't know. Most people think they own their work but are blocked from executing. The moment fear enters, people stop taking risks. The failures that follow are far worse.", x:80, y:22, color:"var(--amber)", sz:50, ring:"inner" },
-  { id:"symbiotic", label:"Symbiotic\nTeams", desc:"The bee needs the flower for nectar. The flower needs the bee for pollination. Neither survives alone. In any team, the action of one directly impacts another. When teams understand this, collaboration becomes natural — not forced.", x:88, y:55, color:"var(--teal)", sz:50, ring:"inner" },
-  { id:"business", label:"Business\nReality", desc:"Every organisation runs on revenue. The question isn't whether money matters — it's who makes it. People do. People who own their work make more. The investment is the people. The technology is just the tools. Your culture IS your business strategy.", x:72, y:84, color:"var(--red)", sz:50, ring:"inner" },
-  { id:"communication", label:"Honest\nConversation", desc:"If the conversation between C-suite and warehouse can't be honest about the good, bad, and ugly — that's where every transformation dies. Leadership doesn't ask the right questions, so they don't get the right answers. A fool with a tool is still a fool.", x:30, y:84, color:"var(--red)", sz:50, ring:"inner" },
-  { id:"cognitive", label:"Cognitive\nDiversity", desc:"Some people can't think inside the box — because they never had one. They find 20 solutions where others see one. You need these minds. But you also need structure-oriented thinkers. The skill is knowing who works best with whom and giving curious people space to tinker.", x:12, y:55, color:"var(--blue)", sz:50, ring:"inner" },
-  { id:"door", label:"The Door", desc:"Open doors for people. Help them walk through. Don't need them to come back. Someone opened a door for you once — you walked through and grew into it. Now you do the same. Success is measured by what ripples outward, not what comes back.", x:20, y:22, color:"var(--green)", sz:50, ring:"inner" },
-  { id:"mandate", label:"Clear\nMandate", desc:"The best teams don't need motivation speeches. They need clarity.", x:36, y:2, color:"var(--amber)", sz:36, ring:"outer" },
-  { id:"scaling", label:"Scaling\nCulture", desc:"Small teams bond naturally. Scaling that spirit to hundreds is the challenge.", x:66, y:2, color:"var(--amber)", sz:36, ring:"outer" },
-  { id:"fail_forward", label:"Failing\nForward", desc:"When someone owns their work and fails — the healthy response is to speak up.", x:94, y:12, color:"var(--amber)", sz:36, ring:"outer" },
-  { id:"complexity", label:"Complexity\nNot Size", desc:"Original ATHOS principle. It's not team size where culture breaks — it's project complexity. Short projects need guardrails. Long projects need social competence. The leadership approach must match the complexity of the work.", x:97, y:38, color:"var(--purple)", sz:36, ring:"outer" },
-  { id:"guardrails", label:"Guard-\nrails", desc:"Guardrails are necessary at scale. But guardrails installed in reaction to failure — without education or communication — strangle execution. They limit everyone's capability. Sometimes the right call is: the guardrails cost more than the risk.", x:97, y:62, color:"var(--purple)", sz:36, ring:"outer" },
-  { id:"mutual", label:"Mutual\nNeed", desc:"Every role exists in relationship to another. The need of one person is the benefit of another — and vice versa. This extends beyond the team to company and customer, product and market. Are your relationships genuinely symbiotic?", x:90, y:82, color:"var(--teal)", sz:36, ring:"outer" },
-  { id:"right_q", label:"Right\nQuestions", desc:"Organisations fail because leadership doesn't ask the right questions — or asks the right questions to the wrong people. The engineers on the floor know what's broken. If that knowledge never reaches decision-makers, no amount of investment fixes the problem.", x:72, y:96, color:"var(--red)", sz:36, ring:"outer" },
-  { id:"fool_tool", label:"Fool with\na Tool", desc:"Technology deployed without understanding the people who use it is waste. Every failed implementation happened because someone bought a solution before understanding the problem. Invest in people first. Then give them the tools.", x:52, y:96, color:"var(--red)", sz:36, ring:"outer" },
-  { id:"rapport", label:"Rapport\nBefore Truth", desc:"You can't tell a CEO they're wrong until you've earned the relationship. Without rapport, your insights go in one ear and out the other. Build trust first. Then the honest conversation becomes possible — and powerful.", x:30, y:96, color:"var(--red)", sz:36, ring:"outer" },
-  { id:"monday", label:"Monday\nQuestion", desc:"How do you build an organisation where people don't long for the weekend on Monday morning? The answer isn't perks. It's ownership. When people genuinely own outcomes, Monday becomes the day they get to do the thing they care about.", x:10, y:82, color:"var(--purple)", sz:36, ring:"outer" },
-  { id:"vulnerable", label:"Be\nHuman", desc:"What's your strength? What's your weakness? Where do you need help? Building an environment where vulnerability is possible when it matters. Not all the time — but when it counts. That's where real teams are built.", x:3, y:68, color:"var(--blue)", sz:36, ring:"outer" },
-  { id:"tinkering", label:"Space to\nTinker", desc:"Give someone 20-30% of their time to explore what interests them within the domain. The breakthroughs don't come from structured roadmaps. They come from curious minds with permission to follow a thread — and a leader who trusts them enough to let go.", x:3, y:42, color:"var(--blue)", sz:36, ring:"outer" },
-  { id:"right_seat", label:"Right\nSeat", desc:"Some in the right seat. Some in the wrong one. Some in seats they didn't know they occupied — with capabilities nobody asked about. The work is seeing where people actually belong and creating conditions where they grow into the role they were meant for.", x:6, y:14, color:"var(--green)", sz:36, ring:"outer" },
-  { id:"pay_forward", label:"Pay It\nForward", desc:"Open a door for someone. Don't need them to come back. If they open a door for someone else one day — that's the real return. Success isn't measured by what comes back to you. It's measured by what ripples outward.", x:6, y:2, color:"var(--green)", sz:36, ring:"outer" },
+const MM_NODES = [
+  { id:'core',    label:'Own It.\nBuild It.\nStand\nBehind It.', desc:'When teams genuinely own their outcomes — when every person feels responsible, capable, and supported — the organisation does not just perform. It transforms. People drive the results. People are the investment. Everything else is just tools.', color:'#4DA8DA', ring:'core' },
+  { id:'purpose', label:'Purpose',           desc:'Every high-performing team shares one trait: every person can answer — why am I here? Not the job description. The real reason. When a touring crew loads into a venue at 6am, nobody needs motivation. They have a mandate. That clarity changes everything — and it scales.', color:'#C8943A', ring:'inner' },
+  { id:'ownership',label:'Ownership',         desc:'Real ownership is permission. Permission to decide, to fail, to say I do not know. Most people think they own their work but are blocked from executing. The moment fear enters the room, innovation leaves. The failures that follow are far worse than any risk avoided.', color:'#C8943A', ring:'inner' },
+  { id:'symbiotic',label:'Symbiotic\nTeams',  desc:'The bee needs the flower for nectar. The flower needs the bee for pollination. Neither survives alone. In any team, the action of one directly impacts another. When people understand this, collaboration becomes natural — not forced.', color:'#4AAD9E', ring:'inner' },
+  { id:'honest',   label:'Honest\nConversation', desc:'If the conversation between leadership and the people doing the work cannot be honest about the good, the bad, and the ugly — that is where every transformation dies. Not in the strategy. Not in the technology. In the silence between the people who know and the people who decide.', color:'#4DA8DA', ring:'inner' },
+  { id:'cognitive',label:'Cognitive\nDiversity', desc:'Some people cannot think inside the box — because they never had one. Their brains do not move in straight lines. They see twenty possibilities where others see one. You need these minds. Give curious people space to follow a thread. The breakthroughs never come from structured roadmaps.', color:'#64B5F6', ring:'inner' },
+  { id:'door',     label:'The Door',           desc:'Open doors for people. Help them walk through. Do not need them to come back. Someone opened a door for you once. You walked through it and grew into it. Now you do the same. Success is measured by what ripples outward — not what comes back to you.', color:'#7AAD5A', ring:'inner' },
+  { id:'business', label:'Business\nReality',  desc:'Every organisation runs on revenue. The question is not whether money matters — it is who makes it. People do. People who own their work make more. Your culture IS your business strategy. Revenue follows ownership.', color:'#D06A5A', ring:'inner' },
+  { id:'mandate',  label:'Clear\nMandate',     desc:'The best teams do not need motivation speeches. They need clarity. When everyone knows what must happen and why it matters, you stop managing and start leading.', color:'#C8943A', ring:'outer' },
+  { id:'scaling',  label:'Scaling\nCulture',   desc:'Small teams bond naturally. Scaling that spirit to hundreds is the real challenge. The answer is not process — it is leaders who carry the culture with them.', color:'#C8943A', ring:'outer' },
+  { id:'fail_forward', label:'Fail\nForward',  desc:'When someone owns their work and fails, the healthy response is to put your hands up and say so. Be proud of failing. That is what makes the team better. The moment fear enters, people stop taking risks.', color:'#C8943A', ring:'outer' },
+  { id:'complexity',label:'Complexity\nNot Size',desc:'Culture does not break at team size — it breaks at project complexity. Short projects need guardrails. Long complex projects need social competence and genuine interpersonal bonds. The leadership approach must match the complexity of the work.', color:'#9A7ABF', ring:'outer' },
+  { id:'guardrails',label:'Guardrails',         desc:'Guardrails installed in reaction to failure — without education or communication — strangle everyone. They limit the entire organisation\'s ability to execute. The right call sometimes takes real courage: the guardrails cost more than the risk.', color:'#9A7ABF', ring:'outer' },
+  { id:'mutual',   label:'Mutual\nNeed',        desc:'Every role exists in relationship to another. The need of one person is the benefit of another. This extends beyond the team to company and customer, product and market. Are your relationships genuinely symbiotic?', color:'#4AAD9E', ring:'outer' },
+  { id:'right_q',  label:'Right\nQuestions',    desc:'Organisations fail because leadership does not ask the right questions — or asks the right questions to the wrong people. The engineers on the floor know what is broken. If that knowledge never reaches decision-makers, no amount of investment fixes the problem.', color:'#4DA8DA', ring:'outer' },
+  { id:'fool_tool',label:'Fool with\na Tool',   desc:'Technology deployed without understanding the people who use it is waste. Every failed implementation happened because someone bought a solution before understanding the problem. A fool with a tool is still a fool.', color:'#D06A5A', ring:'outer' },
+  { id:'rapport',  label:'Rapport\nFirst',      desc:'You cannot tell a leader they are wrong until you have earned the relationship. Without rapport, your insights go in one ear and out the other. Build trust first. Then the honest conversation becomes possible — and powerful.', color:'#4DA8DA', ring:'outer' },
+  { id:'monday',   label:'Monday\nQuestion',    desc:'How do you build an organisation where people do not long for the weekend the moment they walk in on Monday? The answer is not perks or pizza. It is purpose. When people genuinely own their outcomes, Monday becomes the day they get to do the thing they care about.', color:'#9A7ABF', ring:'outer' },
+  { id:'vulnerable',label:'Be\nHuman',          desc:'Build an environment where it is safe to say I am not good at this — without it becoming a weapon. When vulnerability is possible, the symbiotic relationships form naturally. People find each other\'s gaps and fill them.', color:'#64B5F6', ring:'outer' },
+  { id:'tinkering',label:'Space to\nTinker',    desc:'Give curious people twenty to thirty percent of their time to explore within the domain. The breakthroughs never come from structured roadmaps. They come from someone who was given permission to follow a thread — and a leader who trusted them enough to let go.', color:'#64B5F6', ring:'outer' },
+  { id:'right_seat',label:'Right\nSeat',        desc:'Some in the right seat. Some in the wrong one. Some in seats they did not know they occupied — with capabilities nobody asked about. The work is seeing where people actually belong and creating conditions where they grow into the role they were meant for.', color:'#7AAD5A', ring:'outer' },
+  { id:'pay_forward',label:'Pay It\nForward',   desc:'Open a door for someone. Do not need them to come back. If they open a door for someone else one day — that is the real return. Success is not measured by what comes back to you. It is measured by what keeps moving long after you are no longer in the picture.', color:'#7AAD5A', ring:'outer' },
 ];
 
-const mmConns = [
-  ["core","purpose"],["core","ownership"],["core","symbiotic"],["core","communication"],["core","cognitive"],["core","door"],["core","business"],
-  ["purpose","ownership"],["ownership","symbiotic"],["communication","cognitive"],["cognitive","door"],["door","purpose"],["ownership","communication"],["business","communication"],["business","ownership"],["purpose","business"],
-  ["mandate","purpose"],["scaling","ownership"],["fail_forward","ownership"],["complexity","guardrails"],["guardrails","ownership"],
-  ["rapport","communication"],["right_q","communication"],["fool_tool","communication"],["fool_tool","business"],
-  ["tinkering","cognitive"],["vulnerable","cognitive"],["right_seat","door"],["monday","ownership"],["mutual","symbiotic"],["pay_forward","door"],
+const MM_CONNS = [
+  ['core','purpose'],['core','ownership'],['core','symbiotic'],['core','honest'],['core','cognitive'],['core','door'],['core','business'],
+  ['purpose','ownership'],['ownership','symbiotic'],['honest','cognitive'],['cognitive','door'],['door','purpose'],
+  ['ownership','honest'],['business','honest'],['business','ownership'],['purpose','business'],
+  ['mandate','purpose'],['scaling','ownership'],['fail_forward','ownership'],
+  ['complexity','guardrails'],['guardrails','ownership'],
+  ['rapport','honest'],['right_q','honest'],['fool_tool','honest'],['fool_tool','business'],
+  ['tinkering','cognitive'],['vulnerable','cognitive'],['right_seat','door'],
+  ['monday','ownership'],['mutual','symbiotic'],['pay_forward','door'],
 ];
 
-function nodeHex(n) { return colorHex[n.color] || '#4DA8DA'; }
-function connRestColor(fid, tid) {
-  const f = mmNodes.find(n => n.id === fid);
-  const t = mmNodes.find(n => n.id === tid);
-  const src = (fid === 'core') ? t : f;
-  return nodeHex(src) + '25';
+// ---- Layout: radial positions keyed by ring ----
+const RING_RADIUS = { core: 0, inner: 0.32, outer: 0.62 };
+
+function computePositions(centerId) {
+  // Build adjacency for BFS ordering
+  const adj = {};
+  MM_NODES.forEach(n => { adj[n.id] = []; });
+  MM_CONNS.forEach(([a,b]) => { adj[a].push(b); adj[b].push(a); });
+
+  // BFS from centerId to assign rings
+  const rings = {};
+  const queue = [centerId];
+  rings[centerId] = 0;
+  while (queue.length) {
+    const cur = queue.shift();
+    (adj[cur]||[]).forEach(nb => {
+      if (rings[nb] === undefined) {
+        rings[nb] = rings[cur] + 1;
+        queue.push(nb);
+      }
+    });
+  }
+
+  // Assign angles: nodes at ring r get evenly distributed
+  const byRing = {};
+  MM_NODES.forEach(n => {
+    const r = Math.min(rings[n.id]||0, 2);
+    if (!byRing[r]) byRing[r] = [];
+    byRing[r].push(n.id);
+  });
+
+  const positions = {};
+  // Centre node
+  positions[centerId] = { r: 0, angle: 0 };
+
+  // Ring 1 — direct connections from centre
+  const r1 = byRing[1] || [];
+  r1.forEach((id, i) => {
+    positions[id] = { r: 0.30, angle: (2*Math.PI*i)/r1.length - Math.PI/2 };
+  });
+
+  // Ring 2 — group them near their ring-1 parent
+  const r2 = byRing[2] || [];
+  r2.forEach((id, i) => {
+    // Find its closest ring-1 parent
+    const r1parent = (adj[id]||[]).find(nb => byRing[1] && byRing[1].includes(nb));
+    const parentAngle = r1parent ? (positions[r1parent]||{}).angle||0 : (2*Math.PI*i)/r2.length;
+    // spread around parent angle
+    const spread = Math.PI * 0.28;
+    const siblings = r2.filter(sid => {
+      const sp = (adj[sid]||[]).find(nb => byRing[1] && byRing[1].includes(nb));
+      return sp === r1parent;
+    });
+    const si = siblings.indexOf(id);
+    const offset = siblings.length > 1 ? (si/(siblings.length-1) - 0.5) * spread : 0;
+    positions[id] = { r: 0.60, angle: parentAngle + offset };
+  });
+
+  // Ring 3+ if any
+  const r3plus = Object.keys(rings).filter(id => rings[id] >= 3);
+  r3plus.forEach((id, i) => {
+    positions[id] = { r: 0.80, angle: (2*Math.PI*i)/r3plus.length };
+  });
+
+  return positions;
 }
 
-// ---- Pan / Zoom state ----
-let mapScale = 1;
-let mapX = 0, mapY = 0;
-let isPanning = false;
-let panStartX = 0, panStartY = 0;
-let panStartMapX = 0, panStartMapY = 0;
+function polarToXY(r, angle, cx, cy, maxR) {
+  return {
+    x: cx + r * maxR * Math.cos(angle),
+    y: cy + r * maxR * Math.sin(angle)
+  };
+}
 
-// ---- Drag state ----
-let dragNodeId = null;
-let dragStartX = 0, dragStartY = 0;
-let dragNodeStartX = 0, dragNodeStartY = 0;
-let didDrag = false;
+// ---- State ----
+let mmCenterId = 'core';
+let mmCurrentPositions = {}; // {id: {x,y}}
+let mmTargetPositions  = {};  // {id: {x,y}}
+let mmAnimating = false;
+let mmAnimStart = null;
+const MM_ANIM_DURATION = 600; // ms
+
+function mmEase(t) {
+  return t < 0.5 ? 4*t*t*t : 1-Math.pow(-2*t+2,3)/2;
+}
+
+function mmGetCanvasSize() {
+  const canvas = document.getElementById('mindmapCanvas');
+  if (!canvas) return {w:800,h:600};
+  return { w: canvas.offsetWidth, h: canvas.offsetHeight };
+}
+
+function mmComputePixels(centerId) {
+  const {w,h} = mmGetCanvasSize();
+  const cx = w/2, cy = h/2;
+  const maxR = Math.min(w,h) * 0.42;
+  const polar = computePositions(centerId);
+  const px = {};
+  MM_NODES.forEach(n => {
+    const p = polar[n.id] || {r:0.85, angle:0};
+    const pos = polarToXY(p.r, p.angle, cx, cy, maxR);
+    px[n.id] = pos;
+  });
+  return px;
+}
+
+function mmNodeSize(id) {
+  if (id === mmCenterId) return 52;
+  // ring 1 = direct neighbours of centre
+  const conn = MM_CONNS.filter(([a,b]) => a===mmCenterId||b===mmCenterId).map(([a,b])=>a===mmCenterId?b:a);
+  return conn.includes(id) ? 34 : 22;
+}
+
+function mmNodeColor(id) {
+  const n = MM_NODES.find(n=>n.id===id);
+  return n ? n.color : '#4DA8DA';
+}
+
+function renderMindmap() {
+  const canvas = document.getElementById('mindmapCanvas');
+  if (!canvas || canvas.offsetWidth === 0) return;
+  mmTargetPositions = mmComputePixels(mmCenterId);
+  if (Object.keys(mmCurrentPositions).length === 0) {
+    mmCurrentPositions = JSON.parse(JSON.stringify(mmTargetPositions));
+  }
+  mmDraw(mmCurrentPositions);
+}
+
+function mmDraw(positions) {
+  const svg = document.getElementById('mindmapSvg');
+  const container = document.getElementById('mindmapNodes');
+  if (!svg || !container) return;
+
+  // Draw lines
+  let lines = '';
+  MM_CONNS.forEach(([a,b]) => {
+    const pa = positions[a], pb = positions[b];
+    if (!pa||!pb) return;
+    const isCentreConn = a===mmCenterId||b===mmCenterId;
+    const col = isCentreConn ? mmNodeColor(a===mmCenterId?b:a)+'88' : mmNodeColor(a)+'33';
+    const sw = isCentreConn ? 2 : 1;
+    lines += `<line x1="${pa.x}" y1="${pa.y}" x2="${pb.x}" y2="${pb.y}" stroke="${col}" stroke-width="${sw}"/>`;
+  });
+  svg.innerHTML = lines;
+
+  // Draw nodes
+  let html = '';
+  MM_NODES.forEach(n => {
+    const p = positions[n.id];
+    if (!p) return;
+    const isCenter = n.id === mmCenterId;
+    const conn = MM_CONNS.filter(([a,b])=>a===mmCenterId||b===mmCenterId).map(([a,b])=>a===mmCenterId?b:a);
+    const isInner = conn.includes(n.id);
+    const sz = isCenter ? 52 : isInner ? 34 : 22;
+    const fs = isCenter ? 11 : isInner ? 10 : 8.5;
+    const col = n.color;
+    const opacity = isCenter ? 1 : isInner ? 0.95 : 0.75;
+    const glow = isCenter
+      ? `box-shadow:0 0 0 3px rgba(255,255,255,0.5),0 0 40px ${col}66,0 0 80px ${col}22;`
+      : isInner
+      ? `box-shadow:0 0 0 2px rgba(255,255,255,0.3),0 0 20px ${col}44;`
+      : `box-shadow:0 0 0 1.5px rgba(255,255,255,0.18),0 0 10px ${col}22;`;
+    const cursor = n.id !== mmCenterId ? 'cursor:pointer;' : 'cursor:default;';
+    html += `<div class="mm-node ring-${isCenter?'core':isInner?'inner':'outer'}" 
+      data-id="${n.id}" 
+      style="left:${p.x-sz}px;top:${p.y-sz}px;width:${sz*2}px;height:${sz*2}px;
+             border:${isCenter?'3px':'2px'} solid ${col};${glow}opacity:${opacity};${cursor}"
+      title="${n.label.replace(/\n/g,' ')}">
+      <span style="font-size:${fs}px;color:${col};">${n.label}</span>
+    </div>`;
+  });
+  container.innerHTML = html;
+
+  // Attach click handlers
+  container.querySelectorAll('.mm-node').forEach(el => {
+    el.addEventListener('click', function(e) {
+      e.stopPropagation();
+      const id = this.dataset.id;
+      if (id === mmCenterId) {
+        // Show info panel for centre node
+        mmShowInfo(id);
+        return;
+      }
+      mmFocusNode(id);
+    });
+    el.addEventListener('mouseenter', function() {
+      const id = this.dataset.id;
+      const n = MM_NODES.find(n=>n.id===id);
+      if (n && id !== mmCenterId) {
+        this.style.transform = 'scale(1.12)';
+        this.style.zIndex = '10';
+      }
+    });
+    el.addEventListener('mouseleave', function() {
+      this.style.transform = '';
+      this.style.zIndex = '';
+    });
+  });
+}
+
+function mmFocusNode(newCenterId) {
+  if (mmAnimating || newCenterId === mmCenterId) return;
+
+  // Capture current rendered positions as start
+  const startPos = JSON.parse(JSON.stringify(mmCurrentPositions));
+
+  // Compute target layout around new centre
+  mmCenterId = newCenterId;
+  const endPos = mmComputePixels(newCenterId);
+
+  mmAnimating = true;
+  mmAnimStart = null;
+
+  function animFrame(ts) {
+    if (!mmAnimStart) mmAnimStart = ts;
+    const elapsed = ts - mmAnimStart;
+    const t = Math.min(1, elapsed / MM_ANIM_DURATION);
+    const te = mmEase(t);
+
+    // Interpolate all node positions
+    const interp = {};
+    MM_NODES.forEach(n => {
+      const s = startPos[n.id] || endPos[n.id];
+      const e = endPos[n.id];
+      interp[n.id] = {
+        x: s.x + (e.x - s.x) * te,
+        y: s.y + (e.y - s.y) * te
+      };
+    });
+
+    mmCurrentPositions = interp;
+    mmDraw(interp);
+
+    if (t < 1) {
+      requestAnimationFrame(animFrame);
+    } else {
+      mmCurrentPositions = endPos;
+      mmAnimating = false;
+      mmDraw(endPos);
+      // Show info after animation
+      mmShowInfo(newCenterId);
+    }
+  }
+
+  requestAnimationFrame(animFrame);
+}
+
+function mmShowInfo(id) {
+  const n = MM_NODES.find(n=>n.id===id);
+  if (!n) return;
+  const panel = document.getElementById('mmInfoPanel');
+  const title = document.getElementById('mmInfoTitle');
+  const body  = document.getElementById('mmInfoBody');
+  if (!panel) return;
+  title.textContent = n.label.replace(/\n/g,' ');
+  title.style.color = n.color;
+  body.textContent  = n.desc;
+  panel.style.display = 'block';
+}
+
+// ---- Pan / Zoom (keep for usability) ----
+let mapScale = 1, mapX = 0, mapY = 0;
+let isPanning = false, panStartX = 0, panStartY = 0, panStartMapX = 0, panStartMapY = 0;
 
 function applyTransform() {
   const world = document.getElementById('mindmapWorld');
-  if (world) world.style.transform = 'translate('+mapX+'px,'+mapY+'px) scale('+mapScale+')';
+  if (world) world.style.transform = `translate(${mapX}px,${mapY}px) scale(${mapScale})`;
   const lbl = document.getElementById('zoomLevel');
   if (lbl) lbl.textContent = Math.round(mapScale*100)+'%';
 }
 
 function zoomMap(factor) {
   const canvas = document.getElementById('mindmapCanvas');
+  if (!canvas) return;
   const rect = canvas.getBoundingClientRect();
-  const cx = rect.width/2, cy = rect.height/2;
-  zoomAtPoint(factor, cx, cy);
+  zoomAtPoint(factor, rect.width/2, rect.height/2);
 }
 
 function zoomAtPoint(factor, px, py) {
   const newScale = Math.min(4, Math.max(0.3, mapScale * factor));
   const ratio = newScale / mapScale;
-  // Zoom toward the pointer position
-  mapX = px - ratio * (px - mapX);
-  mapY = py - ratio * (py - mapY);
+  mapX = px - ratio*(px-mapX);
+  mapY = py - ratio*(py-mapY);
   mapScale = newScale;
   applyTransform();
 }
 
 function resetMapView() {
-  mapScale = 1; mapX = 0; mapY = 0;
+  mapScale=1; mapX=0; mapY=0;
   applyTransform();
+  // Also reset focus to core
+  mmCenterId = 'core';
+  mmCurrentPositions = {};
+  renderMindmap();
+  document.getElementById('mmInfoPanel').style.display='none';
 }
 
-// ---- Render ----
-function renderMindmap() {
+// ---- Pan events ----
+document.addEventListener('DOMContentLoaded', () => {
   const canvas = document.getElementById('mindmapCanvas');
   if (!canvas) return;
-  const w = canvas.offsetWidth;
-  const h = canvas.offsetHeight;
-  if (w === 0 || h === 0) return;
-  const svg = document.getElementById('mindmapSvg');
-  const container = document.getElementById('mindmapNodes');
 
-  const px = 60, py = 60;
-  const iw = w - px*2, ih = h - py*2;
-
-  // Store pixel positions on nodes for drag
-  mmNodes.forEach(n => {
-    n._cx = px + (n.x/100)*iw;
-    n._cy = py + (n.y/100)*ih;
-  });
-
-  drawLines();
-  drawNodes();
-}
-
-function drawLines() {
-  const svg = document.getElementById('mindmapSvg');
-  let lines = '';
-  mmConns.forEach(([fid,tid]) => {
-    const f = mmNodes.find(n=>n.id===fid);
-    const t = mmNodes.find(n=>n.id===tid);
-    if(!f||!t) return;
-    const isCore = fid==='core'||tid==='core';
-    lines += '<line x1="'+f._cx+'" y1="'+f._cy+'" x2="'+t._cx+'" y2="'+t._cy+'" stroke="'+connRestColor(fid,tid)+'" stroke-width="'+(isCore?2:1)+'" data-f="'+fid+'" data-t="'+tid+'" />';
-  });
-  svg.innerHTML = lines;
-}
-
-function drawNodes() {
-  const container = document.getElementById('mindmapNodes');
-  let html = '';
-  mmNodes.forEach(n => {
-    const left = n._cx - n.sz;
-    const top = n._cy - n.sz;
-    const d = n.sz*2;
-    const fs = n.ring==='core'?14:n.ring==='inner'?11:9;
-    const hex = nodeHex(n);
-    const bw = n.ring==='core'?3:n.ring==='inner'?2:1.5;
-    const wb = n.ring==='core'?'4px':n.ring==='inner'?'3px':'2px';
-    const glow = n.ring==='core'
-      ? 'box-shadow:0 0 0 '+wb+' rgba(255,255,255,0.45),0 0 40px '+hex+'55,0 0 80px '+hex+'22,inset 0 0 25px '+hex+'15;'
-      : n.ring==='inner'
-      ? 'box-shadow:0 0 0 '+wb+' rgba(255,255,255,0.3),0 0 25px '+hex+'33;'
-      : 'box-shadow:0 0 0 '+wb+' rgba(255,255,255,0.22),0 0 15px '+hex+'25;';
-    html += '<div class="mm-node ring-'+n.ring+'" data-id="'+n.id+'" data-hex="'+hex+'" style="left:'+left+'px;top:'+top+'px;width:'+d+'px;height:'+d+'px;border:'+bw+'px solid '+hex+';'+glow+'"><span style="font-size:'+fs+'px;color:'+hex+';">'+n.label+'</span></div>';
-  });
-  container.innerHTML = html;
-
-  // Attach events to each node
-  container.querySelectorAll('.mm-node').forEach(el => {
-    el.addEventListener('mousedown', onNodeMouseDown);
-    el.addEventListener('touchstart', onNodeTouchStart, {passive:false});
-    el.addEventListener('mouseenter', function(){ if(!dragNodeId) hlNode(this.dataset.id); });
-    el.addEventListener('mouseleave', function(){ if(!dragNodeId) unhlNode(); });
-  });
-}
-
-// ---- Node Dragging ----
-function onNodeMouseDown(e) {
-  e.stopPropagation();
-  const id = this.dataset.id;
-  dragNodeId = id;
-  didDrag = false;
-  dragStartX = e.clientX;
-  dragStartY = e.clientY;
-  const n = mmNodes.find(n=>n.id===id);
-  dragNodeStartX = n._cx;
-  dragNodeStartY = n._cy;
-  this.classList.add('dragging');
-  document.addEventListener('mousemove', onNodeMouseMove);
-  document.addEventListener('mouseup', onNodeMouseUp);
-}
-function onNodeMouseMove(e) {
-  if(!dragNodeId) return;
-  const dx = (e.clientX - dragStartX) / mapScale;
-  const dy = (e.clientY - dragStartY) / mapScale;
-  if(Math.abs(dx)>3||Math.abs(dy)>3) didDrag = true;
-  const n = mmNodes.find(n=>n.id===dragNodeId);
-  n._cx = dragNodeStartX + dx;
-  n._cy = dragNodeStartY + dy;
-  // Update this node's position
-  const el = document.querySelector('.mm-node[data-id="'+dragNodeId+'"]');
-  if(el) { el.style.left=(n._cx-n.sz)+'px'; el.style.top=(n._cy-n.sz)+'px'; }
-  drawLines();
-}
-function onNodeMouseUp(e) {
-  document.removeEventListener('mousemove', onNodeMouseMove);
-  document.removeEventListener('mouseup', onNodeMouseUp);
-  const el = document.querySelector('.mm-node[data-id="'+dragNodeId+'"]');
-  if(el) el.classList.remove('dragging');
-  if(!didDrag && dragNodeId) selectMmNode(dragNodeId);
-  dragNodeId = null;
-}
-
-// Touch equivalents for node drag
-function onNodeTouchStart(e) {
-  if(e.touches.length !== 1) return;
-  e.preventDefault();
-  e.stopPropagation();
-  const t = e.touches[0];
-  const id = this.dataset.id;
-  dragNodeId = id;
-  didDrag = false;
-  dragStartX = t.clientX;
-  dragStartY = t.clientY;
-  const n = mmNodes.find(n=>n.id===id);
-  dragNodeStartX = n._cx;
-  dragNodeStartY = n._cy;
-  this.classList.add('dragging');
-  document.addEventListener('touchmove', onNodeTouchMove, {passive:false});
-  document.addEventListener('touchend', onNodeTouchEnd);
-}
-function onNodeTouchMove(e) {
-  if(!dragNodeId || e.touches.length!==1) return;
-  e.preventDefault();
-  const t = e.touches[0];
-  const dx = (t.clientX - dragStartX)/mapScale;
-  const dy = (t.clientY - dragStartY)/mapScale;
-  if(Math.abs(dx)>3||Math.abs(dy)>3) didDrag = true;
-  const n = mmNodes.find(n=>n.id===dragNodeId);
-  n._cx = dragNodeStartX + dx;
-  n._cy = dragNodeStartY + dy;
-  const el = document.querySelector('.mm-node[data-id="'+dragNodeId+'"]');
-  if(el) { el.style.left=(n._cx-n.sz)+'px'; el.style.top=(n._cy-n.sz)+'px'; }
-  drawLines();
-}
-function onNodeTouchEnd(e) {
-  document.removeEventListener('touchmove', onNodeTouchMove);
-  document.removeEventListener('touchend', onNodeTouchEnd);
-  const el = document.querySelector('.mm-node[data-id="'+dragNodeId+'"]');
-  if(el) el.classList.remove('dragging');
-  if(!didDrag && dragNodeId) selectMmNode(dragNodeId);
-  dragNodeId = null;
-}
-
-// ---- Canvas Pan ----
-(function initPanZoom() {
-  const canvas = document.getElementById('mindmapCanvas');
-  if(!canvas) return;
-
-  // Mouse pan
-  canvas.addEventListener('mousedown', function(e) {
-    if(dragNodeId) return;
-    isPanning = true;
-    panStartX = e.clientX; panStartY = e.clientY;
-    panStartMapX = mapX; panStartMapY = mapY;
+  canvas.addEventListener('mousedown', e => {
+    if (e.target.closest('.mm-node')) return;
+    isPanning=true; panStartX=e.clientX; panStartY=e.clientY;
+    panStartMapX=mapX; panStartMapY=mapY;
     canvas.classList.add('grabbing');
   });
-  document.addEventListener('mousemove', function(e) {
-    if(!isPanning) return;
-    mapX = panStartMapX + (e.clientX - panStartX);
-    mapY = panStartMapY + (e.clientY - panStartY);
+  document.addEventListener('mousemove', e => {
+    if (!isPanning) return;
+    mapX=panStartMapX+(e.clientX-panStartX);
+    mapY=panStartMapY+(e.clientY-panStartY);
     applyTransform();
   });
-  document.addEventListener('mouseup', function() {
-    isPanning = false;
-    canvas.classList.remove('grabbing');
+  document.addEventListener('mouseup', () => {
+    isPanning=false;
+    const c=document.getElementById('mindmapCanvas');
+    if(c) c.classList.remove('grabbing');
   });
 
-  // Touch pan (1 finger on background) + pinch zoom (2 fingers)
-  let lastTouchDist = 0;
-  canvas.addEventListener('touchstart', function(e) {
-    if(dragNodeId) return;
-    if(e.touches.length === 1) {
-      isPanning = true;
-      panStartX = e.touches[0].clientX; panStartY = e.touches[0].clientY;
-      panStartMapX = mapX; panStartMapY = mapY;
-    } else if(e.touches.length === 2) {
-      isPanning = false;
-      lastTouchDist = Math.hypot(e.touches[1].clientX-e.touches[0].clientX, e.touches[1].clientY-e.touches[0].clientY);
-    }
-  }, {passive:false});
-  canvas.addEventListener('touchmove', function(e) {
-    if(dragNodeId) return;
+  canvas.addEventListener('wheel', e => {
     e.preventDefault();
-    if(e.touches.length === 1 && isPanning) {
-      mapX = panStartMapX + (e.touches[0].clientX - panStartX);
-      mapY = panStartMapY + (e.touches[0].clientY - panStartY);
-      applyTransform();
-    } else if(e.touches.length === 2) {
-      const dist = Math.hypot(e.touches[1].clientX-e.touches[0].clientX, e.touches[1].clientY-e.touches[0].clientY);
-      if(lastTouchDist > 0) {
-        const midX = (e.touches[0].clientX+e.touches[1].clientX)/2;
-        const midY = (e.touches[0].clientY+e.touches[1].clientY)/2;
-        const rect = canvas.getBoundingClientRect();
-        zoomAtPoint(dist/lastTouchDist, midX-rect.left, midY-rect.top);
-      }
-      lastTouchDist = dist;
-    }
+    const rect=canvas.getBoundingClientRect();
+    zoomAtPoint(e.deltaY<0?1.12:0.89, e.clientX-rect.left, e.clientY-rect.top);
   }, {passive:false});
-  canvas.addEventListener('touchend', function() { isPanning = false; lastTouchDist = 0; });
-
-  // Scroll wheel / trackpad handling
-  // Mac trackpad pinch sends ctrlKey=true → zoom the map
-  // Regular two-finger scroll → horizontal pans the map, vertical scrolls the page
-  canvas.addEventListener('wheel', function(e) {
-    if (e.ctrlKey) {
-      // Pinch-to-zoom gesture on trackpad (or Ctrl+scroll on mouse)
-      e.preventDefault();
-      const rect = canvas.getBoundingClientRect();
-      const px = e.clientX - rect.left;
-      const py = e.clientY - rect.top;
-      const factor = e.deltaY < 0 ? 1.08 : 0.92;
-      zoomAtPoint(factor, px, py);
-    } else if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) {
-      // Horizontal two-finger swipe → pan the map left/right
-      e.preventDefault();
-      mapX -= e.deltaX;
-      applyTransform();
-    }
-    // Vertical scroll without ctrlKey → let it pass through for normal page scroll
-  }, {passive:false});
-})();
-
-// ---- Highlight / Select ----
-function selectMmNode(id) {
-  const node = mmNodes.find(n=>n.id===id);
-  if(!node) return;
-  const hex = nodeHex(node);
-  const panel = document.getElementById('mmPanel');
-  document.getElementById('mmPanelTitle').textContent = node.label.replace('\n',' ');
-  document.getElementById('mmPanelTitle').style.color = hex;
-  document.getElementById('mmPanelDesc').textContent = node.desc;
-  panel.style.borderColor = hex+'60';
-  // Position panel tethered below the clicked node (in world-space coords)
-  const panelW = 280;
-  const panelLeft = node._cx - panelW/2;
-  const panelTop = node._cy + node.sz + 24; // 24px gap below node (includes tether line)
-  panel.style.left = panelLeft + 'px';
-  panel.style.top = panelTop + 'px';
-  panel.classList.add('visible');
-  hlNode(id);
-}
-function closeMmPanel() {
-  document.getElementById('mmPanel').classList.remove('visible');
-  unhlNode();
-}
-function hlNode(id) {
-  const node = mmNodes.find(n=>n.id===id);
-  if(!node) return;
-  const hex = nodeHex(node);
-  document.querySelectorAll('.mindmap-svg line').forEach(l => {
-    if(l.dataset.f===id||l.dataset.t===id) {
-      l.setAttribute('stroke', hex+'BB');
-      l.setAttribute('stroke-width','3');
-    } else {
-      l.setAttribute('stroke', connRestColor(l.dataset.f,l.dataset.t));
-      l.setAttribute('stroke-width','0.5');
-    }
-  });
-  document.querySelectorAll('.mm-node').forEach(el => {
-    const nid = el.dataset.id;
-    const connected = mmConns.some(([f,t])=>(f===id&&t===nid)||(t===id&&f===nid));
-    if(nid!==id && !connected) { el.style.opacity='0.12'; }
-    else if(nid!==id) { el.style.opacity='1'; el.style.filter='brightness(1.15)'; }
-  });
-}
-function unhlNode() {
-  document.querySelectorAll('.mindmap-svg line').forEach(l => {
-    l.setAttribute('stroke', connRestColor(l.dataset.f,l.dataset.t));
-    const isCore = l.dataset.f==='core'||l.dataset.t==='core';
-    l.setAttribute('stroke-width', isCore?'2':'1');
-  });
-  document.querySelectorAll('.mm-node').forEach(el => { el.style.opacity='1'; el.style.filter=''; });
-}
+});
 
 window.addEventListener('resize', () => {
-  const _mv=document.getElementById('mindmapView'); if(_mv && _mv.style.display!=='none') renderMindmap();
+  const _mv=document.getElementById('mindmapView');
+  if(_mv && _mv.style.display!=='none') { mmCurrentPositions={}; renderMindmap(); }
 });
+
 
 // ---- Audio Playback for Topic Cards ----
 let currentAudio = null;
