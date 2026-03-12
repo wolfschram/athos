@@ -2755,19 +2755,18 @@ body.immersive-open {
   </div>
 </div>
 
-<div class="page" id="page-resume">
-  <div class="page-content" style="max-width: 900px; margin: 0 auto;">
-
-    <!-- Hero Image -->
-    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 380px; overflow: hidden; margin-bottom: 32px; margin-top: -48px;">
-      <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.85;">
-      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0.4) 60%, rgba(12,11,15,1) 100%);"></div>
-      <div style="position: absolute; bottom: 36px; left: 48px; right: 48px;">
-        <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin-bottom: 10px;">R&Eacute;SUM&Eacute;</div>
-        <div style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.1;">Wolfgang Schram</div>
-        <div style="font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 8px; letter-spacing: 0.06em;">Los Angeles &middot; VP Engineering &middot; Culture Architect &middot; 25+ Years</div>
-      </div>
+<div class="page" id="page-resume" style="padding: 0;">
+  <!-- Hero Image — full bleed, outside max-width wrapper -->
+  <div style="position: relative; width: 100%; height: 420px; overflow: hidden; margin-bottom: 0;">
+    <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.9;">
+    <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0.5) 60%, rgba(12,11,15,1) 100%);"></div>
+    <div style="position: absolute; bottom: 36px; left: 48px; right: 48px;">
+      <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin-bottom: 10px;">R&Eacute;SUM&Eacute;</div>
+      <div style="font-size: clamp(28px, 4vw, 44px); font-weight: 800; color: #FFFFFF; letter-spacing: -0.01em; line-height: 1.1;">Wolfgang Schram</div>
+      <div style="font-family: var(--font-mono); font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 8px; letter-spacing: 0.06em;">Los Angeles &middot; VP Engineering &middot; Culture Architect &middot; 25+ Years</div>
     </div>
+  </div>
+  <div class="page-content" style="max-width: 900px; margin: 0 auto; padding-top: 40px;">
 
     <!-- Header -->
     <div style="margin-bottom: 32px;">
@@ -2781,6 +2780,11 @@ body.immersive-open {
     <!-- Positioning Statement -->
     <div style="padding: 24px 28px; background: var(--bg-warm); border-left: 3px solid var(--amber-bright); border-radius: 0 10px 10px 0; margin-bottom: 40px;">
       <p style="font-size: 16px; color: var(--text); line-height: 1.8; font-style: italic;">"I thrive on building teams of diverse and complex minds that flourish under the core concept of an ownership culture. Twenty-five years leading engineering teams across three continents—from broadcast engineering in Germany to concert touring to transforming a 250-person engineering organization at Diversified."</p>
+    </div>
+
+    <!-- Portrait Image -->
+    <div style="text-align: center; margin: 0 0 48px 0;">
+      <img src="images/resume-portrait.png" alt="Wolfgang Schram" style="width: 100%; max-width: 640px; border-radius: 6px; opacity: 0.92;">
     </div>
 
     <!-- ---- EXPERIENCE ---- -->
@@ -3782,37 +3786,36 @@ function gpGoTo(index) {
 }
 
 function gpPlayFrom(startFile) {
-  // Play all engineering tracks starting from given file
-  const idx = gpTracks.findIndex(t => t.file === startFile);
-  if (idx >= 0) {
-    gpCurrentIndex = idx;
-    gpOpen();
-    gpPlayIndex(idx);
-  } else {
-    gpOpen();
-    gpPlayIndex(0);
-  }
+  const idx = GP_TRACKS.findIndex(t => t.file === startFile);
+  gpIndex = idx >= 0 ? idx : 0;
+  gpActive = true;
+  gpAudio.src = GP_TRACKS[gpIndex].file;
+  gpBuildDots();
+  gpShow();
+  gpUpdateUI();
+  gpAudio.play().catch(() => {});
+  document.getElementById('gp-play').innerHTML = '&#9646;&#9646;';
 }
 function gpPlaySingle(file, label) {
-  // Open global player and play just this one track
-  const track = gpTracks.find(t => t.file === file);
-  if (track) {
-    gpCurrentIndex = gpTracks.indexOf(track);
+  const idx = GP_TRACKS.findIndex(t => t.file === file);
+  if (idx >= 0) {
+    gpIndex = idx;
+    gpActive = true;
+    gpAudio.src = GP_TRACKS[gpIndex].file;
+    gpBuildDots();
+    gpShow();
+    gpUpdateUI();
+    gpAudio.play().catch(() => {});
+    document.getElementById('gp-play').innerHTML = '&#9646;&#9646;';
   } else {
-    // Not in playlist - play directly
-    gpOpen();
-    if (gpAudio) { gpAudio.pause(); gpAudio = null; }
-    gpAudio = new Audio(file);
-    gpAudio.play();
-    const lbl = document.getElementById('gpTrackLabel');
-    if (lbl) lbl.textContent = label;
-    const btn = document.getElementById('gpPlayBtn');
-    if (btn) btn.innerHTML = '&#9646;&#9646;';
-    gpAudio.onended = () => { if (btn) btn.innerHTML = '&#9654;'; };
-    return;
+    gpAudio.pause();
+    gpAudio.src = file;
+    gpShow();
+    document.getElementById('gp-title').textContent = label;
+    document.getElementById('gp-sub').textContent = '';
+    gpAudio.play().catch(() => {});
+    document.getElementById('gp-play').innerHTML = '&#9646;&#9646;';
   }
-  gpOpen();
-  gpPlayIndex(gpCurrentIndex);
 }
 function gpPlayAll() {
   gpIndex = 0;
