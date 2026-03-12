@@ -3740,7 +3740,7 @@ const GP_TRACKS = [
 let gpAudio = new Audio();
 let gpIndex = 0;
 let gpActive = false;
-let gpSingleMode = false; // true = stop after current track, don't advance
+let gpSectionEnd = -1; // -1 = play all; set to last index of section to stay within it
 
 function gpBuildDots() {
   const wrap = document.getElementById('gp-tracks');
@@ -3788,8 +3788,14 @@ function gpGoTo(index) {
   }
 }
 
+// Section boundaries (last index of each section)
+const GP_SECTION_ENDS = {
+  'audio/purpose.mp3':             5,  // leadership: 0-5
+  'audio/the-honest-truth.mp3':    6,  // AI evolution: 6 only
+  'audio/broadcast-live-production.mp3': 10, // engineering: 7-10
+};
 function gpPlayFrom(startFile) {
-  gpSingleMode = false; // play all mode
+  gpSectionEnd = GP_SECTION_ENDS[startFile] !== undefined ? GP_SECTION_ENDS[startFile] : -1;
   const idx = GP_TRACKS.findIndex(t => t.file === startFile);
   gpIndex = idx >= 0 ? idx : 0;
   gpActive = true;
@@ -3801,8 +3807,12 @@ function gpPlayFrom(startFile) {
   document.getElementById('gp-play').innerHTML = '&#9646;&#9646;';
 }
 function gpPlaySingle(file, label) {
-  gpSingleMode = true; // stop after this track
   const idx = GP_TRACKS.findIndex(t => t.file === file);
+  // set section boundary so playback stays within current page section
+  if (idx >= 0 && idx <= 5)      gpSectionEnd = 5;  // leadership
+  else if (idx === 6)            gpSectionEnd = 6;  // AI evolution (single track)
+  else if (idx >= 7)             gpSectionEnd = 10; // engineering
+  else                           gpSectionEnd = idx;
   if (idx >= 0) {
     gpIndex = idx;
     gpActive = true;
@@ -3823,7 +3833,7 @@ function gpPlaySingle(file, label) {
   }
 }
 function gpPlayAll() {
-  gpSingleMode = false; // play all mode
+  gpSectionEnd = -1; // no limit, play everything
   gpIndex = 0;
   gpActive = true;
   gpAudio.src = GP_TRACKS[gpIndex].file;
@@ -3853,15 +3863,16 @@ gpAudio.addEventListener('timeupdate', () => {
 });
 
 gpAudio.addEventListener('ended', () => {
-  if (gpSingleMode) {
-    // single track — stop here
-    gpSingleMode = false;
+  gpIndex++;
+  // stop if we've hit the section boundary
+  if (gpSectionEnd >= 0 && gpIndex > gpSectionEnd) {
+    gpIndex = gpSectionEnd; // leave cursor at last track of section
+    gpSectionEnd = -1;
     gpActive = false;
     document.getElementById('gp-play').innerHTML = '&#9654;';
     gpUpdateUI();
     return;
   }
-  gpIndex++;
   if (gpIndex < GP_TRACKS.length) {
     gpAudio.src = GP_TRACKS[gpIndex].file;
     gpAudio.play().catch(() => {});
