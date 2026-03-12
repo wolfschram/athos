@@ -1797,6 +1797,41 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
   #gp-tracks { display: none; }
 }
 
+/* Mindmap controls bar */
+.mindmap-controls {
+  position: absolute;
+  bottom: 16px;
+  left: 50%;
+  transform: translateX(-50%);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  background: rgba(12,11,15,0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+  border-radius: 24px;
+  padding: 6px 16px;
+  z-index: 15;
+}
+.mm-ctrl-btn {
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.15);
+  color: var(--text);
+  border-radius: 8px;
+  width: 28px;
+  height: 28px;
+  font-size: 16px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+.mm-ctrl-btn:hover { background: rgba(77,168,218,0.2); color: #4DA8DA; }
+.mm-ctrl-reset { width: auto; padding: 0 12px; font-size: 11px; font-family: var(--font-mono); letter-spacing: 0.05em; }
+.mm-zoom-label { font-family: var(--font-mono); font-size: 11px; color: var(--text-light); min-width: 36px; text-align: center; }
+.mm-hint { font-family: var(--font-mono); font-size: 10px; color: rgba(255,255,255,0.3); margin-left: 8px; }
 /* Hyperbolic mindmap node transitions */
 .mm-node {
   transition: transform 0.15s ease, opacity 0.15s ease;
@@ -1990,10 +2025,11 @@ img[src^="hero-"], img[src="images/athos-logo.png"] {
         </div>
       </div>
       <div class="mindmap-controls">
-        <button onclick="zoomMap(1.25)">+</button>
-        <span id="zoomLevel">100%</span>
-        <button onclick="zoomMap(0.8)">&minus;</button>
-        <button onclick="resetMapView()" style="margin-left:8px;">Reset</button>
+        <button class="mm-ctrl-btn" onclick="zoomMap(1.25)" title="Zoom in">+</button>
+        <span id="zoomLevel" class="mm-zoom-label">100%</span>
+        <button class="mm-ctrl-btn" onclick="zoomMap(0.8)" title="Zoom out">&minus;</button>
+        <button class="mm-ctrl-btn mm-ctrl-reset" onclick="resetMapView()" title="Reset to core">&#8635; Reset</button>
+        <span class="mm-hint">Click any node to focus</span>
       </div>
       <div id="mmInfoPanel" class="mm-info-panel" style="display:none;">
         <div id="mmInfoTitle" class="mm-info-title"></div>
@@ -2988,12 +3024,23 @@ function toggleLeadershipView(view) {
   const mindmap = document.getElementById('mindmapView');
   const btnR = document.getElementById('btnReadable');
   const btnM = document.getElementById('btnMindmap');
+  const lpage = document.getElementById('page-leadership');
+  const heroBanner = lpage ? lpage.querySelector('.mindmap-toggle')?.previousElementSibling : null;
   if (view === 'readable') {
-    readable.style.display = 'block'; mindmap.style.display = 'none';
+    readable.style.display = 'block';
+    mindmap.style.display = 'none';
+    if (heroBanner) heroBanner.style.display = '';
+    document.body.style.overflow = '';
+    window.scrollTo(0, 0);
     btnR.classList.add('active'); btnM.classList.remove('active');
   } else {
-    readable.style.display = 'none'; mindmap.style.display = 'block';
+    readable.style.display = 'none';
+    mindmap.style.display = 'block';
+    if (heroBanner) heroBanner.style.display = 'none';
+    document.body.style.overflow = 'hidden';
+    window.scrollTo(0, 0);
     btnM.classList.add('active'); btnR.classList.remove('active');
+    mmCenterId = 'core';
     mmCurrentPositions = {};
     document.getElementById('mmInfoPanel').style.display = 'none';
     setTimeout(renderMindmap, 80);
