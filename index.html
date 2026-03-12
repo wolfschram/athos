@@ -3740,6 +3740,7 @@ const GP_TRACKS = [
 let gpAudio = new Audio();
 let gpIndex = 0;
 let gpActive = false;
+let gpSingleMode = false; // true = stop after current track, don't advance
 
 function gpBuildDots() {
   const wrap = document.getElementById('gp-tracks');
@@ -3788,6 +3789,7 @@ function gpGoTo(index) {
 }
 
 function gpPlayFrom(startFile) {
+  gpSingleMode = false; // play all mode
   const idx = GP_TRACKS.findIndex(t => t.file === startFile);
   gpIndex = idx >= 0 ? idx : 0;
   gpActive = true;
@@ -3799,6 +3801,7 @@ function gpPlayFrom(startFile) {
   document.getElementById('gp-play').innerHTML = '&#9646;&#9646;';
 }
 function gpPlaySingle(file, label) {
+  gpSingleMode = true; // stop after this track
   const idx = GP_TRACKS.findIndex(t => t.file === file);
   if (idx >= 0) {
     gpIndex = idx;
@@ -3820,6 +3823,7 @@ function gpPlaySingle(file, label) {
   }
 }
 function gpPlayAll() {
+  gpSingleMode = false; // play all mode
   gpIndex = 0;
   gpActive = true;
   gpAudio.src = GP_TRACKS[gpIndex].file;
@@ -3849,6 +3853,14 @@ gpAudio.addEventListener('timeupdate', () => {
 });
 
 gpAudio.addEventListener('ended', () => {
+  if (gpSingleMode) {
+    // single track — stop here
+    gpSingleMode = false;
+    gpActive = false;
+    document.getElementById('gp-play').innerHTML = '&#9654;';
+    gpUpdateUI();
+    return;
+  }
   gpIndex++;
   if (gpIndex < GP_TRACKS.length) {
     gpAudio.src = GP_TRACKS[gpIndex].file;
