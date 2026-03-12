@@ -137,3 +137,42 @@ Add this to the TOP of every prompt when generating in the same session:
 - Each card has a small × button (top right)
 - Clicking × prompts for this password before deleting
 - To change it: search `VOICES_DELETE_PW` in index.html and update the value
+
+---
+
+## LESSONS LEARNED — Read This Every Session, Not Just at the Start
+
+> These are hard-won. They cost Wolf time and frustration. Respect them.
+
+### 1. READ THE FULL CODE STATE BEFORE TOUCHING ANYTHING
+Before editing ANY section, run `sed -n 'LINE,LINEp'` to see exactly what is there right now.
+Do NOT assume the file matches what was written in a previous turn — it may have accumulated bugs from prior edits.
+Never layer a fix on top of unread code.
+
+### 2. VERIFY THE LIVE SITE, NOT JUST THE REPO
+A successful `git push` does NOT mean the live site updated.
+Cloudflare Pages aggressively caches files — especially images and audio.
+If a file was deployed once in a broken/stub state, renaming the file is the only reliable fix.
+Always confirm with a `fetch HEAD` check on the live URL before telling Wolf it's fixed.
+
+### 3. NEVER TELL WOLF SOMETHING IS FIXED UNTIL YOU HAVE SEEN IT WITH YOUR OWN EYES
+Do not say "it's live" or "refresh and you'll see it" until you have navigated to the live URL and taken a screenshot yourself.
+Wolf should never have to be the one who discovers it's still broken.
+
+### 4. ONE CHANGE AT A TIME WHEN LAYOUT IS INVOLVED
+When editing HTML layout (flex, grid, sticky, position), make ONE structural change, verify it renders correctly, then make the next.
+Chaining multiple layout edits in one shot compounds errors and makes them hard to untangle.
+
+### 5. PYTHON HEREDOC STRINGS WITH HTML ARE FRAGILE
+Never use Python triple-quote strings inside bash heredocs to manipulate HTML.
+They break on parentheses, quotes, and special characters.
+Instead: use `sed -n` to identify exact line numbers, then use `python3 << 'PYEOF'` with line-by-line array replacement.
+
+### 6. AFTER ANY EDIT, READ BACK THE CHANGED LINES
+After every file edit, immediately run `sed -n` on the affected lines to confirm the result looks correct before committing.
+Committing broken code and then fixing it creates noise and wastes deploys.
+
+### 7. CLOUDFLARE CACHE PURGE IS NOT ENOUGH FOR BINARY FILES
+Purging the Cloudflare cache does NOT reliably force new versions of images and audio files.
+The only guaranteed fix: rename the file and update the HTML reference.
+This has been proven multiple times. Do not attempt cache purge alone for binary assets.
