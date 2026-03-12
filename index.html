@@ -2758,7 +2758,7 @@ body.immersive-open {
 <div class="page" id="page-resume" style="padding: 0;">
   <!-- Hero Image — full bleed, outside max-width wrapper -->
   <div style="position: relative; width: 100%; height: 420px; overflow: hidden; margin-bottom: 0;">
-    <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: center 30%; opacity: 0.9;">
+    <img src="images/hero-resume.png" alt="" style="width: 100%; height: 100%; object-fit: cover; object-position: 20% center; opacity: 0.9;">
     <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0) 0%, rgba(12,11,15,0.5) 60%, rgba(12,11,15,1) 100%);"></div>
     <div style="position: absolute; bottom: 36px; left: 48px; right: 48px;">
       <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.14em; color: rgba(255,255,255,0.5); margin-bottom: 10px;">R&Eacute;SUM&Eacute;</div>
@@ -2782,10 +2782,12 @@ body.immersive-open {
       <p style="font-size: 16px; color: var(--text); line-height: 1.8; font-style: italic;">"I thrive on building teams of diverse and complex minds that flourish under the core concept of an ownership culture. Twenty-five years leading engineering teams across three continents—from broadcast engineering in Germany to concert touring to transforming a 250-person engineering organization at Diversified."</p>
     </div>
 
-    <!-- Portrait Image -->
-    <div style="text-align: center; margin: 0 0 48px 0;">
-      <img src="images/resume-portrait.png" alt="Wolfgang Schram" style="width: 100%; max-width: 640px; border-radius: 6px; opacity: 0.92;">
+    <!-- Portrait Image â floated right alongside content -->
+    <div style="float: right; width: 340px; margin: 0 0 32px 40px; shape-outside: border-box;">
+      <img src="images/resume-portrait.png" alt="Wolfgang Schram" style="width: 100%; border-radius: 6px; opacity: 0.92; object-fit: cover; object-position: center top; display: block;">
     </div>
+
+    <div style="clear: both;"></div>
 
     <!-- ---- EXPERIENCE ---- -->
     <div class="cv-section-heading">Experience</div>
