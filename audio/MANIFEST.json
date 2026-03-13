@@ -1,0 +1,71 @@
+{
+  "generated": "2026-03-13 09:53",
+  "note": "Auto-generated manifest. Compare hashes to detect if source files have changed vs deployed versions.",
+  "files": {
+    "broadcast-live-production.mp3": {
+      "size_kb": 3429,
+      "modified": "2026-03-13 08:47",
+      "hash": "67f8933bb67c"
+    },
+    "cognitive-diversity.mp3": {
+      "size_kb": 1049,
+      "modified": "2026-03-11 13:20",
+      "hash": "da586e0ef4d7"
+    },
+    "concert-touring.mp3": {
+      "size_kb": 2677,
+      "modified": "2026-03-13 09:50",
+      "hash": "bdd3c3ad760a"
+    },
+    "honest-conversation.mp3": {
+      "size_kb": 2176,
+      "modified": "2026-03-12 11:07",
+      "hash": "8db5588f5e2a"
+    },
+    "ownership-v2.mp3": {
+      "size_kb": 2390,
+      "modified": "2026-03-12 16:12",
+      "hash": "36533b164823"
+    },
+    "ownership.mp3": {
+      "size_kb": 2390,
+      "modified": "2026-03-12 16:12",
+      "hash": "36533b164823"
+    },
+    "purpose.mp3": {
+      "size_kb": 1878,
+      "modified": "2026-03-12 09:40",
+      "hash": "0761f331b918"
+    },
+    "symbiotic-teams.mp3": {
+      "size_kb": 699,
+      "modified": "2026-03-11 13:20",
+      "hash": "2609152b18b7"
+    },
+    "the-door.mp3": {
+      "size_kb": 1912,
+      "modified": "2026-03-12 09:27",
+      "hash": "3c6a80a79390"
+    },
+    "the-honest-truth.mp3": {
+      "size_kb": 1489,
+      "modified": "2026-03-12 11:17",
+      "hash": "4ad1143100ff"
+    },
+    "the-pivot.mp3": {
+      "size_kb": 1260,
+      "modified": "2026-03-12 10:20",
+      "hash": "30ad45df7931"
+    },
+    "the-restless-mind.mp3": {
+      "size_kb": 1487,
+      "modified": "2026-03-13 08:48",
+      "hash": "30007ad8a87b"
+    },
+    "the-through-line.mp3": {
+      "size_kb": 1240,
+      "modified": "2026-03-12 10:20",
+      "hash": "36215f25c18b"
+    }
+  }
+}
