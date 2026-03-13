@@ -220,3 +220,17 @@ git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS add . && git -C /Users/wolfg
 # Push
 git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS push
 ```
+
+### 9. NEVER USE localStorage FOR USER-GENERATED CONTENT THAT SHOULD BE SHARED
+localStorage is per-browser, per-device. It is NOT a database. It is NOT shared storage.
+If a feature collects content from visitors that other visitors should see (testimonials, voices, comments, reviews, guestbook entries), localStorage is WRONG. Full stop.
+
+**What happened:** The Voices feature was built with localStorage as its only storage backend. Every voice submitted was trapped in that one visitor's browser. Nobody else could ever see it. Wolf left a voice on mobile — invisible on desktop. If anyone else left a voice — invisible to everyone except that person on that exact browser. The feature looked functional but was fundamentally broken from day one. Zero voices were ever actually shared.
+
+**The rule:** Any user-submitted content that needs to be visible to other users MUST use server-side storage from the start. For Cloudflare Pages static sites, this means:
+- Cloudflare Workers KV (what we use now for Voices)
+- Cloudflare D1 (SQLite)
+- An external API (Firebase, Supabase, etc.)
+- NEVER localStorage, sessionStorage, IndexedDB, or any other client-side-only storage
+
+**The cost of getting this wrong:** Lost user contributions that can never be recovered. Wolf's voice from mobile — gone. Any visitor who took the time to write something — gone. That trust damage is real and it's permanent. Build it right the first time.
