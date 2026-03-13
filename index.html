@@ -2841,7 +2841,6 @@ body.immersive-open {
           <a href="mailto:wolfbroadcast@gmail.com">wolfbroadcast@gmail.com</a> &middot;
           <a href="https://www.linkedin.com/in/wolfschram" target="_blank">linkedin.com/in/wolfschram</a>
         </div>
-      </div>
 
       <!-- Positioning Statement -->
       <div style="padding: 24px 28px; background: var(--bg-warm); border-left: 3px solid var(--amber-bright); border-radius: 0 10px 10px 0; margin-bottom: 40px;">
@@ -3969,26 +3968,21 @@ function syncImmersiveBtn(playing) {
 
 
 // ============================================================
-// VOICES SYSTEM
+// VOICES SYSTEM — API backend (Cloudflare KV via Pages Functions)
 // ============================================================
-const VOICES_KEY = 'athos_voices_v1';
-const VOICES_DELETE_PW = 'athos2026';
+const VOICES_API = '/api/voices';
 let voicesDeleteTargetId = null;
 
-function voicesLoad() {
-  try { return JSON.parse(localStorage.getItem(VOICES_KEY) || '[]'); }
-  catch(e) { return []; }
-}
-
-function voicesSave(voices) {
-  localStorage.setItem(VOICES_KEY, JSON.stringify(voices));
-}
-
-function voicesRender() {
-  const voices = voicesLoad();
+async function voicesRender() {
   const grid = document.getElementById('voices-grid');
   const empty = document.getElementById('voices-empty');
   if (!grid) return;
+  grid.innerHTML = '<div style="color:var(--text-light);font-family:var(--font-mono);font-size:11px;padding:20px;">Loading...</div>';
+  let voices = [];
+  try {
+    const res = await fetch(VOICES_API);
+    voices = await res.json();
+  } catch(e) { voices = []; }
   grid.innerHTML = '';
   if (voices.length === 0) {
     if (empty) empty.style.display = 'block';
@@ -4027,27 +4021,31 @@ function voicesCloseModal() {
   document.getElementById('v-error').style.display = 'none';
 }
 
-function voicesSubmit() {
+async function voicesSubmit() {
   const name = document.getElementById('v-name').value.trim();
   const message = document.getElementById('v-message').value.trim();
   if (!name || !message) {
     document.getElementById('v-error').style.display = 'block';
     return;
   }
-  const voice = {
-    id: Date.now().toString(),
-    name,
-    title: document.getElementById('v-title').value.trim(),
-    company: document.getElementById('v-company').value.trim(),
-    linkedin: document.getElementById('v-linkedin').value.trim(),
-    message,
-    ts: new Date().toISOString()
-  };
-  const voices = voicesLoad();
-  voices.unshift(voice);
-  voicesSave(voices);
+  const btn = document.querySelector('#voices-modal button[onclick="voicesSubmit()"]');
+  if (btn) { btn.disabled = true; btn.textContent = 'Submitting...'  }
+  try {
+    await fetch(VOICES_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        action: 'add',
+        name,
+        title: document.getElementById('v-title').value.trim(),
+        company: document.getElementById('v-company').value.trim(),
+        linkedin: document.getElementById('v-linkedin').value.trim(),
+        message
+      })
+    });
+  } catch(e) { console.error('Voice submit error:', e); }
   voicesCloseModal();
-  voicesRender();
+  await voicesRender();
 }
 
 function voicesAskDelete(id) {
@@ -4059,16 +4057,25 @@ function voicesAskDelete(id) {
   setTimeout(() => document.getElementById('v-delete-pw').focus(), 100);
 }
 
-function voicesDeleteConfirm() {
+async function voicesDeleteConfirm() {
   const pw = document.getElementById('v-delete-pw').value;
-  if (pw !== VOICES_DELETE_PW) {
+  try {
+    const res = await fetch(VOICES_API, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ action: 'delete', id: voicesDeleteTargetId, password: pw })
+    });
+    const data = await res.json();
+    if (!data.ok) {
+      document.getElementById('v-delete-error').style.display = 'block';
+      return;
+    }
+  } catch(e) {
     document.getElementById('v-delete-error').style.display = 'block';
     return;
   }
-  const voices = voicesLoad().filter(v => v.id !== voicesDeleteTargetId);
-  voicesSave(voices);
   voicesCancelDelete();
-  voicesRender();
+  await voicesRender();
 }
 
 function voicesCancelDelete() {
