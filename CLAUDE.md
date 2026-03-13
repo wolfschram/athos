@@ -176,3 +176,47 @@ Committing broken code and then fixing it creates noise and wastes deploys.
 Purging the Cloudflare cache does NOT reliably force new versions of images and audio files.
 The only guaranteed fix: rename the file and update the HTML reference.
 This has been proven multiple times. Do not attempt cache purge alone for binary assets.
+
+### 8. MCP SERVER ROOT — ATHOS IS NOT IN THE archive-35 REPO
+The `archive35` MCP tool is rooted in the **archive-35** repo (`~/Documents/ACTIVE/archive-35`).
+ATHOS is a **separate repo** at `~/Documents/ACTIVE/ATHOS/` with its own git remote (`github.com/wolfschram/athos`).
+
+**What this means at session start:**
+- `archive35:archive35_read_file` with a path like `ATHOS/CLAUDE.md` will FAIL — that file is not in the archive-35 repo
+- The correct method: use `archive35:archive35_run_command` with full absolute paths
+  - Example: `cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/CLAUDE.md`
+  - Example: `git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS status`
+- All ATHOS file reads, edits, and git operations must use absolute paths via `run_command`
+- Do NOT attempt relative paths via `archive35_read_file` for ATHOS files — they will 404
+
+**Session startup sequence for ATHOS:**
+1. Run `cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/ATHOS_HANDOVER_SESSION{N}.md`
+2. Run `cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/CLAUDE.md`
+3. Then ask Wolf for today's fix list — no code until both are read
+
+### 8. THE ARCHIVE-35 MCP SERVER IS ROOTED IN THE ARCHIVE-35 REPO — NOT ATHOS
+The `archive35` MCP tool is connected to the **archive-35.com** GitHub repo as its root.
+It cannot use relative paths to reach the ATHOS project.
+
+**What this means at session start:**
+- `archive35_read_file` with a path like `ATHOS/CLAUDE.md` will FAIL — that path doesn't exist in the archive-35 repo
+- `archive35_list_dir` and `archive35_git_*` operate on archive-35.com, not ATHOS
+- ATHOS files must be accessed via `archive35_run_command` using **absolute paths**: `/Users/wolfgangschram/Documents/ACTIVE/ATHOS/`
+- ATHOS git commands must use: `git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS <command>`
+
+**The correct startup sequence for ATHOS sessions:**
+1. Use `archive35_run_command` to `cat` the handover doc at its absolute path
+2. Use `archive35_run_command` to `cat` CLAUDE.md at its absolute path
+3. Use `git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS status` to check git state
+4. Never try to use `archive35_read_file` for ATHOS files — it will always fail silently or error
+
+**The correct pattern for ALL ATHOS file edits:**
+```bash
+# Read
+cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/index.html | sed -n '100,120p'
+# Edit (use python or sed — never heredoc)
+# Commit
+git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS add . && git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS commit -m "..."
+# Push
+git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS push
+```

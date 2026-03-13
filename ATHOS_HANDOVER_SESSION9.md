@@ -104,3 +104,23 @@ Items to verify:
 - NEVER edit without sed -n reading lines first
 - NEVER commit without reading back changed lines
 - NEVER Diversified in public content (CV excepted)
+
+---
+
+## SESSION 10 ADDENDUM — MCP PROTOCOL NOTE (added 2026-03-13)
+
+### CRITICAL: How the archive35 MCP server works
+The `archive35` MCP tool is rooted in the **archive-35.com** repo — NOT the ATHOS repo.
+Every new Claude session will try relative paths and fail until it figures this out.
+
+**Do not waste session time on this. Read this first:**
+- `archive35_read_file` CANNOT reach ATHOS files by relative path — always errors
+- All ATHOS file access must use `archive35_run_command` with full absolute paths
+- ATHOS root: `/Users/wolfgangschram/Documents/ACTIVE/ATHOS/`
+- ATHOS git: `git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS <command>`
+
+**Correct startup sequence:**
+1. `archive35_run_command`: `cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/ATHOS_HANDOVER_SESSION[N].md`
+2. `archive35_run_command`: `cat /Users/wolfgangschram/Documents/ACTIVE/ATHOS/CLAUDE.md`
+3. `archive35_run_command`: `git -C /Users/wolfgangschram/Documents/ACTIVE/ATHOS log --oneline -5`
+4. Ask Wolf for today's fix list. Do NOT touch code until you have it.
