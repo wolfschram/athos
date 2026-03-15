@@ -2084,12 +2084,13 @@ body.immersive-open {
 
     <!-- Readable View (default) — horizontal cards, multi-open -->
     <div id="readableView">
-      <!-- Business Reality — always visible at top -->
-      <div style="margin-bottom: 28px; padding: 32px; background: var(--bg-warm); border: 1px solid rgba(77,168,218,0.3); border-radius: 12px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;">
-        <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE BUSINESS REALITY</div>
-        <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-bottom: 16px;">Every organisation runs on revenue. That's not cynical — it's the system. The question isn't whether money matters. It's: who makes it? People do. People who own their work make more. Your culture IS your business strategy.</p>
-        <div class="provocation">Let's talk about the money.</div>
-        <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-top: 16px;">Revenue follows ownership. When your team genuinely owns their work, nobody needs to be told what matters. They already know. Because they built it.</p>
+      <!-- The Ownership Architecture — framework framing -->
+      <div style="margin-bottom: 28px; max-width: 760px; margin-left: auto; margin-right: auto;">
+        <div style="padding: 32px; background: var(--bg-warm); border: 1px solid rgba(77,168,218,0.3); border-radius: 12px;">
+          <div style="font-family: var(--font-mono); font-size: 13px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 16px; text-align: center;">THE OWNERSHIP ARCHITECTURE</div>
+          <p style="font-size: 16px; color: var(--text); line-height: 1.8; margin-bottom: 16px; text-align: center;">Six conditions that determine whether a team genuinely owns its outcomes &mdash; or just goes through the motions.</p>
+          <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; text-align: center;">Think of it as a signal chain. In broadcast engineering, every signal passes through a chain of connections from source to destination. One bad link and the whole chain fails. Culture works the same way. Purpose is the source. Ownership is the first amplifier. Symbiotic Teams, Honest Conversation, and Cognitive Diversity are the processing chain. The Door is the output &mdash; what leaves your system and enters the world.</p>
+        </div>
       </div>
 
       <!-- Leadership Sub-Navigation -->
@@ -2140,11 +2141,17 @@ body.immersive-open {
               </div>
             </div>
             <div class="immersive-hero" id="immersiveHero">
-              <div class="immersive-hero-placeholder">HERO IMAGE COMING SOON</div>
+              <!-- Hero image loads when topic is selected -->
             </div>
           </div>
           <div class="immersive-body" id="immersiveBody"></div>
         </div>
+      </div>
+
+      <!-- Business Reality — anchor at bottom -->
+      <div style="margin-top: 40px; padding: 32px; background: var(--bg-warm); border: 1px solid rgba(77,168,218,0.3); border-radius: 12px; text-align: center; max-width: 720px; margin-left: auto; margin-right: auto;">
+        <div class="provocation">Let&rsquo;s talk about the money.</div>
+        <p style="font-size: 16px; color: var(--text-mid); line-height: 1.8; margin-top: 16px;">Every organisation runs on revenue. That&rsquo;s not cynical &mdash; it&rsquo;s the system. The question isn&rsquo;t whether money matters. It&rsquo;s: who makes it? People do. People who own their work make more. Revenue follows ownership. Your culture IS your business strategy.</p>
       </div>
 
     </div>
@@ -2513,30 +2520,7 @@ body.immersive-open {
 </div>
 
 
-<div class="page" id="page-photography" style="display:none;">
-  <div class="page-content">
-    <!-- Hero -->
-    <div style="position: relative; width: 100vw; margin-left: calc(-48px); height: 350px; overflow: hidden; margin-bottom: 24px;">
-      <img src="images/hero-photography.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.75;">
-      <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.1) 0%, rgba(12,11,15,0.7) 65%, rgba(12,11,15,1) 100%);"></div>
-      <div style="position: absolute; bottom: 28px; left: 48px; right: 48px;">
-        <div class="page-label" style="color: var(--teal); text-align: left;">SEEING WHAT OTHERS WALK PAST</div>
-        <div class="page-title" style="text-align: left; font-size: clamp(24px, 4vw, 38px);">Photography</div>
-      </div>
-    </div>
-
-    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 24px; align-items: center;">
-      <div>
-        <div class="quote" style="margin-bottom: 20px;">The same eye that finds light in a frame finds potential in a person.</div>
-        <p style="color: var(--text); font-size: 16px; line-height: 1.8;">~1,000 images. 55+ countries. Captured during years of international work. Photography isn’t separate from culture architecture. It’s the same muscle — pattern recognition, timing, seeing what’s there before anyone else does.</p>
-        <p style="font-family: var(--font-mono); font-size: 11px; color: var(--text-light); letter-spacing: 0.1em; margin-top: 16px;">THROUGH A DIFFERENT LENS</p>
-      </div>
-      <div style="aspect-ratio: 3/2; background: linear-gradient(135deg, var(--bg-warm), var(--bg-accent)); border-radius: 12px; border: 1px solid rgba(255,255,255,0.1); display: flex; align-items: center; justify-content: center; font-family: var(--font-mono); font-size: 11px; color: var(--text-light);">
-        AWAITING IMAGE SELECTION
-      </div>
-    </div>
-  </div>
-</div>
+<!-- Photography page removed — will return when images are ready -->
 
 
 <div class="page" id="page-reading">
@@ -2748,23 +2732,31 @@ body.immersive-open {
       <div style="position: absolute; inset: 0; background: linear-gradient(to bottom, rgba(12,11,15,0.2) 0%, rgba(12,11,15,0.75) 65%, rgba(12,11,15,1) 100%);"></div>
       <div style="position: absolute; bottom: 28px; left: 48px; right: 48px;">
         <div class="page-label" style="color: var(--green); text-align: left;">WORKING WITH ATHOS</div>
-        <div class="page-title" style="text-align: left; font-size: clamp(24px, 4vw, 38px);">Let's Talk</div>
-        <div class="page-subtitle" style="text-align: left; margin-left: 0;">Did anything on this site spark something? There's only one way to find out.</div>
+        <div class="page-title" style="text-align: left; font-size: clamp(24px, 4vw, 38px);">Let&rsquo;s Talk</div>
       </div>
     </div>
 
     <!-- Key Question -->
-    <div style="margin-bottom: 20px;">
+    <div style="margin-bottom: 24px;">
       <div style="padding: 24px; background: rgba(255,255,255,0.04); backdrop-filter: blur(16px); -webkit-backdrop-filter: blur(16px); border: 1px solid rgba(255,255,255,0.1); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
         <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: #4DA8DA; margin-bottom: 12px;">THE ONLY QUESTION THAT MATTERS</div>
-        <p style="font-size: 15px; color: #FFFFFF; line-height: 1.7; margin-bottom: 10px;">Did anything on this site spark your interest? Do you see somewhere we should have a conversation?</p>
-        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px;">That&rsquo;s it. That&rsquo;s the entry point. Not a commitment. Not a pitch deck. Not three months with a stranger. Just two people finding out if there&rsquo;s something worth building together.</p>
-        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7;">If you already know me &mdash; pick up the phone. If you don&rsquo;t &mdash; let&rsquo;s change that. Every engagement starts with a conversation. Every single one.</p>
+        <p style="font-size: 15px; color: #FFFFFF; line-height: 1.7; margin-bottom: 10px;">Did anything on this site spark your interest?</p>
+        <p style="font-size: 14px; color: var(--text-mid); line-height: 1.7; margin-bottom: 10px;">If you already know me &mdash; pick up the phone. If you don&rsquo;t &mdash; let&rsquo;s change that. Everything starts with a conversation.</p>
       </div>
-      </div>
+    </div>
+
+    <!-- What changes — the impact -->
+    <div style="margin-bottom: 24px; padding: 28px; background: rgba(255,255,255,0.03); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);">
+      <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.12em; color: var(--green); margin-bottom: 16px;">WHAT CHANGES</div>
+      <p style="font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 14px;">I read rooms. Not reports &mdash; rooms. Do the words people say have actions that follow, or do they have more words that follow? Are the relationships that need to exist for execution actually there &mdash; or is everyone operating in parallel, touching nothing?</p>
+      <p style="font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 14px;">Every organisation has patterns it can&rsquo;t see because the people inside are too close to the wood to see the trees. That&rsquo;s not a failure &mdash; it&rsquo;s physics. You need someone from outside the system to trace the signal flow and show you where it breaks.</p>
+      <p style="font-size: 15px; color: var(--text); line-height: 1.8; margin-bottom: 14px;">The break is almost never where you think it is. It&rsquo;s not the technology. It&rsquo;s not the process. It&rsquo;s the moment where a capable person was told they don&rsquo;t have permission to do what they know is right. Fix that moment, and everything downstream starts working.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8; margin-bottom: 14px;">Saying what you&rsquo;re not is the most credible thing you can say in a room full of people pretending to be everything. I&rsquo;m not the smartest person in the room. I&rsquo;m the one who will sit with your engineers, your project managers, your field team &mdash; and actually listen. Then fight for the changes they need.</p>
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8;">What changes is trust. People start owning their work because someone finally gave them permission. People start speaking up because someone showed them it&rsquo;s safe. Leaders start leading instead of controlling because someone demonstrated that trusting your team isn&rsquo;t weakness &mdash; it&rsquo;s the only thing that scales. In my experience, if it hasn&rsquo;t shifted in six months, it won&rsquo;t. The first months are when everyone is listening. That&rsquo;s when you build the relationships that stick. That&rsquo;s when you either earn the right to change things, or you don&rsquo;t.</p>
+    </div>
 
     <!-- Three Track Cards with images -->
-    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 20px;">
+    <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; margin-bottom: 24px;">
       <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(122,173,90,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
         <div style="height: 130px; overflow: hidden; position: relative;">
           <img src="images/engage-blueprint.png" alt="" style="width: 100%; height: 100%; object-fit: cover; opacity: 0.5;">
@@ -2772,8 +2764,8 @@ body.immersive-open {
         </div>
         <div style="padding: 18px;">
           <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--green); margin-bottom: 8px;">CULTURE ARCHITECTURE</div>
-          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Team culture challenges that may have nothing to do with AI. Ownership, communication, team dynamics, leadership development.</p>
-          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">The human system. Where people own outcomes because the environment makes it natural.</p>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Your team has smart people doing good work inside a system that&rsquo;s limiting them. Guardrails that made sense at one scale are strangling execution at another. Ownership exists in pockets but not across the organisation.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">I trace the signal flow of your culture and show you where it breaks.</p>
         </div>
       </div>
       <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(77,168,218,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
@@ -2783,8 +2775,8 @@ body.immersive-open {
         </div>
         <div style="padding: 18px;">
           <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: #4DA8DA; margin-bottom: 8px;">EMBEDDED ADVISORY</div>
-          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">1 week. 1 month. 3 months. Fractional senior leadership without the full-time cost.</p>
-          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">In the room, not on a call. Witnessing how the team works. Weekly reflections. Building ownership from the inside.</p>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Fractional senior leadership. Remote, on-site, or a mix &mdash; whatever the situation needs. I engage with your people, understand the relationships, and identify patterns that are helping or hurting.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">Sometimes you&rsquo;re so close to the wood you can&rsquo;t see the trees. That&rsquo;s where an outside perspective makes the difference.</p>
         </div>
       </div>
       <div style="position: relative; overflow: hidden; border-radius: 12px; border: 1px solid rgba(100,181,246,0.25); background: rgba(255,255,255,0.04); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); box-shadow: 0 8px 32px rgba(0,0,0,0.25), inset 0 1px 0 rgba(255,255,255,0.08);">
@@ -2794,16 +2786,21 @@ body.immersive-open {
         </div>
         <div style="padding: 18px;">
           <div style="font-family: var(--font-mono); font-size: 11px; font-weight: 700; letter-spacing: 0.1em; color: var(--blue); margin-bottom: 8px;">AI ADOPTION</div>
-          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Helping leadership teams guide AI transition without losing the humans in the process.</p>
-          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">Not replacing people with technology &mdash; building people who know how to work with it.</p>
+          <p style="font-size: 14px; color: var(--text); line-height: 1.7; margin-bottom: 6px;">Your team isn&rsquo;t afraid of AI. They&rsquo;re afraid of being left behind. The change is happening whether we fight it or not &mdash; and fighting it means fighting the organisation&rsquo;s future.</p>
+          <p style="font-size: 13px; color: var(--text-mid); line-height: 1.6;">In a perfect world, not one person loses their job through AI. They convert their capabilities with AI into something that catapults the organisation forward. That&rsquo;s the mindset shift. A fool with a tool is still a fool.</p>
         </div>
       </div>
     </div>
 
+    <!-- Intent Signal -->
+    <div style="margin-bottom: 24px; padding: 24px; background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;">
+      <p style="font-size: 15px; color: var(--text-mid); line-height: 1.8;">I&rsquo;m looking for the right fit. That could be a full-time leadership role where this philosophy can make an impact &mdash; not replace what exists, but influence it. It could be a fractional engagement where I embed with your team for a defined period and build something that outlasts my time there. Or it could start as a conversation and turn into something neither of us expected. I don&rsquo;t need to own the company. I need to own the impact.</p>
+    </div>
+
     <!-- CTA -->
     <div style="text-align: center; padding: 24px; background: rgba(255,255,255,0.03); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; box-shadow: 0 8px 32px rgba(0,0,0,0.2), inset 0 1px 0 rgba(255,255,255,0.06);">
-      <p style="font-size: 16px; color: var(--text); margin-bottom: 16px;">Every engagement starts with a conversation. No commitment. No pitch deck. Just two people talking about what’s real. Simple. Nothing promised other than an honest exchange. Let’s find out how we can help one another.</p>
-      <div class="wolf-btn" onclick="showPage('wolf')" style="display: inline-block;">START A CONVERSATION</div>
+      <p style="font-size: 16px; color: var(--text); margin-bottom: 16px;">Everything starts with a conversation. If anything on this site made you think &mdash; let&rsquo;s find out what that means.</p>
+      <div class="wolf-btn" onclick="showPage(‘wolf’)" style="display: inline-block;">START A CONVERSATION</div>
     </div>
 
   </div>
