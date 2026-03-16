@@ -3136,9 +3136,9 @@ body.immersive-open {
 let _hashNav = false;
 
 function showPage(pageId) {
-  // Update URL hash for shareable links
+  // Update URL hash for shareable links (strip any query strings)
   if (!_hashNav) {
-    history.replaceState(null, '', '#' + pageId);
+    history.replaceState(null, '', location.pathname + '#' + pageId);
   }
   // Cleanup: restore scroll if topic was open
   document.body.classList.remove('immersive-open');
@@ -3326,9 +3326,9 @@ function openTopic(key) {
   const icon = document.getElementById('immersivePlayIcon'); if(icon) icon.innerHTML = '&#9654;';
   document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
 
-  // Update URL hash with topic sub-path
+  // Update URL hash with topic sub-path (strip any query strings)
   if (!_hashNav) {
-    history.replaceState(null, '', '#leadership/' + key);
+    history.replaceState(null, '', location.pathname + '#leadership/' + key);
   }
 
   // Show immersive, hide grid
@@ -3349,7 +3349,7 @@ function closeTopic() {
 
   // Reset hash back to leadership page (skip during hash nav)
   if (!_hashNav) {
-    history.replaceState(null, '', '#leadership');
+    history.replaceState(null, '', location.pathname + '#leadership');
   }
 
   // Clear active pill styles
