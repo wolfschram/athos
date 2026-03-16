@@ -2104,9 +2104,9 @@ body.immersive-open {
      ============================================ -->
 <div class="page active" id="page-landing">
   <section id="landing">
-    <div style="position: relative; z-index: 10; width: 100%; height: 100%; padding: 0 48px;">
+    <div style="position: relative; z-index: 10; width: 100%; min-height: 100%; padding: 0 48px; display: flex; flex-direction: column; align-items: center;">
       <!-- Logo top-left, 2 inches below nav -->
-      <div style="padding-top: 100px;">
+      <div style="padding-top: 100px; align-self: flex-start;">
         <img src="images/athos-logo.png" alt="ATHOS" style="max-width: 420px; width: 50vw; height: auto; filter: brightness(1.3) contrast(1.1); animation: logoEntrance 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards; opacity: 0;">
       </div>
       <!-- Tagline centred, right below logo area -->
@@ -2119,7 +2119,6 @@ body.immersive-open {
           <div class="hero-question" id="rotatingQuestion"></div>
         </div>
       </div>
-    </div>
       <!-- Positioning + Wayfinding -->
       <div class="hero-positioning">I help engineering organisations build cultures that scale.</div>
       <div class="wayfinding">
@@ -2140,6 +2139,7 @@ body.immersive-open {
           <div class="wayfinding-label">Contact</div>
         </div>
       </div>
+    </div>
     <div class="hero-scroll" onclick="showPage('leadership')">EXPLORE &#8595;</div>
   </section>
 </div>
