@@ -3265,8 +3265,10 @@ function closeTopic() {
   document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
   currentTopic = null;
 
-  // Reset hash back to leadership page
-  history.replaceState(null, '', '#leadership');
+  // Reset hash back to leadership page (skip during hash nav)
+  if (!_hashNav) {
+    history.replaceState(null, '', '#leadership');
+  }
 
   // Clear active pill styles
   document.querySelectorAll('.subnav-pill').forEach(p => {
