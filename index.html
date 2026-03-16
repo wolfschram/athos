@@ -4204,9 +4204,10 @@ function handleHash() {
 window.addEventListener('hashchange', handleHash);
 
 // Handle direct URL load (deep link)
-window.addEventListener('DOMContentLoaded', function() {
+// Use window load + delay to ensure TOPICS data and DOM are fully ready
+window.addEventListener('load', function() {
   if (location.hash) {
-    handleHash();
+    setTimeout(handleHash, 100);
   }
 });
 
