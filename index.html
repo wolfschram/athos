@@ -3050,7 +3050,14 @@ body.immersive-open {
      ============================================ -->
 <script>
 // ---- Tab-based Page Navigation ----
+// ---- Hash-based routing (shareable URLs) ----
+let _hashNav = false;
+
 function showPage(pageId) {
+  // Update URL hash for shareable links
+  if (!_hashNav) {
+    history.replaceState(null, '', '#' + pageId);
+  }
   // Cleanup: restore scroll if topic was open
   document.body.classList.remove('immersive-open');
   const _ti = document.getElementById('topicImmersive');
@@ -3237,6 +3244,11 @@ function openTopic(key) {
   const icon = document.getElementById('immersivePlayIcon'); if(icon) icon.innerHTML = '&#9654;';
   document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
 
+  // Update URL hash with topic sub-path
+  if (!_hashNav) {
+    history.replaceState(null, '', '#leadership/' + key);
+  }
+
   // Show immersive, hide grid
   const ti = document.getElementById('topicImmersive');
   ti.classList.add('visible');
@@ -3252,6 +3264,9 @@ function closeTopic() {
   const icon = document.getElementById('immersivePlayIcon'); if(icon) icon.innerHTML = '&#9654;';
   document.getElementById('immersivePlayBtn').innerHTML = '&#9654;';
   currentTopic = null;
+
+  // Reset hash back to leadership page
+  history.replaceState(null, '', '#leadership');
 
   // Clear active pill styles
   document.querySelectorAll('.subnav-pill').forEach(p => {
@@ -4081,6 +4096,35 @@ document.getElementById('voices-modal').addEventListener('click', function(e) {
 
 // Init on load
 voicesRender();
+
+
+// ---- Hash-based deep-link routing ----
+function handleHash() {
+  const hash = location.hash.replace('#', '');
+  if (!hash) return;
+  const parts = hash.split('/');
+  const pageId = parts[0];
+  const topicId = parts[1] || null;
+
+  // Navigate to page
+  _hashNav = true;
+  showPage(pageId);
+  // If there's a topic sub-path (e.g. #leadership/door)
+  if (topicId && typeof openTopic === 'function') {
+    openTopic(topicId);
+  }
+  _hashNav = false;
+}
+
+// Handle browser back/forward
+window.addEventListener('hashchange', handleHash);
+
+// Handle direct URL load (deep link)
+window.addEventListener('DOMContentLoaded', function() {
+  if (location.hash) {
+    handleHash();
+  }
+});
 
 </script>
 
