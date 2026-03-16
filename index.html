@@ -416,6 +416,66 @@ a:hover { color: #fff; }
   line-height: 1.6;
   transition: opacity 0.8s ease;
 }
+
+/* ---- Wayfinding Bar ---- */
+.wayfinding {
+  display: flex;
+  justify-content: center;
+  gap: 16px;
+  margin-top: 48px;
+  padding: 0 24px;
+  opacity: 0;
+  animation: fadeUp 1s 2.8s ease forwards;
+}
+.wayfinding-card {
+  flex: 0 1 180px;
+  padding: 20px 16px;
+  border: 1px solid var(--amber-border);
+  border-radius: 12px;
+  background: rgba(30, 30, 36, 0.6);
+  backdrop-filter: blur(12px);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+.wayfinding-card:hover {
+  border-color: var(--amber-bright);
+  background: rgba(58, 123, 213, 0.08);
+  box-shadow: 0 0 24px rgba(77, 168, 218, 0.15);
+  transform: translateY(-2px);
+}
+.wayfinding-q {
+  font-family: var(--font-body);
+  font-size: 15px;
+  font-style: italic;
+  color: #FFFFFF;
+  line-height: 1.4;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+.wayfinding-label {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--amber-bright);
+  margin-top: 10px;
+}
+.hero-positioning {
+  font-family: var(--font-body);
+  font-size: clamp(15px, 2vw, 18px);
+  color: var(--text-mid);
+  text-align: center;
+  margin-top: 32px;
+  opacity: 0;
+  animation: fadeUp 1s 2.6s ease forwards;
+  text-shadow: 0 1px 3px rgba(0,0,0,0.8);
+}
+@media (max-width: 700px) {
+  .wayfinding { flex-wrap: wrap; gap: 10px; }
+  .wayfinding-card { flex: 0 1 calc(50% - 8px); padding: 14px 10px; }
+  .wayfinding-q { font-size: 13px; }
+}
+
 .hero-scroll {
   position: absolute;
   bottom: 28px;
@@ -2060,6 +2120,26 @@ body.immersive-open {
         </div>
       </div>
     </div>
+      <!-- Positioning + Wayfinding -->
+      <div class="hero-positioning">I help engineering organisations build cultures that scale.</div>
+      <div class="wayfinding">
+        <div class="wayfinding-card" onclick="showPage('engage')">
+          <div class="wayfinding-q">&ldquo;What do you do?&rdquo;</div>
+          <div class="wayfinding-label">Engage</div>
+        </div>
+        <div class="wayfinding-card" onclick="showPage('leadership')">
+          <div class="wayfinding-q">&ldquo;How do you lead?&rdquo;</div>
+          <div class="wayfinding-label">Leadership</div>
+        </div>
+        <div class="wayfinding-card" onclick="showPage('ai')">
+          <div class="wayfinding-q">&ldquo;What have you built?&rdquo;</div>
+          <div class="wayfinding-label">AI Evolution</div>
+        </div>
+        <div class="wayfinding-card" onclick="showPage('wolf')">
+          <div class="wayfinding-q">&ldquo;Can we talk?&rdquo;</div>
+          <div class="wayfinding-label">Contact</div>
+        </div>
+      </div>
     <div class="hero-scroll" onclick="showPage('leadership')">EXPLORE &#8595;</div>
   </section>
 </div>
