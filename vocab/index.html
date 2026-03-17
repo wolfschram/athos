@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Wolf's Cyber Vocab Trainer</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;700&family=DM+Sans:wght@400;500;700&display=swap');
+
+  :root {
+    --bg: #0a0e17;
+    --surface: #131a2b;
+    --surface2: #1a2340;
+    --accent: #00e5a0;
+    --accent-dim: #00e5a033;
+    --warning: #ff6b35;
+    --gold: #ffd700;
+    --text: #e8eaf0;
+    --text-dim: #7a8599;
+    --correct: #00e5a0;
+    --wrong: #ff4757;
+    --border: #1e2a42;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'DM Sans', sans-serif;
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  /* ── Nav bar ── */
+  .nav {
+    display: flex;
+    gap: 8px;
+    padding: 16px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    flex-wrap: wrap;
+    position: sticky;
+    top: 0;
+    z-index: 100;
+  }
+  .nav-btn {
+    padding: 10px 18px;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .nav-btn:hover { border-color: var(--accent); color: var(--text); }
+  .nav-btn.active {
+    background: var(--accent-dim);
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ── Stats bar ── */
+  .stats-bar {
+    display: flex;
+    gap: 24px;
+    padding: 12px 24px;
+    background: var(--surface);
+    border-bottom: 1px solid var(--border);
+    font-size: 13px;
+    color: var(--text-dim);
+    flex-wrap: wrap;
+  }
+  .stat-item span { color: var(--accent); font-weight: 700; font-family: 'JetBrains Mono', monospace; }
+
+  /* ── Main container ── */
+  .container {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 32px 24px;
+  }
+
+  /* ── Mode: LEARN (flashcards) ── */
+  .card {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    padding: 40px 32px;
+    margin-bottom: 24px;
+    position: relative;
+    overflow: hidden;
+  }
+  .card::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--accent), transparent);
+  }
+  .card-category {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--accent);
+    margin-bottom: 16px;
+    font-weight: 700;
+  }
+  .card-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 42px;
+    font-weight: 700;
+    margin-bottom: 8px;
+    line-height: 1.1;
+  }
+  .card-full-name {
+    font-size: 18px;
+    color: var(--text-dim);
+    margin-bottom: 24px;
+    font-weight: 500;
+  }
+  .card-explain {
+    font-size: 16px;
+    line-height: 1.7;
+    color: var(--text);
+    margin-bottom: 20px;
+  }
+  .card-why {
+    background: var(--surface2);
+    border-left: 3px solid var(--accent);
+    padding: 16px 20px;
+    border-radius: 0 8px 8px 0;
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+  }
+  .card-why strong { color: var(--accent); }
+  .card-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-top: 24px;
+  }
+  .card-counter {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 13px;
+    color: var(--text-dim);
+  }
+  .btn {
+    padding: 12px 28px;
+    border-radius: 8px;
+    border: none;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: var(--bg);
+  }
+  .btn-primary:hover { transform: translateY(-1px); box-shadow: 0 4px 20px var(--accent-dim); }
+  .btn-secondary {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--text-dim);
+  }
+  .btn-secondary:hover { border-color: var(--text-dim); color: var(--text); }
+  .confidence-btns {
+    display: flex;
+    gap: 8px;
+    margin-top: 16px;
+  }
+  .conf-btn {
+    flex: 1;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border);
+    background: transparent;
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: center;
+  }
+  .conf-btn:hover { transform: translateY(-1px); }
+  .conf-btn.conf-no { color: var(--wrong); border-color: var(--wrong); }
+  .conf-btn.conf-no:hover { background: #ff475722; }
+  .conf-btn.conf-kinda { color: var(--warning); border-color: var(--warning); }
+  .conf-btn.conf-kinda:hover { background: #ff6b3522; }
+  .conf-btn.conf-yes { color: var(--correct); border-color: var(--correct); }
+  .conf-btn.conf-yes:hover { background: #00e5a022; }
+
+  /* ── Mode: QUIZ ── */
+  .quiz-question {
+    font-size: 18px;
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+  .quiz-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 48px;
+    font-weight: 700;
+    color: var(--accent);
+    display: block;
+    margin-bottom: 16px;
+  }
+  .quiz-options {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .quiz-option {
+    padding: 16px 20px;
+    border: 1px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    color: var(--text);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 0.15s;
+    text-align: left;
+    line-height: 1.4;
+  }
+  .quiz-option:hover:not(.disabled) {
+    border-color: var(--accent);
+    background: var(--surface2);
+  }
+  .quiz-option.correct {
+    border-color: var(--correct);
+    background: #00e5a015;
+    color: var(--correct);
+  }
+  .quiz-option.wrong {
+    border-color: var(--wrong);
+    background: #ff475715;
+    color: var(--wrong);
+    text-decoration: line-through;
+  }
+  .quiz-option.disabled { cursor: default; opacity: 0.6; }
+  .quiz-option.show-correct {
+    border-color: var(--correct);
+    background: #00e5a015;
+    color: var(--correct);
+    opacity: 1 !important;
+  }
+  .quiz-feedback {
+    margin-top: 20px;
+    padding: 16px 20px;
+    border-radius: 10px;
+    font-size: 14px;
+    line-height: 1.6;
+    display: none;
+  }
+  .quiz-feedback.show { display: block; }
+  .quiz-feedback.correct-fb {
+    background: #00e5a010;
+    border: 1px solid #00e5a033;
+    color: var(--correct);
+  }
+  .quiz-feedback.wrong-fb {
+    background: #ff475710;
+    border: 1px solid #ff475733;
+    color: var(--text);
+  }
+
+  /* ── Mode: MATCH ── */
+  .match-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .match-item {
+    padding: 14px 16px;
+    border: 2px solid var(--border);
+    border-radius: 10px;
+    background: var(--surface);
+    cursor: pointer;
+    transition: all 0.15s;
+    font-size: 14px;
+    line-height: 1.4;
+    min-height: 56px;
+    display: flex;
+    align-items: center;
+  }
+  .match-item:hover:not(.matched):not(.selected) { border-color: var(--text-dim); }
+  .match-item.selected { border-color: var(--accent); background: var(--accent-dim); }
+  .match-item.matched {
+    border-color: var(--correct);
+    background: #00e5a010;
+    opacity: 0.5;
+    cursor: default;
+  }
+  .match-item.wrong-match {
+    border-color: var(--wrong);
+    background: #ff475715;
+    animation: shake 0.4s ease;
+  }
+  .match-item .abbr-label {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 16px;
+    color: var(--accent);
+  }
+  @keyframes shake {
+    0%,100% { transform: translateX(0); }
+    25% { transform: translateX(-6px); }
+    75% { transform: translateX(6px); }
+  }
+
+  /* ── Mode: BROWSE ── */
+  .browse-filter {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 24px;
+    flex-wrap: wrap;
+  }
+  .filter-btn {
+    padding: 8px 16px;
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    background: transparent;
+    color: var(--text-dim);
+    font-family: 'DM Sans', sans-serif;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .filter-btn:hover { border-color: var(--accent); color: var(--text); }
+  .filter-btn.active { background: var(--accent-dim); border-color: var(--accent); color: var(--accent); }
+  .browse-item {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 12px;
+    padding: 20px 24px;
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.15s;
+  }
+  .browse-item:hover { border-color: var(--accent); }
+  .browse-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 4px;
+  }
+  .browse-item-abbr {
+    font-family: 'JetBrains Mono', monospace;
+    font-weight: 700;
+    font-size: 20px;
+  }
+  .browse-item-cat {
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: var(--accent);
+    font-weight: 700;
+  }
+  .browse-item-name {
+    font-size: 14px;
+    color: var(--text-dim);
+    margin-bottom: 8px;
+  }
+  .browse-item-desc {
+    font-size: 14px;
+    line-height: 1.6;
+    color: var(--text);
+    display: none;
+  }
+  .browse-item.open .browse-item-desc { display: block; }
+  .browse-item-why {
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--text-dim);
+    margin-top: 12px;
+    padding-top: 12px;
+    border-top: 1px solid var(--border);
+    display: none;
+  }
+  .browse-item.open .browse-item-why { display: block; }
+
+  .streak-display {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-family: 'JetBrains Mono', monospace;
+    font-size: 72px;
+    font-weight: 700;
+    color: var(--gold);
+    pointer-events: none;
+    opacity: 0;
+    z-index: 200;
+    text-shadow: 0 0 40px #ffd70066;
+  }
+  .streak-display.show {
+    animation: streakPop 1s ease forwards;
+  }
+  @keyframes streakPop {
+    0% { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
+    30% { opacity: 1; transform: translate(-50%, -50%) scale(1.2); }
+    100% { opacity: 0; transform: translate(-50%, -60%) scale(1); }
+  }
+
+  .section-title {
+    font-size: 13px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--text-dim);
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .hidden { display: none !important; }
+
+  .progress-ring {
+    width: 100%;
+    height: 6px;
+    background: var(--surface2);
+    border-radius: 3px;
+    margin-top: 8px;
+    overflow: hidden;
+  }
+  .progress-fill {
+    height: 100%;
+    background: linear-gradient(90deg, var(--accent), var(--gold));
+    border-radius: 3px;
+    transition: width 0.5s ease;
+  }
+
+  @media (max-width: 600px) {
+    .card-abbr { font-size: 32px; }
+    .quiz-abbr { font-size: 36px; }
+    .match-grid { grid-template-columns: 1fr; }
+    .container { padding: 20px 16px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="nav">
+  <button class="nav-btn active" onclick="switchMode('learn')">Learn</button>
+  <button class="nav-btn" onclick="switchMode('quiz')">Quiz Me</button>
+  <button class="nav-btn" onclick="switchMode('match')">Match</button>
+  <button class="nav-btn" onclick="switchMode('reverse')">Reverse Quiz</button>
+  <button class="nav-btn" onclick="switchMode('browse')">Browse All</button>
+</div>
+
+<div class="stats-bar">
+  <div class="stat-item">Streak: <span id="streak">0</span></div>
+  <div class="stat-item">Mastered: <span id="mastered">0</span>/<span id="total">0</span></div>
+  <div class="stat-item">Session score: <span id="score">0</span></div>
+  <div class="stat-item" style="flex:1; text-align:right;">
+    <button onclick="resetProgress()" style="background:none;border:none;color:var(--text-dim);font-size:12px;cursor:pointer;text-decoration:underline;">Reset progress</button>
+  </div>
+</div>
+
+<div class="container" id="main"></div>
+<div class="streak-display" id="streakPop"></div>
+
+<script>
+const TERMS = [
+  // Cybersecurity & TENEX-specific
+  {
+    abbr: "MDR", full: "Managed Detection and Response", cat: "Cyber",
+    explain: "A service where a company monitors your systems 24/7, detects threats, and responds to them for you. Think of it as outsourcing your security operations to people with better tools and AI.",
+    why: "TENEX's core product. This is what they sell. Their whole business is being a better, faster, AI-powered MDR."
+  },
+  {
+    abbr: "SOC", full: "Security Operations Center", cat: "Cyber",
+    explain: "The team (and room) that watches security alerts around the clock. Like a broadcast control room, but for cyber threats instead of live feeds.",
+    why: "TENEX is building an 'AI-native SOC' — meaning AI does the first pass on every alert instead of a human analyst."
+  },
+  {
+    abbr: "SIEM", full: "Security Information and Event Management", cat: "Cyber",
+    explain: "Software that collects logs from every system in your network and looks for suspicious patterns. Like a giant mixing console that takes feeds from every camera, mic, and device — but for security data.",
+    why: "Google Chronicle (now Google SecOps) is a SIEM. TENEX builds their AI layer on top of it."
+  },
+  {
+    abbr: "EDR", full: "Endpoint Detection and Response", cat: "Cyber",
+    explain: "Security software that sits on individual devices — laptops, servers, phones — to catch threats at the device level.",
+    why: "CrowdStrike and SentinelOne are EDR companies that TENEX partners with. They protect the endpoints, TENEX watches the bigger picture."
+  },
+  {
+    abbr: "CISO", full: "Chief Information Security Officer", cat: "Cyber",
+    explain: "The executive responsible for an organization's entire security program. Reports to the CEO or CTO. Owns the risk.",
+    why: "Mat held this title at Unisys. TENEX's Jan Grzymala-Busse is their CISO."
+  },
+  {
+    abbr: "MTTR", full: "Mean Time To Respond", cat: "Cyber",
+    explain: "How fast you detect and fix a security incident. Measured in minutes or hours. Lower is better — every minute counts when you're breached.",
+    why: "TENEX's whole pitch is their AI triage gets MTTR under 1 minute. That's their competitive edge."
+  },
+  {
+    abbr: "UEBA", full: "User Entity Behavior Analytics", cat: "Cyber",
+    explain: "Technology that learns what 'normal' looks like for each user and flags when behavior is abnormal. Like noticing a crew member suddenly accessing areas they never go to.",
+    why: "TENEX's CTO Venkata built Google Chronicle's UEBA system. It's core to their detection intelligence."
+  },
+  // Regulatory
+  {
+    abbr: "GDPR", full: "General Data Protection Regulation", cat: "Regulatory",
+    explain: "EU law since 2018 that governs how companies collect, store, and process personal data of EU residents. Fines can hit 4% of global annual revenue.",
+    why: "The #1 reason expanding into Europe is hard for US tech companies. TENEX's MDR processes security alerts containing personal data — IPs, user behavior, access logs. All of that falls under GDPR."
+  },
+  {
+    abbr: "DPO", full: "Data Protection Officer", cat: "Regulatory",
+    explain: "A person every company processing EU personal data at scale must hire under GDPR. They're the compliance watchdog inside the company.",
+    why: "TENEX will need to appoint one as they expand into EMEA. It's a legal requirement, not optional."
+  },
+  {
+    abbr: "DPA", full: "Data Protection Authority", cat: "Regulatory",
+    explain: "The government body in each EU country that enforces GDPR. Like each country having its own security inspector general.",
+    why: "Where TENEX plants their EU HQ determines which DPA oversees them. Strategic decision, not just real estate."
+  },
+  {
+    abbr: "NIS2", full: "Network and Information Security Directive 2", cat: "Regulatory",
+    explain: "Updated EU law requiring critical infrastructure operators — including cybersecurity providers — to meet strict security standards and report incidents fast.",
+    why: "Directly applies to TENEX as a cybersecurity provider operating in Europe. They'll be regulated by the very kind of rules their customers need help with."
+  },
+  {
+    abbr: "AI Act", full: "EU Artificial Intelligence Act", cat: "Regulatory",
+    explain: "The EU's new law regulating how AI can be used. Extra requirements for 'high-risk' AI systems — like AI that makes security decisions.",
+    why: "TENEX's entire product is AI-driven threat detection. Their AI triage system will likely classify as high-risk under this law."
+  },
+  {
+    abbr: "NIST CSF", full: "NIST Cybersecurity Framework", cat: "Regulatory",
+    explain: "A US government framework that defines best practices for managing cybersecurity risk. The gold standard most companies measure against.",
+    why: "The Diversified-GroCyber partnership Mat built uses NIST CSF certification. It's the common language of cybersecurity compliance."
+  },
+  {
+    abbr: "CMMC", full: "Cybersecurity Maturity Model Certification", cat: "Regulatory",
+    explain: "Required for US Department of Defense contractors. Proves your cybersecurity is mature enough to handle military-grade requirements.",
+    why: "Mat sits on the CMMC Accreditation Body board. He's literally one of the people who decides the standard."
+  },
+  {
+    abbr: "HIPAA", full: "Health Insurance Portability and Accountability Act", cat: "Regulatory",
+    explain: "US law that protects health data. Any company handling patient records must follow strict security and privacy rules.",
+    why: "TENEX advertises HIPAA-compliant solutions. Healthcare is one of their target verticals."
+  },
+  {
+    abbr: "PCI DSS", full: "Payment Card Industry Data Security Standard", cat: "Regulatory",
+    explain: "Security requirements for any company handling credit card data. Set by Visa, Mastercard, and the other card networks.",
+    why: "TENEX serves financial services clients who must comply. Credit card breaches make headlines."
+  },
+  {
+    abbr: "SOC 2", full: "Service Organization Control 2", cat: "Regulatory",
+    explain: "An audit framework that proves a company handles customer data securely. NOT the same as Security Operations Center — same letters, completely different thing.",
+    why: "Confusing abbreviation alert. When TENEX says 'AI SOC' they mean the operations center. When a customer asks for SOC 2, they want the audit report."
+  },
+  {
+    abbr: "ISO 27001", full: "International Security Management Standard", cat: "Regulatory",
+    explain: "The global standard for proving your information security management is solid. Think of it as the international version of NIST CSF.",
+    why: "European customers will expect this. It's the baseline for doing business with enterprise clients in EMEA."
+  },
+  {
+    abbr: "FedRAMP", full: "Federal Risk and Authorization Management Program", cat: "Regulatory",
+    explain: "US government certification that a cloud product is secure enough for federal agencies. Takes months to get.",
+    why: "If TENEX wants government customers, they'll eventually need this. Major barrier to entry but huge revenue once you're in."
+  },
+  // Post-Quantum
+  {
+    abbr: "PQC", full: "Post-Quantum Cryptography", cat: "Quantum",
+    explain: "New encryption algorithms designed to resist attacks from quantum computers. Uses new math that runs on regular computers — not quantum hardware.",
+    why: "The entire reason cybersecurity has a ticking clock. NIST standards are finalized. Deprecation of old crypto starts 2030. This is where your quantum interest becomes strategic."
+  },
+  {
+    abbr: "QKD", full: "Quantum Key Distribution", cat: "Quantum",
+    explain: "Using quantum physics itself to create unhackable encryption keys. Unlike PQC, this requires actual quantum hardware on both ends.",
+    why: "Mat tagged #QKD in his LinkedIn post about the NSA/FBI meeting at Diversified. He's tracking both PQC and QKD."
+  },
+  {
+    abbr: "RSA", full: "Rivest-Shamir-Adleman", cat: "Quantum",
+    explain: "The encryption algorithm that protects most of the internet today. Named after its three inventors in 1977. Quantum computers will break it.",
+    why: "This is THE thing that quantum computing threatens. Every HTTPS connection, every encrypted email — RSA is underneath. That's why PQC exists."
+  },
+  {
+    abbr: "ML-KEM", full: "Module-Lattice Key Encapsulation Mechanism", cat: "Quantum",
+    explain: "The new NIST standard (FIPS 203) for securely exchanging encryption keys. Replaces the key exchange part of RSA that quantum will break. Uses lattice-based math.",
+    why: "This is the primary PQC standard organizations should implement now. Google, Microsoft, and AWS are already rolling it into their platforms — TENEX's own tech partners."
+  },
+  {
+    abbr: "ML-DSA", full: "Module-Lattice Digital Signature Algorithm", cat: "Quantum",
+    explain: "The new NIST standard (FIPS 204) for digital signatures — proving a message or document is authentic and hasn't been tampered with.",
+    why: "Every software update, every secure communication relies on digital signatures. This replaces the quantum-vulnerable ones."
+  },
+  {
+    abbr: "HQC", full: "Hamming Quasi-Cyclic", cat: "Quantum",
+    explain: "Fifth PQC algorithm selected by NIST in March 2025. Uses code-based math instead of lattice-based. It's the backup plan — different math foundation in case lattice gets cracked.",
+    why: "Shows NIST isn't putting all eggs in one basket. Algorithmic diversity is a security strategy."
+  },
+  {
+    abbr: "TLS", full: "Transport Layer Security", cat: "Quantum",
+    explain: "The protocol that puts the 'S' in HTTPS. What encrypts your web traffic right now. Currently uses RSA/ECC underneath — which quantum will break.",
+    why: "TLS migration to PQC is the most urgent transition. NIST wants TLS 1.3 with PQC adopted by 2030."
+  },
+  // Business
+  {
+    abbr: "a16z", full: "Andreessen Horowitz", cat: "Business",
+    explain: "One of the biggest and most prestigious venture capital firms in Silicon Valley. Founded by Marc Andreessen (Netscape) and Ben Horowitz. When they invest, it's a signal.",
+    why: "They backed TENEX. That's serious validation — a16z doesn't do small bets."
+  },
+  {
+    abbr: "DTCP", full: "Deutsche Telekom Capital Partners", cat: "Business",
+    explain: "German investment firm connected to Deutsche Telekom. Deep roots in European enterprise networks and telecom infrastructure.",
+    why: "Their investment in TENEX is specifically tied to the EMEA expansion. Deutsche Telekom connections = European enterprise doors opening."
+  },
+  {
+    abbr: "SANS", full: "SANS Institute", cat: "Business",
+    explain: "The most respected cybersecurity training and certification organization in the world. Being a SANS instructor means you're elite.",
+    why: "Mat was a SANS instructor. In cybersecurity circles, that's like saying you taught at Juilliard."
+  },
+  {
+    abbr: "NLP", full: "Natural Language Processing", cat: "Cyber",
+    explain: "The branch of AI that deals with understanding human language — text, speech, intent. Powers chatbots, translation, and smart search.",
+    why: "TENEX's CTO specialized in NLP at Google. It's how their AI understands and categorizes security alerts in natural language."
+  },
+  {
+    abbr: "FIPS", full: "Federal Information Processing Standards", cat: "Quantum",
+    explain: "Official US government standards for cryptography. When NIST publishes a new encryption standard, it gets a FIPS number. That makes it mandatory for federal systems.",
+    why: "The new PQC algorithms are FIPS 203, 204, and 205. Those numbers matter — they're what procurement officers look for."
+  }
+];
+
+// ── State ──
+let state = {
+  mode: 'learn',
+  cardIndex: 0,
+  streak: 0,
+  bestStreak: 0,
+  score: 0,
+  confidence: {},  // abbr -> 0,1,2 (none, kinda, yes)
+  quizHistory: [], // last N results
+  matchPairs: [],
+  matchSelected: null,
+  matchMatched: 0,
+  browseFilter: 'all'
+};
+
+function loadState() {
+  try {
+    const s = localStorage.getItem('wolf-cyber-vocab');
+    if (s) {
+      const saved = JSON.parse(s);
+      state.confidence = saved.confidence || {};
+      state.bestStreak = saved.bestStreak || 0;
+      state.score = saved.score || 0;
+    }
+  } catch(e) {}
+}
+
+function saveState() {
+  try {
+    localStorage.setItem('wolf-cyber-vocab', JSON.stringify({
+      confidence: state.confidence,
+      bestStreak: state.bestStreak,
+      score: state.score
+    }));
+  } catch(e) {}
+}
+
+function resetProgress() {
+  if (confirm('Reset all progress?')) {
+    state.confidence = {};
+    state.streak = 0;
+    state.bestStreak = 0;
+    state.score = 0;
+    saveState();
+    updateStats();
+    render();
+  }
+}
+
+function updateStats() {
+  document.getElementById('streak').textContent = state.streak;
+  const mastered = Object.values(state.confidence).filter(v => v >= 2).length;
+  document.getElementById('mastered').textContent = mastered;
+  document.getElementById('total').textContent = TERMS.length;
+  document.getElementById('score').textContent = state.score;
+}
+
+function showStreakPop(n) {
+  const el = document.getElementById('streakPop');
+  el.textContent = n + '🔥';
+  el.classList.remove('show');
+  void el.offsetWidth;
+  el.classList.add('show');
+}
+
+// ── Navigation ──
+function switchMode(mode) {
+  state.mode = mode;
+  document.querySelectorAll('.nav-btn').forEach((btn, i) => {
+    btn.classList.toggle('active', ['learn','quiz','match','reverse','browse'][i] === mode);
+  });
+  render();
+}
+
+function render() {
+  const main = document.getElementById('main');
+  switch(state.mode) {
+    case 'learn': renderLearn(main); break;
+    case 'quiz': renderQuiz(main); break;
+    case 'match': renderMatch(main); break;
+    case 'reverse': renderReverse(main); break;
+    case 'browse': renderBrowse(main); break;
+  }
+  updateStats();
+}
+
+// ── LEARN MODE ──
+function getLearnOrder() {
+  // Prioritize terms with low confidence
+  const sorted = [...TERMS].sort((a, b) => {
+    const ca = state.confidence[a.abbr] || 0;
+    const cb = state.confidence[b.abbr] || 0;
+    return ca - cb;
+  });
+  return sorted;
+}
+
+function renderLearn(el) {
+  const terms = getLearnOrder();
+  const idx = state.cardIndex % terms.length;
+  const t = terms[idx];
+  const conf = state.confidence[t.abbr] || 0;
+  const confLabels = ['Not yet', 'Getting there', 'Got it'];
+  const confColors = ['var(--wrong)', 'var(--warning)', 'var(--correct)'];
+
+  el.innerHTML = `
+    <div class="section-title">Learn — read, absorb, rate yourself</div>
+    <div class="card">
+      <div class="card-category">${t.cat}</div>
+      <div class="card-abbr">${t.abbr}</div>
+      <div class="card-full-name">${t.full}</div>
+      <div class="card-explain">${t.explain}</div>
+      <div class="card-why"><strong>Why it matters for TENEX:</strong> ${t.why}</div>
+      <div style="font-size:12px;color:var(--text-dim);margin-bottom:12px;">
+        Your confidence: <span style="color:${confColors[conf]};font-weight:700">${confLabels[conf]}</span>
+      </div>
+      <div class="confidence-btns">
+        <button class="conf-btn conf-no" onclick="rateCard('${t.abbr}', 0)">🤷 Don't know yet</button>
+        <button class="conf-btn conf-kinda" onclick="rateCard('${t.abbr}', 1)">🤔 Kinda get it</button>
+        <button class="conf-btn conf-yes" onclick="rateCard('${t.abbr}', 2)">✅ I got this</button>
+      </div>
+      <div class="card-nav">
+        <button class="btn btn-secondary" onclick="prevCard()">← Back</button>
+        <span class="card-counter">${idx + 1} / ${terms.length}</span>
+        <button class="btn btn-primary" onclick="nextCard()">Next →</button>
+      </div>
+      <div class="progress-ring"><div class="progress-fill" style="width: ${((idx+1)/terms.length)*100}%"></div></div>
+    </div>
+  `;
+}
+
+function rateCard(abbr, level) {
+  state.confidence[abbr] = level;
+  saveState();
+  updateStats();
+  nextCard();
+}
+
+function nextCard() {
+  state.cardIndex++;
+  render();
+}
+function prevCard() {
+  state.cardIndex = Math.max(0, state.cardIndex - 1);
+  render();
+}
+
+// ── QUIZ MODE (What does this abbreviation mean?) ──
+let quizTerm = null;
+let quizOptions = [];
+let quizAnswered = false;
+
+function renderQuiz(el) {
+  if (!quizTerm || quizAnswered) newQuiz();
+  quizAnswered = false;
+
+  el.innerHTML = `
+    <div class="section-title">Quiz — what does this stand for?</div>
+    <div class="card">
+      <span class="quiz-abbr">${quizTerm.abbr}</span>
+      <div class="quiz-question">What is <strong>${quizTerm.abbr}</strong>?</div>
+      <div class="quiz-options" id="quizOpts">
+        ${quizOptions.map((opt, i) => `
+          <button class="quiz-option" onclick="answerQuiz(${i})" id="qopt-${i}">${opt.explain.split('.')[0]}.</button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="quizFb"></div>
+      <div class="card-nav" style="margin-top:20px;">
+        <div></div>
+        <button class="btn btn-primary hidden" id="quizNext" onclick="renderQuiz(document.getElementById('main'))">Next question →</button>
+      </div>
+    </div>
+  `;
+}
+
+function newQuiz() {
+  // Prioritize terms with lower confidence
+  const pool = [...TERMS].sort((a,b) => (state.confidence[a.abbr]||0) - (state.confidence[b.abbr]||0));
+  const topHalf = pool.slice(0, Math.ceil(pool.length * 0.7));
+  quizTerm = topHalf[Math.floor(Math.random() * topHalf.length)];
+
+  const others = TERMS.filter(t => t.abbr !== quizTerm.abbr);
+  const shuffled = others.sort(() => Math.random() - 0.5).slice(0, 3);
+  quizOptions = [...shuffled, quizTerm].sort(() => Math.random() - 0.5);
+}
+
+function answerQuiz(idx) {
+  if (quizAnswered) return;
+  quizAnswered = true;
+
+  const correct = quizOptions[idx].abbr === quizTerm.abbr;
+  const fb = document.getElementById('quizFb');
+  const btn = document.getElementById(`qopt-${idx}`);
+
+  document.querySelectorAll('.quiz-option').forEach(b => b.classList.add('disabled'));
+
+  if (correct) {
+    btn.classList.add('correct');
+    state.streak++;
+    state.score += 10;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+    if (state.streak > 0 && state.streak % 5 === 0) showStreakPop(state.streak);
+    state.confidence[quizTerm.abbr] = Math.min(2, (state.confidence[quizTerm.abbr] || 0) + 1);
+    fb.className = 'quiz-feedback show correct-fb';
+    fb.innerHTML = `<strong>Correct!</strong> ${quizTerm.abbr} = ${quizTerm.full}. ${quizTerm.why}`;
+  } else {
+    btn.classList.add('wrong');
+    state.streak = 0;
+    state.confidence[quizTerm.abbr] = 0;
+    const correctIdx = quizOptions.findIndex(o => o.abbr === quizTerm.abbr);
+    document.getElementById(`qopt-${correctIdx}`).classList.add('show-correct');
+    fb.className = 'quiz-feedback show wrong-fb';
+    fb.innerHTML = `<strong>${quizTerm.abbr}</strong> = ${quizTerm.full}.<br><br>${quizTerm.explain}<br><br><em>${quizTerm.why}</em>`;
+  }
+
+  saveState();
+  updateStats();
+  document.getElementById('quizNext').classList.remove('hidden');
+}
+
+// ── REVERSE QUIZ (description → abbreviation) ──
+let revTerm = null;
+let revOptions = [];
+let revAnswered = false;
+
+function renderReverse(el) {
+  if (!revTerm || revAnswered) newReverse();
+  revAnswered = false;
+
+  el.innerHTML = `
+    <div class="section-title">Reverse Quiz — which abbreviation matches this description?</div>
+    <div class="card">
+      <div class="quiz-question" style="font-size:16px;line-height:1.7;margin-bottom:8px;">${revTerm.explain}</div>
+      <div style="font-size:13px;color:var(--text-dim);margin-bottom:24px;"><em>${revTerm.why}</em></div>
+      <div class="quiz-question">Which abbreviation is this?</div>
+      <div class="quiz-options" id="revOpts">
+        ${revOptions.map((opt, i) => `
+          <button class="quiz-option" onclick="answerReverse(${i})" id="ropt-${i}" style="font-family:'JetBrains Mono',monospace;font-weight:700;font-size:18px;">
+            ${opt.abbr} <span style="font-family:'DM Sans',sans-serif;font-weight:400;font-size:13px;color:var(--text-dim);margin-left:8px;">${opt.full}</span>
+          </button>
+        `).join('')}
+      </div>
+      <div class="quiz-feedback" id="revFb"></div>
+      <div class="card-nav" style="margin-top:20px;">
+        <div></div>
+        <button class="btn btn-primary hidden" id="revNext" onclick="renderReverse(document.getElementById('main'))">Next question →</button>
+      </div>
+    </div>
+  `;
+}
+
+function newReverse() {
+  const pool = [...TERMS].sort((a,b) => (state.confidence[a.abbr]||0) - (state.confidence[b.abbr]||0));
+  const topHalf = pool.slice(0, Math.ceil(pool.length * 0.7));
+  revTerm = topHalf[Math.floor(Math.random() * topHalf.length)];
+  const others = TERMS.filter(t => t.abbr !== revTerm.abbr && t.cat === revTerm.cat);
+  let distractors = others.sort(() => Math.random() - 0.5).slice(0, 3);
+  if (distractors.length < 3) {
+    const more = TERMS.filter(t => t.abbr !== revTerm.abbr && !distractors.includes(t)).sort(() => Math.random() - 0.5);
+    distractors = [...distractors, ...more].slice(0, 3);
+  }
+  revOptions = [...distractors, revTerm].sort(() => Math.random() - 0.5);
+}
+
+function answerReverse(idx) {
+  if (revAnswered) return;
+  revAnswered = true;
+  const correct = revOptions[idx].abbr === revTerm.abbr;
+  const fb = document.getElementById('revFb');
+  const btn = document.getElementById(`ropt-${idx}`);
+  document.querySelectorAll('.quiz-option').forEach(b => b.classList.add('disabled'));
+
+  if (correct) {
+    btn.classList.add('correct');
+    state.streak++;
+    state.score += 15;
+    if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+    if (state.streak > 0 && state.streak % 5 === 0) showStreakPop(state.streak);
+    state.confidence[revTerm.abbr] = Math.min(2, (state.confidence[revTerm.abbr] || 0) + 1);
+    fb.className = 'quiz-feedback show correct-fb';
+    fb.innerHTML = `<strong>Nailed it!</strong> That's ${revTerm.abbr} — ${revTerm.full}.`;
+  } else {
+    btn.classList.add('wrong');
+    state.streak = 0;
+    state.confidence[revTerm.abbr] = 0;
+    const correctIdx = revOptions.findIndex(o => o.abbr === revTerm.abbr);
+    document.getElementById(`ropt-${correctIdx}`).classList.add('show-correct');
+    fb.className = 'quiz-feedback show wrong-fb';
+    fb.innerHTML = `The answer was <strong>${revTerm.abbr}</strong> — ${revTerm.full}.`;
+  }
+  saveState();
+  updateStats();
+  document.getElementById('revNext').classList.remove('hidden');
+}
+
+// ── MATCH MODE ──
+function renderMatch(el) {
+  const pool = [...TERMS].sort(() => Math.random() - 0.5).slice(0, 6);
+  state.matchPairs = pool;
+  state.matchSelected = null;
+  state.matchMatched = 0;
+
+  const left = pool.map((t, i) => ({type:'abbr', idx: i, text: t.abbr, term: t}));
+  const right = pool.map((t, i) => ({type:'desc', idx: i, text: t.full, term: t}));
+  const shuffledRight = right.sort(() => Math.random() - 0.5);
+
+  el.innerHTML = `
+    <div class="section-title">Match — connect the abbreviation to its full name</div>
+    <div class="match-grid" id="matchGrid">
+      ${left.map((item, i) => `
+        <div class="match-item" id="ml-${item.idx}" onclick="matchClick('abbr', ${item.idx})" data-type="abbr" data-idx="${item.idx}">
+          <span class="abbr-label">${item.text}</span>
+        </div>
+      `).join('')}
+    </div>
+    <div style="height:16px;"></div>
+    <div style="display:flex;flex-direction:column;gap:10px;" id="matchDescs">
+      ${shuffledRight.map(item => `
+        <div class="match-item" id="md-${item.idx}" onclick="matchClick('desc', ${item.idx})" data-type="desc" data-idx="${item.idx}">
+          ${item.text}
+        </div>
+      `).join('')}
+    </div>
+    <div style="margin-top:24px;text-align:center;">
+      <button class="btn btn-secondary" onclick="renderMatch(document.getElementById('main'))">New round</button>
+    </div>
+  `;
+}
+
+function matchClick(type, idx) {
+  const elId = type === 'abbr' ? `ml-${idx}` : `md-${idx}`;
+  const el = document.getElementById(elId);
+  if (el.classList.contains('matched')) return;
+
+  if (!state.matchSelected) {
+    state.matchSelected = {type, idx};
+    el.classList.add('selected');
+  } else {
+    if (state.matchSelected.type === type) {
+      // Same side, switch selection
+      const prevId = type === 'abbr' ? `ml-${state.matchSelected.idx}` : `md-${state.matchSelected.idx}`;
+      document.getElementById(prevId).classList.remove('selected');
+      state.matchSelected = {type, idx};
+      el.classList.add('selected');
+    } else {
+      // Different sides — check match
+      const abbrIdx = type === 'abbr' ? idx : state.matchSelected.idx;
+      const descIdx = type === 'desc' ? idx : state.matchSelected.idx;
+      const prevId = state.matchSelected.type === 'abbr' ? `ml-${state.matchSelected.idx}` : `md-${state.matchSelected.idx}`;
+
+      if (abbrIdx === descIdx) {
+        // Correct match!
+        document.getElementById(`ml-${abbrIdx}`).classList.remove('selected');
+        document.getElementById(`ml-${abbrIdx}`).classList.add('matched');
+        document.getElementById(`md-${descIdx}`).classList.add('matched');
+        el.classList.remove('selected');
+        document.getElementById(prevId).classList.remove('selected');
+        state.matchMatched++;
+        state.score += 5;
+        state.streak++;
+        if (state.streak > state.bestStreak) state.bestStreak = state.streak;
+        const term = state.matchPairs[abbrIdx];
+        state.confidence[term.abbr] = Math.min(2, (state.confidence[term.abbr] || 0) + 1);
+        saveState();
+        updateStats();
+        if (state.matchMatched === state.matchPairs.length) {
+          showStreakPop('✅');
+        }
+      } else {
+        // Wrong match
+        el.classList.add('wrong-match');
+        document.getElementById(prevId).classList.add('wrong-match');
+        document.getElementById(prevId).classList.remove('selected');
+        state.streak = 0;
+        updateStats();
+        setTimeout(() => {
+          el.classList.remove('wrong-match');
+          document.getElementById(prevId).classList.remove('wrong-match');
+        }, 500);
+      }
+      state.matchSelected = null;
+    }
+  }
+}
+
+// ── BROWSE MODE ──
+function renderBrowse(el) {
+  const cats = ['all', ...new Set(TERMS.map(t => t.cat))];
+  const filtered = state.browseFilter === 'all' ? TERMS : TERMS.filter(t => t.cat === state.browseFilter);
+
+  el.innerHTML = `
+    <div class="section-title">Browse all terms — tap to expand</div>
+    <div class="browse-filter">
+      ${cats.map(c => `
+        <button class="filter-btn ${state.browseFilter === c ? 'active' : ''}" onclick="setBrowseFilter('${c}')">${c === 'all' ? 'All' : c}</button>
+      `).join('')}
+    </div>
+    ${filtered.map(t => {
+      const conf = state.confidence[t.abbr] || 0;
+      const dot = conf === 2 ? '🟢' : conf === 1 ? '🟡' : '🔴';
+      return `
+        <div class="browse-item" onclick="this.classList.toggle('open')">
+          <div class="browse-item-header">
+            <span class="browse-item-abbr">${dot} ${t.abbr}</span>
+            <span class="browse-item-cat">${t.cat}</span>
+          </div>
+          <div class="browse-item-name">${t.full}</div>
+          <div class="browse-item-desc">${t.explain}</div>
+          <div class="browse-item-why"><strong>Why it matters:</strong> ${t.why}</div>
+        </div>
+      `;
+    }).join('')}
+  `;
+}
+
+function setBrowseFilter(cat) {
+  state.browseFilter = cat;
+  render();
+}
+
+// ── Init ──
+loadState();
+render();
+</script>
+</body>
+</html>
